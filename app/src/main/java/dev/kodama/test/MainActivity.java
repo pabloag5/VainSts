@@ -24,7 +24,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
-
+//Main Activity
 public class MainActivity extends AppCompatActivity
         /*implements Communicator*/ {
 
