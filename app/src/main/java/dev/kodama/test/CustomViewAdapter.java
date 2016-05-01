@@ -24,13 +24,14 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     private int expandedPosition = -1;
     private boolean repeatPosition = false;
     private Context context;
-    Communicator comm;
+    private Communicator comm;
 
 
     public CustomViewAdapter (Context context, List<gamestats> data){
         inflater=LayoutInflater.from(context);
         this.data=data;
         this.context=context;
+        comm = (Communicator) this.context;
 
     }
 
