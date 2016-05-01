@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">test</string>
+    <string name="edit_message">Enter a message</string>
+    <string name="button_send">Save</string>
+    <string name="text_send">PRUEBA</string>
+    <string name="Result_label">Win/Loss</string>
+    <string name="Kills_label">Kills</string>
+    <string name="Deaths_label">Deaths</string>
+    <string name="Assists_label">Assists</string>
+    <string name="CS_label">CS</string>
+    <string name="Gold_label">Gold</string>
+    <string name="win_radio">Win</string>
+    <string name="loss_radio">Loss</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_new_game">New Game</string>
+    <string name="update">Update</string>
+    <string name="newgamesave">Save</string>
+
+    <string-array name="Heroes_name">
+        <item>Adagio</item>
+        <item>Ardan</item>
+        <item>Blackfeather</item>
+        <item>Catherine</item>
+        <item>Celeste</item>
+        <item>Fortress</item>
+        <item>Glaive</item>
+        <item>Joule</item>
+        <item>Kestrel</item>
+        <item>Koshka</item>
+        <item>Krul</item>
+        <item>Petal</item>
+        <item>Phinn</item>
+        <item>Reim</item>
+        <item>Ringo</item>
+        <item>Rona</item>
+        <item>Saw</item>
+        <item>Skaarf</item>
+        <item>Skye</item>
+        <item>Taka</item>
+        <item>Vox</item>
+
+    </string-array>
+
+</resources>
