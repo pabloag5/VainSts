@@ -31,7 +31,7 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
         inflater=LayoutInflater.from(context);
         this.data=data;
         this.context=context;
-        
+
     }
 
     @Override
