@@ -25,7 +25,8 @@ public class Fragment2 extends Fragment implements Communicator {
     //variables for recyclerview
     private RecyclerView recyclerView;
     private CustomViewAdapter adapter;
-    LinearLayoutManager llmanager = new LinearLayoutManager(getActivity());
+    //LinearLayoutManager llmanager = new LinearLayoutManager(getActivity());
+    CustomLinearLayoutManager llmanager = new CustomLinearLayoutManager(getActivity());
 
 
     @Override
@@ -37,7 +38,7 @@ public class Fragment2 extends Fragment implements Communicator {
         //code create recyclerView
         recyclerView=(RecyclerView)view.findViewById(R.id.list_content);
 
-        adapter =new CustomViewAdapter(getActivity(),getData());
+        adapter =new CustomViewAdapter(getActivity(),getData(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(llmanager);
 
@@ -91,17 +92,18 @@ public class Fragment2 extends Fragment implements Communicator {
      //   outState.putString("current_message", message);
     }
 
-    public void showText(String data){
-        this.message=data;
-        textView.setText(data);
-    }
+    public void scrollRV(int position, boolean repeatPosition) {
 
-    public void scrollRV(int position) {
-        llmanager.scrollToPositionWithOffset(position,20);
+        if (repeatPosition==false){
+            llmanager.scrollToPositionWithOffset(position,20);
+            llmanager.setScrollEnabled(false);
+        } else llmanager.setScrollEnabled(true);
+
     }
 
     @Override
     public void sendPosition(int position, boolean repeatPosition) {
-        scrollRV(position);
+        scrollRV(position, repeatPosition);
     }
+
 }
