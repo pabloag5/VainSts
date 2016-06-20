@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity
     private CoordinatorLayout layout;
     TabLayout tabLayout;
     ViewPager viewPager;
+    private int[] tabicons = {R.drawable.ic_progress_white_24dp,R.drawable.ic_heroes_white_24dp, R.drawable.ic_position_white_24dp,
+            R.drawable.ic_progress_black_24dp,R.drawable.ic_heroes_black_24dp, R.drawable.ic_position_black_24dp };
 
 
 
@@ -51,6 +54,53 @@ public class MainActivity extends AppCompatActivity
 
         tabLayout = (TabLayout) findViewById(R.id.tabmenu);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(tabicons[3]);
+        tabLayout.getTabAt(1).setIcon(tabicons[1]);
+        tabLayout.getTabAt(2).setIcon(tabicons[2]);
+
+        tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.colorAccent));
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorBackground));
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                switch(position) {
+                    case 0: {
+                        tabLayout.getTabAt(0).setIcon(tabicons[3]);
+                        tabLayout.getTabAt(1).setIcon(tabicons[1]);
+                        tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        break;
+
+                    }
+                    case 1: {
+                        tabLayout.getTabAt(0).setIcon(tabicons[0]);
+                        tabLayout.getTabAt(1).setIcon(tabicons[4]);
+                        tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        break;
+
+                    }
+                    case 2: {
+                        tabLayout.getTabAt(0).setIcon(tabicons[0]);
+                        tabLayout.getTabAt(1).setIcon(tabicons[1]);
+                        tabLayout.getTabAt(2).setIcon(tabicons[5]);
+                        break;
+
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
             @Override
@@ -75,19 +125,6 @@ public class MainActivity extends AppCompatActivity
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         final int width = dm.widthPixels;
         final int height = dm.heightPixels;
-
-/*        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                //        .setAction("Action", null).show();
-
-                //popupnewgame(width,height);
-                //newgameWindow();
-            }
-        });*/
-
 
     }
 
@@ -118,12 +155,6 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-/*    @Override
-    public void respond(String data) {
-        Fragment2 secondfragment = (Fragment2) getSupportFragmentManager().findFragmentById(R.id.fragment2_container);
-        secondfragment.showText(data);
-    }
-*/
     public void newgameWindow (){
         startActivity(new Intent(getApplicationContext(),newgameActivity.class));
 
@@ -133,28 +164,9 @@ public class MainActivity extends AppCompatActivity
                 .add(container, fragment)
                 .commit();
     }
-    public void popupnewgame (int width, int height) {
-        Transition transition;
-        layoutInflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-        ViewGroup newgamecontainer = (ViewGroup) layoutInflater.inflate(R.layout.newgamelayout,null);
-        newgame = new PopupWindow(newgamecontainer,(int) (width),(int) (height),true);
-        newgame.showAtLocation(layout, Gravity.CENTER, 0,0);
-        newgame.setAnimationStyle(-1);
-
-
-
-        newgamecontainer.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                newgame.dismiss();
-                return true;
-            }
-        });
-    }
 
     private class CustomAdapter extends FragmentPagerAdapter {
-        private String fragments [] = {"Recent", "Heroes", "Positions"};
+        private String fragments [] = {"Progress", "hero","Position"};
 
 
         public CustomAdapter(FragmentManager supportFragmentManager, Context applicationContext) {
@@ -171,6 +183,7 @@ public class MainActivity extends AppCompatActivity
                     return new Fragment2();
                 case 2:
                     return new PositionsFragment();
+
                 default:
                     return null;
             }
@@ -184,7 +197,8 @@ public class MainActivity extends AppCompatActivity
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return fragments[position];
+            //return fragments[position];
+            return null;
         }
     }
 }

@@ -41,7 +41,6 @@ public class newgameActivity extends AppCompatActivity {
         final int width = dm.widthPixels;
         final int height = dm.heightPixels;
 
-        //getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.dimAmount=0.3f;
         getWindow().setAttributes(lp);
@@ -66,7 +65,10 @@ public class newgameActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
             case R.id.action_save:
-                Snackbar.make(findViewById(R.id.main_layout),"GAME SAVED",Snackbar.LENGTH_SHORT).show();
+                //save game data code
+                this.finish();
+
+                //Snackbar.make(findViewById(R.id.main_layout),"GAME SAVED",Snackbar.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
