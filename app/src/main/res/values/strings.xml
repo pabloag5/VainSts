@@ -15,6 +15,16 @@
     <string name="add_new_game">New Game</string>
     <string name="update">Update</string>
     <string name="newgamesave">Save</string>
+    <string name="skill_tier_title">SKILL TIER</string>
+    <string name="skill_tier">GOT SWAGGER</string>
+    <string name="wins_total">500</string>
+    <string name="wins_total_lbl">WINS</string>
+    <string name="losses_total">100</string>
+    <string name="losses_total_lbl">LOSSES</string>
+    <string name="matches_total">600</string>
+    <string name="matches_total_lbl">MATCHES</string>
+    <string name="kda_value">KDA 7.3%</string>
+    <string name="best_hero_button">BEST HERO PERFORMANCE</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>
