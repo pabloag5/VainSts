@@ -23,8 +23,8 @@
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.newTheme"
             >
-
         </activity>
+
     </application>
 
 </manifest>

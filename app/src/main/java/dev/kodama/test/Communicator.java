@@ -1,5 +1,7 @@
 package dev.kodama.test;
 
+import android.support.v4.app.Fragment;
+
 /**
  * Created by kodama on 3/10/16.
  */

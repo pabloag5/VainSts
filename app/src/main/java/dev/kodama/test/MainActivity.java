@@ -13,17 +13,11 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.transition.Transition;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 //Main Activity
 public class MainActivity extends AppCompatActivity
@@ -142,7 +136,7 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
             case R.id.action_newgame:
-                newgameWindow();
+                newActivity(newgameActivity.class);
                 return true;
             case R.id.action_refresh:
                 Snackbar.make(findViewById(R.id.main_layout),"DONE",Snackbar.LENGTH_SHORT).show();
@@ -155,8 +149,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    public void newgameWindow (){
-        startActivity(new Intent(getApplicationContext(),newgameActivity.class));
+    public void newActivity(Class activity){
+        startActivity(new Intent(getApplicationContext(),activity));
 
     }
     public void add_fragment(Fragment fragment, int container){
@@ -178,9 +172,9 @@ public class MainActivity extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new RecentFragment();
+                    return new ProgressFragment();
                 case 1:
-                    return new Fragment2();
+                    return new HeroesFragment();
                 case 2:
                     return new PositionsFragment();
 

@@ -1,8 +1,6 @@
 package dev.kodama.test;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +24,7 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     private Communicator comm;
 
 
-    public CustomViewAdapter (Context context, List<gamestats> data, Fragment2 fragment){
+    public CustomViewAdapter (Context context, List<gamestats> data, HeroesFragment fragment){
         inflater=LayoutInflater.from(context);
         this.data=data;
         comm = (Communicator) fragment;

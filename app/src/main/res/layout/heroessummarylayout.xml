@@ -5,8 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dev.kodama.test.Fragment2"
-    android:background="@android:color/holo_purple">
+    tools:context=".HeroesFragment"
+    android:background="#231f20">
 
     <TextView
         android:layout_width="wrap_content"

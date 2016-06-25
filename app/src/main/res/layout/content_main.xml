@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tabmenu"
-        android:background="#3c3c3f"
+        android:background="#ebebeb"
         app:tabMode="fixed"
         app:tabGravity="fill"/>
 
