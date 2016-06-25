@@ -3,6 +3,7 @@ package dev.kodama.test;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +17,46 @@ import java.util.zip.Inflater;
 public class ProgressFragment extends Fragment {
 
     Button kdabutton;
-    @Nullable
+    Button bestherobutton;
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.summarylayout,container,false);
-        kdabutton= (Button) getActivity().findViewById(R.id.kda_button);
+        kdabutton= (Button) view.findViewById(R.id.kda_button);
         kdabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FragmentTransaction trans = getFragmentManager()
+                        .beginTransaction();
 
+                trans.replace(R.id.progressroot, new kdaFragment());
+
+				/*
+				 * IMPORTANT: The following lines allow us to add the fragment
+				 * to the stack and return to it later, by pressing back
+				 */
+                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
             }
         });
+        /*
+        bestherobutton= (Button) view.findViewById(R.id.best_hero_button);
+        bestherobutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction trans = getFragmentManager()
+                        .beginTransaction();
 
+                trans.replace(R.id.progressroot, new bestheroFragment());
+
+				trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                trans.addToBackStack(null);
+
+                trans.commit();
+            }
+        });
+*/
         return view;
     }
 

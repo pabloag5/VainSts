@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         layout = (CoordinatorLayout) findViewById(R.id.main_layout);
 
         viewPager = (ViewPager) findViewById(R.id.viewcontent);
@@ -172,11 +172,11 @@ public class MainActivity extends AppCompatActivity
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new ProgressFragment();
+                    return new ProgressRoot();
                 case 1:
-                    return new HeroesFragment();
+                    return new HeroesRoot();
                 case 2:
-                    return new PositionsFragment();
+                    return new PositionsRoot();
 
                 default:
                     return null;
