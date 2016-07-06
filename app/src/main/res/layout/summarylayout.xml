@@ -7,7 +7,7 @@
     android:paddingTop="40dp"
     android:paddingBottom="40dp"
     android:baselineAligned="false"
-    android:background="#231f20">
+    android:background="@drawable/app_background">
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,13 +112,13 @@
         android:id="@+id/kda_button"
         android:textSize="20dp"
         android:elevation="10dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:paddingLeft="80dp"
         android:paddingRight="80dp"
         android:layout_marginBottom="5dp"
         android:textColor="#ffffff"
-        android:background="#4b4b4b"
+        android:background="@drawable/app_background"
         android:shadowColor="#000000" />
     <Button
         android:layout_width="wrap_content"
@@ -128,11 +128,11 @@
         android:textSize="20dp"
         android:elevation="10dp"
         android:paddingLeft="15dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:paddingRight="15dp"
         android:shadowColor="#000000"
         android:textColor="#ffffff"
-        android:background="#4b4b4b" />
+        android:background="@drawable/app_background" />
 
 </LinearLayout>
