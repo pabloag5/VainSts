@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:paddingTop="40dp"
-    android:paddingBottom="40dp"
+    android:paddingBottom="10dp"
     android:baselineAligned="false"
     android:background="@drawable/app_background">
 
@@ -27,10 +27,25 @@
         android:gravity="center_vertical"
         android:layout_margin="5dp"
         android:textColor="#ffffff" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp" />
+    <!--
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:id="@+id/rankchart"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:gravity="center_vertical" />
+        -->
+    <ProgressBar
+        android:layout_width="260dp"
+        android:layout_height="40dp"
+        android:id="@+id/rankprogress"
+        android:gravity="center_vertical"
+        style="@style/CustomProgressBar"
+        android:max="15"
+        android:progress="5"
+        android:progressDrawable="@drawable/customprogressbar"
+        android:minHeight="15dp"
+        android:layout_marginTop="15dp" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -112,8 +127,9 @@
         android:id="@+id/kda_button"
         android:textSize="20dp"
         android:elevation="10dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="1dp"
         android:paddingLeft="80dp"
         android:paddingRight="80dp"
         android:layout_marginBottom="5dp"
@@ -127,9 +143,11 @@
         android:id="@+id/best_hero_button"
         android:textSize="20dp"
         android:elevation="10dp"
+        android:layout_marginTop="5dp"
+
         android:paddingLeft="15dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="0dp"
+        android:paddingBottom="1dp"
         android:paddingRight="15dp"
         android:shadowColor="#000000"
         android:textColor="#ffffff"
