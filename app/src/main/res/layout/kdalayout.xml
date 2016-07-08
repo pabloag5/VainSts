@@ -19,35 +19,307 @@
             android:layout_height="wrap_content"
             android:id="@+id/kdagraph"/>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal">
             <Button
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:id="@+id/btn1kda"
                 android:text="@string/btn1kda"
-                android:textSize="15dp"
+                android:textSize="10dp"
+                android:textColor="#0BACDD"
                 android:background="@drawable/leftbutton" />
             <Button
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:id="@+id/btn2kda"
                 android:text="@string/btn2kda"
-                android:textSize="15dp"
+                android:textSize="10dp"
+                android:textColor="#0BACDD"
                 android:background="@drawable/middlebutton" />
             <Button
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_weight="1"
                 android:id="@+id/btn3kda"
                 android:text="@string/btn3kda"
-                android:textSize="15dp"
+                android:textSize="10dp"
+                android:textColor="#0BACDD"
                 android:background="@drawable/rightbutton" />
+
         </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:dividerPadding="5dp"
+            android:padding="25dp">
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1albl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1aval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1blbl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1bval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1albl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1aval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1blbl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1bval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1albl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1aval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1blbl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1bval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1albl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1aval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1blbl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1bval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1albl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1aval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1blbl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1bval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </TableRow>
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:layout_marginRight="5dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1albl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1aval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:background="@drawable/middlebutton"
+                    android:minWidth="150dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1blbl"
+                        android:textColor="#cccccc"
+                        android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/kdacell1bval"
+                        android:textColor="#ffffff"
+                        android:textSize="30dp"/>
+                </LinearLayout>
+            </TableRow>
+
+        </TableLayout>
+
+
 
     </LinearLayout>
 </ScrollView>

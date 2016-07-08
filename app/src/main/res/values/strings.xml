@@ -31,6 +31,10 @@
     <string name="btn1kda">LAST10</string>
     <string name="btn2kda">WEEKLY</string>
     <string name="btn3kda">SEASON</string>
+    <string name="kdacell1albl">WINS</string>
+    <string name="kdacell1aval">50</string>
+    <string name="kdacell1blbl">WINS RATIO</string>
+    <string name="kdacell1bval">30%</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>
