@@ -59,6 +59,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/bronce_lbl"
+                android:id="@+id/bronce_lbl"
+                android:textSize="15dp"
+                android:paddingBottom="25dp"
+                android:textColor="#ffffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/wins_total"
                 android:id="@+id/wins_total"
                 android:textSize="30dp"
@@ -82,6 +90,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/silver_lbl"
+                android:id="@+id/silver_lbl"
+                android:textSize="15dp"
+                android:paddingBottom="25dp"
+                android:textColor="#ffffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/losses_total"
                 android:id="@+id/losses_total"
                 android:textSize="30dp"
@@ -102,6 +118,14 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:padding="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gold_lbl"
+                android:id="@+id/gold_lbl"
+                android:textSize="15dp"
+                android:paddingBottom="25dp"
+                android:textColor="#ffffff" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

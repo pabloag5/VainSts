@@ -25,6 +25,9 @@
     <string name="matches_total_lbl">MATCHES</string>
     <string name="kda_value">KDA 7.3%</string>
     <string name="best_hero_button">BEST HERO PERFORMANCE</string>
+    <string name="bronce_lbl">BRONCE</string>
+    <string name="silver_lbl">SILVER</string>
+    <string name="gold_lbl">GOLD</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>
