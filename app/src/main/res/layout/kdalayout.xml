@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#bfb6b6"
-    >
-    <TextView
+    android:layout_height="wrap_content">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/Result_label"
-        android:id="@+id/Result_lbl"
-        android:textSize="25dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:gravity="center_vertical"
-        android:layout_marginStart="10dp"
-        />
+        android:paddingTop="40dp"
+        android:paddingBottom="10dp"
+        android:baselineAligned="false"
+        android:background="@drawable/app_background">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/kdagraph"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:id="@+id/btn1kda"
+                android:text="@string/btn1kda"
+                android:textSize="15dp"
+                android:background="@drawable/leftbutton" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:id="@+id/btn2kda"
+                android:text="@string/btn2kda"
+                android:textSize="15dp"
+                android:background="@drawable/middlebutton" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:id="@+id/btn3kda"
+                android:text="@string/btn3kda"
+                android:textSize="15dp"
+                android:background="@drawable/rightbutton" />
+        </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
 
 

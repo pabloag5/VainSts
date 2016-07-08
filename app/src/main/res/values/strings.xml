@@ -28,6 +28,9 @@
     <string name="bronce_lbl">BRONCE</string>
     <string name="silver_lbl">SILVER</string>
     <string name="gold_lbl">GOLD</string>
+    <string name="btn1kda">LAST10</string>
+    <string name="btn2kda">WEEKLY</string>
+    <string name="btn3kda">SEASON</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>

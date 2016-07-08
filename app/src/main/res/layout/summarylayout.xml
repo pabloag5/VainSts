@@ -15,7 +15,7 @@
         android:text="@string/skill_tier_title"
         android:id="@+id/skill_tier_lbl"
         android:textSize="20dp"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
         android:layout_margin="2dp"
         android:textColor="#cccccc" />
     <TextView
@@ -24,7 +24,7 @@
         android:text="@string/skill_tier"
         android:id="@+id/skill_tier"
         android:textSize="30dp"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
         android:layout_margin="5dp"
         android:textColor="#ffffff" />
     <!--
@@ -35,10 +35,10 @@
         android:gravity="center_vertical" />
         -->
     <ProgressBar
-        android:layout_width="260dp"
+        android:layout_width="270dp"
         android:layout_height="40dp"
         android:id="@+id/rankprogress"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
         style="@style/CustomProgressBar"
         android:max="15"
         android:progress="5"
@@ -49,7 +49,9 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,7 +88,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +128,9 @@
                 android:id="@+id/gold_lbl"
                 android:textSize="15dp"
                 android:paddingBottom="25dp"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:textAlignment="textEnd"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
