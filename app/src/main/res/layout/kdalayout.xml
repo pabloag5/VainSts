@@ -20,8 +20,6 @@
             android:id="@+id/kdagraph"
             android:background="@drawable/ring"
             android:layout_marginBottom="20dp"
-
-            android:text="5.8%\nKDA"
             android:textAlignment="gravity"
             android:gravity="center"
             android:textSize="35dp"
@@ -39,8 +37,9 @@
                 android:id="@+id/btn1kda"
                 android:text="@string/btn1kda"
                 android:textSize="10dp"
-                android:textColor="#0BACDD"
-                android:background="@drawable/leftbutton" />
+                android:textColor="@drawable/selectortextbutton"
+                android:background="@drawable/selectorleftbutton"
+                android:clickable="false" />
             <Button
                 android:layout_width="0dp"
                 android:layout_height="25dp"
@@ -48,8 +47,8 @@
                 android:id="@+id/btn2kda"
                 android:text="@string/btn2kda"
                 android:textSize="10dp"
-                android:textColor="#0BACDD"
-                android:background="@drawable/middlebutton" />
+                android:textColor="@drawable/selectortextbutton"
+                android:background="@drawable/selectormiddlebutton" />
             <Button
                 android:layout_width="0dp"
                 android:layout_height="25dp"
@@ -57,8 +56,8 @@
                 android:id="@+id/btn3kda"
                 android:text="@string/btn3kda"
                 android:textSize="10dp"
-                android:textColor="#0BACDD"
-                android:background="@drawable/rightbutton" />
+                android:textColor="@drawable/selectortextbutton"
+                android:background="@drawable/selectorrightbutton" />
 
         </LinearLayout>
 
