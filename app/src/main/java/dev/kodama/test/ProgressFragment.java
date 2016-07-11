@@ -1,5 +1,6 @@
 package dev.kodama.test;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -7,6 +8,8 @@ import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,11 +28,13 @@ import java.util.ArrayList;
 /**
  * Created by kodama on 4/20/16.
  */
-public class ProgressFragment extends Fragment {
+public class ProgressFragment extends Fragment  {
 
     HorizontalBarChart rankchart;
     Button kdabutton;
     Button bestherobutton;
+    CommunicatorKdaFragment comm;
+    ProgressFragment fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -109,11 +114,13 @@ public class ProgressFragment extends Fragment {
 //        yr.setInverted(true);
 
         //setData(1, 15);*/
-
+        comm = (CommunicatorKdaFragment) getActivity();
         kdabutton= (Button) view.findViewById(R.id.kda_button);
         kdabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                comm.fragmentParent(new ProgressFragment(),0);
+
                 FragmentTransaction trans = getFragmentManager()
                         .beginTransaction();
 
@@ -123,10 +130,11 @@ public class ProgressFragment extends Fragment {
 				 * IMPORTANT: The following lines allow us to add the fragment
 				 * to the stack and return to it later, by pressing back
 				 */
-                trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                //trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 trans.addToBackStack(null);
 
                 trans.commit();
+
             }
         });
         /*
@@ -149,10 +157,8 @@ public class ProgressFragment extends Fragment {
         return view;
     }
 
+    public interface CommunicatorKdaFragment {
+        public void fragmentParent (Fragment fragment, int secondpage);
 
-
-
-
-
-
+    }
 }

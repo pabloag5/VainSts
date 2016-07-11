@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,14 +21,19 @@ import android.view.MenuItem;
 import android.widget.PopupWindow;
 
 //Main Activity
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements ProgressFragment.CommunicatorKdaFragment
         /*implements Communicator*/ {
-
     private PopupWindow newgame;
     private LayoutInflater layoutInflater;
     private CoordinatorLayout layout;
     TabLayout tabLayout;
     ViewPager viewPager;
+    int secondpage;
+    Fragment fragment;
+
+
+
+
     private int[] tabicons = {R.drawable.ic_progress_white_24dp,R.drawable.ic_heroes_white_24dp, R.drawable.ic_position_white_24dp,
             R.drawable.ic_progress_black_24dp,R.drawable.ic_heroes_black_24dp, R.drawable.ic_position_black_24dp };
 
@@ -41,6 +47,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
         layout = (CoordinatorLayout) findViewById(R.id.main_layout);
 
         viewPager = (ViewPager) findViewById(R.id.viewcontent);
@@ -52,7 +60,7 @@ public class MainActivity extends AppCompatActivity
         tabLayout.getTabAt(1).setIcon(tabicons[1]);
         tabLayout.getTabAt(2).setIcon(tabicons[2]);
 
-        tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.colorAccent));
+        //tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorBackground));
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -70,6 +78,9 @@ public class MainActivity extends AppCompatActivity
                         tabLayout.getTabAt(0).setIcon(tabicons[3]);
                         tabLayout.getTabAt(1).setIcon(tabicons[1]);
                         tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        if (secondpage==0) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        } else getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         break;
 
                     }
@@ -77,6 +88,9 @@ public class MainActivity extends AppCompatActivity
                         tabLayout.getTabAt(0).setIcon(tabicons[0]);
                         tabLayout.getTabAt(1).setIcon(tabicons[4]);
                         tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        if (secondpage==1) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        } else getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         break;
 
                     }
@@ -84,6 +98,9 @@ public class MainActivity extends AppCompatActivity
                         tabLayout.getTabAt(0).setIcon(tabicons[0]);
                         tabLayout.getTabAt(1).setIcon(tabicons[1]);
                         tabLayout.getTabAt(2).setIcon(tabicons[5]);
+                        if (secondpage==2) {
+                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                        } else getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                         break;
 
                     }
@@ -143,6 +160,13 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.action_settings:
                 return true;
+            case android.R.id.home:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.progressroot, fragment)
+                        .commit();
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                secondpage=3;
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -194,6 +218,11 @@ public class MainActivity extends AppCompatActivity
             //return fragments[position];
             return null;
         }
+    }
+    public void fragmentParent (Fragment fragment, int secondpage) {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.fragment=fragment;
+        this.secondpage=secondpage;
     }
 }
 

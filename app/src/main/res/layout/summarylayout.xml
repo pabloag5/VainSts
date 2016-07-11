@@ -164,7 +164,8 @@
         android:layout_marginBottom="5dp"
         android:textColor="#ffffff"
         android:background="@drawable/app_background"
-        android:shadowColor="#000000" />
+        android:shadowColor="#000000"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
