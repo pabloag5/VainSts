@@ -14,16 +14,13 @@
         android:paddingBottom="10dp"
         android:baselineAligned="false"
         android:background="@drawable/app_background">
-        <TextView
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/kdagraph"
-            android:background="@drawable/ring"
+            android:layout_height="160dp"
+            android:id="@+id/heroimage"
             android:layout_marginBottom="20dp"
-            android:textAlignment="gravity"
             android:gravity="center"
-            android:textSize="35dp"
-            android:textColor="#ffffff"
+            android:background="@drawable/ring"
              />
         <LinearLayout
             android:layout_width="150dp"
@@ -34,8 +31,8 @@
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_weight="1"
-                android:id="@+id/btn1kda"
-                android:text="@string/btn1kda"
+                android:id="@+id/lanebtn"
+                android:text="@string/lanebtn"
                 android:textSize="10dp"
                 android:textColor="@drawable/selectortextbutton"
                 android:background="@drawable/selectorleftbutton"
@@ -44,8 +41,8 @@
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_weight="1"
-                android:id="@+id/btn2kda"
-                android:text="@string/btn2kda"
+                android:id="@+id/junglebtn"
+                android:text="@string/junglebtn"
                 android:textSize="10dp"
                 android:textColor="@drawable/selectortextbutton"
                 android:background="@drawable/selectormiddlebutton" />
@@ -53,8 +50,8 @@
                 android:layout_width="0dp"
                 android:layout_height="25dp"
                 android:layout_weight="1"
-                android:id="@+id/btn3kda"
-                android:text="@string/btn3kda"
+                android:id="@+id/roambtn"
+                android:text="@string/roambtn"
                 android:textSize="10dp"
                 android:textColor="@drawable/selectortextbutton"
                 android:background="@drawable/selectorrightbutton" />

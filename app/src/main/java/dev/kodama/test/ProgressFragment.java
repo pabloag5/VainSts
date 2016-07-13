@@ -1,29 +1,14 @@
 package dev.kodama.test;
 
-import android.content.ClipData;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-
-import java.util.ArrayList;
 
 /**
  * Created by kodama on 4/20/16.
@@ -38,7 +23,7 @@ public class ProgressFragment extends Fragment  {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.summarylayout,container,false);
+        View view = inflater.inflate(R.layout.progresslayout,container,false);
 
         /*
         //code using chart lib
@@ -116,6 +101,8 @@ public class ProgressFragment extends Fragment  {
         //setData(1, 15);*/
         comm = (CommunicatorKdaFragment) getActivity();
         kdabutton= (Button) view.findViewById(R.id.kda_button);
+        String kdabtn = getString(R.string.kda_lbl)+"  "+getString(R.string.kda_value);
+        kdabutton.setText(kdabtn);
         kdabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,11 +124,12 @@ public class ProgressFragment extends Fragment  {
 
             }
         });
-        /*
+
         bestherobutton= (Button) view.findViewById(R.id.best_hero_button);
         bestherobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                comm.fragmentParent(new ProgressFragment(),0);
                 FragmentTransaction trans = getFragmentManager()
                         .beginTransaction();
 
@@ -153,7 +141,7 @@ public class ProgressFragment extends Fragment  {
                 trans.commit();
             }
         });
-*/
+
         return view;
     }
 

@@ -16,7 +16,6 @@
         android:id="@+id/skill_tier_lbl"
         android:textSize="20dp"
         android:gravity="center_horizontal"
-        android:layout_margin="2dp"
         android:textColor="#cccccc" />
     <TextView
         android:layout_width="wrap_content"
@@ -152,10 +151,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/kda_value"
         android:id="@+id/kda_button"
         android:textSize="20dp"
-        android:elevation="10dp"
+        android:elevation="20dp"
         android:layout_marginTop="15dp"
         android:paddingTop="0dp"
         android:paddingBottom="1dp"

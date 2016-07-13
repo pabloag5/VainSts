@@ -23,7 +23,8 @@
     <string name="losses_total_lbl">LOSSES</string>
     <string name="matches_total">600</string>
     <string name="matches_total_lbl">MATCHES</string>
-    <string name="kda_value">KDA 7.3%</string>
+    <string name="kda_value">7.3</string>
+    <string name="kda_lbl">KDA</string>
     <string name="best_hero_button">BEST HERO PERFORMANCE</string>
     <string name="bronce_lbl">BRONCE</string>
     <string name="silver_lbl">SILVER</string>
@@ -35,6 +36,9 @@
     <string name="kdacell1aval">50</string>
     <string name="kdacell1blbl">WINS RATIO</string>
     <string name="kdacell1bval">30%</string>
+    <string name="lanebtn">LANE</string>
+    <string name="junglebtn">JUNGLE</string>
+    <string name="roambtn">ROAM</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>
@@ -58,7 +62,6 @@
         <item>Skye</item>
         <item>Taka</item>
         <item>Vox</item>
-
     </string-array>
 
 </resources>

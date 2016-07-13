@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class kdaFragment extends Fragment {
     Button btn1kda;
     Button btn2kda;
     Button btn3kda;
-
+    TextView kdachart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,9 +30,16 @@ public class kdaFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.kdalayout, container, false);
 
+        //setting graph text
+        kdachart=(TextView) view.findViewById(R.id.kdagraph);
+        kdachart.setSingleLine(false);
+        kdachart.setText(getString(R.string.kda_value)+"\n"+getString(R.string.kda_lbl));
+
+        //setting buttons
         btn1kda=(Button) view.findViewById(R.id.btn1kda);
         btn2kda=(Button) view.findViewById(R.id.btn2kda);
         btn3kda=(Button) view.findViewById(R.id.btn3kda);
+        btn1kda.setSelected(true);
         btn1kda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
