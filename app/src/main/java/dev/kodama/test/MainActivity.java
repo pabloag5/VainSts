@@ -2,6 +2,7 @@ package dev.kodama.test;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -21,8 +22,8 @@ import android.view.MenuItem;
 import android.widget.PopupWindow;
 
 //Main Activity
-public class MainActivity extends AppCompatActivity implements ProgressFragment.CommunicatorKdaFragment
-        /*implements Communicator*/ {
+public class MainActivity extends AppCompatActivity implements ProgressFragment.CommunicatorKdaFragment, HeroesFragment.CommHeroDetailFragment
+         {
     private PopupWindow newgame;
     private LayoutInflater layoutInflater;
     private CoordinatorLayout layout;
@@ -30,9 +31,6 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
     ViewPager viewPager;
     int secondpage;
     Fragment fragment;
-
-
-
 
     private int[] tabicons = {R.drawable.ic_progress_white_24dp,R.drawable.ic_heroes_white_24dp, R.drawable.ic_position_white_24dp,
             R.drawable.ic_progress_black_24dp,R.drawable.ic_heroes_black_24dp, R.drawable.ic_position_black_24dp };
@@ -161,12 +159,30 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
             case R.id.action_settings:
                 return true;
             case android.R.id.home:
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.progressroot, fragment)
-                        .commit();
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                secondpage=3;
-                return true;
+                switch(secondpage){
+                    case 0:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.progressroot, fragment)
+                                .commit();
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        secondpage=3;
+                        return true;
+                    case 1:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.heroesroot, fragment)
+                                .commit();
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        secondpage=3;
+                        return true;
+                    case 2:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.positionroot, fragment)
+                                .commit();
+                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                        secondpage=3;
+                        return true;
+                }
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -183,7 +199,9 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
                 .commit();
     }
 
-    private class CustomAdapter extends FragmentPagerAdapter {
+
+
+             private class CustomAdapter extends FragmentPagerAdapter {
         private String fragments [] = {"Progress", "hero","Position"};
 
 
@@ -223,6 +241,24 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.fragment=fragment;
         this.secondpage=secondpage;
+    }
+    @Override
+    public void HerofragmentParent(int position, int secondpage,  Fragment fragment) {
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.fragment=fragment;
+        this.secondpage=secondpage;
+
+        HeroDetailFragment frag = new HeroDetailFragment();
+        Bundle args = new Bundle();
+        args.putInt(HeroDetailFragment.ARG_POSITION, position);
+        frag.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.heroesroot,frag)
+                .addToBackStack(null)
+                .commit();
+
+
     }
 }
 

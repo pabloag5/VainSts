@@ -39,6 +39,10 @@
     <string name="lanebtn">LANE</string>
     <string name="junglebtn">JUNGLE</string>
     <string name="roambtn">ROAM</string>
+    <string name="overall_title">OVERALL</string>
+    <string name="winratioPos">50%</string>
+    <string name="win_ratio_title">WIN RATIO</string>
+    <string name="average_title">AVERAGE</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>

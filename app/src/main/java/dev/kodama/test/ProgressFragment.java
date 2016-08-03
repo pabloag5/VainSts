@@ -19,7 +19,7 @@ public class ProgressFragment extends Fragment  {
     Button kdabutton;
     Button bestherobutton;
     CommunicatorKdaFragment comm;
-    ProgressFragment fragment;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,6 +1,9 @@
 package dev.kodama.test;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,19 +18,20 @@ import java.util.List;
 /**
  * Created by kodama on 3/20/16.
  */
-public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.MyViewHolder> implements View.OnClickListener {
+public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.MyViewHolder>
+        implements View.OnClickListener {
 
     private LayoutInflater inflater;
     List<gamestats> data= Collections.emptyList();
-    private int expandedPosition = -1;
-    private boolean repeatPosition = false;
-    private Communicator comm;
+    //private int expandedPosition = -1;
+    //private boolean repeatPosition = false;
+    private HeroesFragment.CommHeroDetailFragment comm;
 
 
     public CustomViewAdapter (Context context, List<gamestats> data, HeroesFragment fragment){
         inflater=LayoutInflater.from(context);
         this.data=data;
-        comm = (Communicator) fragment;
+        comm = (HeroesFragment.CommHeroDetailFragment) context;
 
     }
 
@@ -48,7 +52,7 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
         gamestats current=data.get(position);
         holder.name.setText(current.heroName);
         holder.icon.setImageResource(current.heroIcon);
-
+        /*
         //expand code
         if (position == expandedPosition && repeatPosition==false){
             holder.llExpandedDetail.setVisibility(View.VISIBLE);
@@ -57,6 +61,7 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
             holder.llExpandedDetail.setVisibility(View.GONE);
 
         }
+        */
 
     }
 
@@ -68,6 +73,13 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     @Override
     public void onClick(View v) {
         MyViewHolder holder = (MyViewHolder) v.getTag();
+        comm.HerofragmentParent(holder.getAdapterPosition(), 1, new HeroesFragment());
+
+
+
+        /*code to find position and send it to the layoutmanager to scroll and block layout
+        MyViewHolder holder = (MyViewHolder) v.getTag();
+
         //find position
         if (holder.llExpandedDetail.getVisibility()==View.VISIBLE) {
             repeatPosition=true;
@@ -79,20 +91,29 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
         expandedPosition = holder.getAdapterPosition();
         notifyItemChanged(expandedPosition);
         comm.sendPosition(expandedPosition, repeatPosition);
+        */
     }
 
     //create subclass ViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         ImageView icon;
+
+        /*defining layout to expand
         LinearLayout llExpandedDetail;
+         */
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
             name= (TextView) itemView.findViewById(R.id.Hero_name);
             icon= (ImageView) itemView.findViewById(R.id.Hero_image);
+            /*code to expand layout
             llExpandedDetail= (LinearLayout) itemView.findViewById(R.id.llExpandDetail);
+             */
         }
     }
+
 }
+
+

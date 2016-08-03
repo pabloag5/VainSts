@@ -3,8 +3,7 @@
     android:animateLayoutChanges="true"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:divider="@android:color/white">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -29,26 +28,28 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Hero"
                 android:id="@+id/Hero_name"
-            />
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="KDA Ratio"
-                android:id="@+id/KDA_Ratio" />
+                android:id="@+id/KDA_Ratio"
+                android:textColor="#ffffff" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Win Ratio"
-                android:id="@+id/Win_ratio" />
+                android:id="@+id/Win_ratio"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
 
     </LinearLayout>
-
+<!--
     <LinearLayout
         android:id="@+id/llExpandDetail"
         android:visibility="gone"
@@ -79,5 +80,6 @@
             android:text="Assists"
             android:id="@+id/Hero_Assists_value" />
     </LinearLayout>
+    -->
 
 </LinearLayout>
