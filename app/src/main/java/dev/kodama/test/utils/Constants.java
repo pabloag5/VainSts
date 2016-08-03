@@ -43,5 +43,17 @@ public final class Constants {
         public static String GOLD = "sub_tier_3";
     }
 
+    public final static class Statistics_DB {
+
+        public final static String TOTAL_ALL = "total";
+        public final static String TOTAL_LANE = "total_lane";
+        public final static String TOTAL_JUNGLE = "total_jungle";
+        public final static String TOTAL_ROAM = "total_roam";
+        public final static String HEROE_ALL = "heroe";
+        public final static String HEROE_LANE = "heroe_lane";
+        public final static String HEROE_JUNGLE = "heroe_jungle";
+        public final static String HEROE_ROAM = "heroe_roam";
+    }
+
 
 }

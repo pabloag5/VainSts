@@ -166,5 +166,38 @@ public final class DatabaseContract {
         public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
     }
 
+    public static abstract class Statistics implements BaseColumns {
+        public static final String TABLE_NAME                   = "statistics";
+        public static final String TYPE                         = "type";
+        public static final String SECOND_TYPE                  = "second_type";
+        public static final String WINS                         = "wins";
+        public static final String TOTAL_GAMES                  = "wins";
+        public static final String KILLS_PER_GAME               = "wins";
+        public static final String DEATHS_PER_GAME              = "wins";
+        public static final String ASSISTS_PER_GAME             = "wins";
+        public static final String CS_MIN_PER_GAME              = "wins";
+        public static final String GOLD_MIN_PER_GAME            = "wins";
+        public static final String GOLD_PER_GAME                = "wins";
+        public static final String KDA_PER_GAME                 = "wins";
+        public static final String KILL_PARTICIPATION_PER_GAME  = "wins";
+
+        public static final String CREATE_TABLE = "CREATE TABLE " +
+                TABLE_NAME + " (" +
+                _ID + INTEGER_TYPE + PRIMARY_KEY + AUTOINCREMENT + COMMA_SEP +
+                TYPE + TEXT_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
+                SECOND_TYPE + TEXT_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
+                WINS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
+                TOTAL_GAMES + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
+                KILLS_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                DEATHS_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                ASSISTS_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                CS_MIN_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                GOLD_MIN_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                GOLD_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                KDA_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
+                KILL_PARTICIPATION_PER_GAME + REAL_TYPE + NOT_NULL +
+                " )";
+        public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
 
 }
