@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 
-public class HeroesFragment extends Fragment implements SortInterface {
+public class HeroesFragment extends Fragment  {
     TextView textView;
 
     //the list containing our heroes list
@@ -23,6 +24,11 @@ public class HeroesFragment extends Fragment implements SortInterface {
 
     //the sorter that sorts our heroes based on sort button
     private dataSort mdataSort = new dataSort();
+
+    //sort buttons
+    Button byName;
+    Button byKdaRatio;
+    Button byWinRatio;
 
     //variables for recyclerview
     private RecyclerView recyclerView;
@@ -41,6 +47,38 @@ public class HeroesFragment extends Fragment implements SortInterface {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.heroessummarylayout, container, false);
+
+        byName=(Button) view.findViewById(R.id.bynamebtn);
+        byKdaRatio=(Button)view.findViewById(R.id.bykdaratiobtn);
+        byWinRatio=(Button)view.findViewById(R.id.bywinratiobtn);
+
+        byName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                byName.setSelected(true);
+                byKdaRatio.setSelected(false);
+                byWinRatio.setSelected(false);
+                Sorthero(v);
+            }
+        });
+        byKdaRatio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                byName.setSelected(false);
+                byKdaRatio.setSelected(true);
+                byWinRatio.setSelected(false);
+                Sorthero(v);
+            }
+        });
+        byWinRatio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                byName.setSelected(false);
+                byKdaRatio.setSelected(false);
+                byWinRatio.setSelected(true);
+                Sorthero(v);
+            }
+        });
 
         //code creates recyclerView
         recyclerView=(RecyclerView)view.findViewById(R.id.list_content);
@@ -64,6 +102,23 @@ public class HeroesFragment extends Fragment implements SortInterface {
         return view;
 
 
+    }
+
+    private void Sorthero(View btn) {
+        //games queries
+        switch (btn.getId()){
+            case R.id.bynamebtn:
+                SortByHeroName();
+                break;
+            case R.id.bykdaratiobtn:
+                SortByKdaRatio();
+                break;
+            case R.id.bywinratiobtn:
+                SortByWinRatio();
+                break;
+            default:
+                break;
+        }
     }
 
     public List<gamestats> getData(){
@@ -99,7 +154,7 @@ public class HeroesFragment extends Fragment implements SortInterface {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        textView= (TextView) getActivity().findViewById(R.id.TxtVw_fragment2);
+
 //        listView=(ListView) getActivity().findViewById(R.id.listViewHero);
     }
 
@@ -119,20 +174,17 @@ public class HeroesFragment extends Fragment implements SortInterface {
 */
     }
 
-    @Override
-    public void onSortByHeroName() {
+    public void SortByHeroName() {
         mdataSort.sortHeroesByName(mListHeroes);
         adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onSortByKdaRatio() {
+    public void SortByKdaRatio() {
         mdataSort.sortHeroesByKdaRatio(mListHeroes);
         adapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onSortByWinRatio() {
+    public void SortByWinRatio() {
         mdataSort.sortHeroesByWinRatio(mListHeroes);
         adapter.notifyDataSetChanged();
     }
@@ -144,7 +196,7 @@ public class HeroesFragment extends Fragment implements SortInterface {
     */
 
     public interface CommHeroDetailFragment {
-        public void HerofragmentParent (int position, int secondpage, Fragment fragment);
+        public void HerofragmentParent (int position, int secondpage, Fragment fragment, List<gamestats> data);
 
     }
 }

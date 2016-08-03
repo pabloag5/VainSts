@@ -43,6 +43,9 @@
     <string name="winratioPos">50%</string>
     <string name="win_ratio_title">WIN RATIO</string>
     <string name="average_title">AVERAGE</string>
+    <string name="bynamebtn">by NAME</string>
+    <string name="bykdaratiobtn">by KDA RATIO</string>
+    <string name="bywinratiobtn">by WIN RATIO</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>

@@ -21,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupWindow;
 
+import java.util.List;
+
 //Main Activity
 public class MainActivity extends AppCompatActivity implements ProgressFragment.CommunicatorKdaFragment, HeroesFragment.CommHeroDetailFragment
          {
@@ -243,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
         this.secondpage=secondpage;
     }
     @Override
-    public void HerofragmentParent(int position, int secondpage,  Fragment fragment) {
+    public void HerofragmentParent(int position, int secondpage,  Fragment fragment, List<gamestats> data) {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.fragment=fragment;

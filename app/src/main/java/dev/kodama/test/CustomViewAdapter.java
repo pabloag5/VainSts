@@ -52,6 +52,8 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
         gamestats current=data.get(position);
         holder.name.setText(current.heroName);
         holder.icon.setImageResource(current.heroIcon);
+        holder.kdaratio.setText(String.format("KDA ratio: %.1f",current.kdaRatio));
+        holder.winratio.setText(String.format("Win ratio: %.1f",current.winRatio));
         /*
         //expand code
         if (position == expandedPosition && repeatPosition==false){
@@ -59,7 +61,6 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
 
         } else {
             holder.llExpandedDetail.setVisibility(View.GONE);
-
         }
         */
 
@@ -73,7 +74,7 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     @Override
     public void onClick(View v) {
         MyViewHolder holder = (MyViewHolder) v.getTag();
-        comm.HerofragmentParent(holder.getAdapterPosition(), 1, new HeroesFragment());
+        comm.HerofragmentParent(holder.getAdapterPosition(), 1, new HeroesFragment(),data);
 
 
 
@@ -98,6 +99,8 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         ImageView icon;
+        TextView kdaratio;
+        TextView winratio;
 
         /*defining layout to expand
         LinearLayout llExpandedDetail;
@@ -108,6 +111,9 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
             super(itemView);
             name= (TextView) itemView.findViewById(R.id.Hero_name);
             icon= (ImageView) itemView.findViewById(R.id.Hero_image);
+            kdaratio= (TextView) itemView.findViewById(R.id.KDA_Ratio);
+            winratio= (TextView) itemView.findViewById(R.id.Win_ratio);
+
             /*code to expand layout
             llExpandedDetail= (LinearLayout) itemView.findViewById(R.id.llExpandDetail);
              */

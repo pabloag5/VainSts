@@ -9,11 +9,41 @@
     tools:context=".HeroesFragment"
     android:background="@drawable/app_background">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/TxtVw_fragment2"
-        android:text="@string/text_send"/>
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:id="@+id/bynamebtn"
+            android:text="@string/bynamebtn"
+            android:textSize="10dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:id="@+id/bykdaratiobtn"
+            android:text="@string/bykdaratiobtn"
+            android:textSize="10dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectormiddlebutton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:id="@+id/bywinratiobtn"
+            android:text="@string/bywinratiobtn"
+            android:textSize="10dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorrightbutton" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_content"

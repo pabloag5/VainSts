@@ -19,7 +19,7 @@ public class gamestats {
         return kdaRatio;
     }
     public double getWinRatio() {
-        return getWinRatio();
+        return winRatio;
     }
 
 }
