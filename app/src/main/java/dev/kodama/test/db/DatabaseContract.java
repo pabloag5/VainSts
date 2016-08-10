@@ -171,15 +171,15 @@ public final class DatabaseContract {
         public static final String TYPE                         = "type";
         public static final String SECOND_TYPE                  = "second_type";
         public static final String WINS                         = "wins";
-        public static final String TOTAL_GAMES                  = "wins";
-        public static final String KILLS_PER_GAME               = "wins";
-        public static final String DEATHS_PER_GAME              = "wins";
-        public static final String ASSISTS_PER_GAME             = "wins";
-        public static final String CS_MIN_PER_GAME              = "wins";
-        public static final String GOLD_MIN_PER_GAME            = "wins";
-        public static final String GOLD_PER_GAME                = "wins";
-        public static final String KDA_PER_GAME                 = "wins";
-        public static final String KILL_PARTICIPATION_PER_GAME  = "wins";
+        public static final String TOTAL_GAMES                  = "total_games";
+        public static final String KILLS_PER_GAME               = "kills_per_game";
+        public static final String DEATHS_PER_GAME              = "deaths_per_game";
+        public static final String ASSISTS_PER_GAME             = "assists_per_game";
+        public static final String CS_MIN_PER_GAME              = "cs_min_per_game";
+        public static final String GOLD_MIN_PER_GAME            = "gold_min_per_game";
+        public static final String GOLD_PER_GAME                = "gold_per_game";
+        public static final String KDA_PER_GAME                 = "kda_per_game";
+        public static final String KILL_PARTICIPATION_PER_GAME  = "kill_participation_per_game";
 
         public static final String CREATE_TABLE = "CREATE TABLE " +
                 TABLE_NAME + " (" +
