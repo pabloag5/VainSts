@@ -12,6 +12,46 @@ public final class Constants {
         public static String UTILITY = "utility";
     }
 
+    public static class Heroes {
+
+        public static String[] list = {
+            "Lyra",
+            "Lance",
+            "Alpha",
+            "Ozo",
+            "Reim",
+            "Kestrel",
+            "Blackfeather",
+            "Phinn",
+            "Skye",
+            "Rona",
+            "Fortress",
+            "Joule",
+            "Ardan",
+            "Skaarf",
+            "Taka",
+            "Krul",
+            "Saw",
+            "Petal",
+            "Glaive",
+            "Koshka",
+            "Adagio",
+            "Ringo",
+            "Catherine",
+            "Celeste",
+            "Vox",
+            "Samuel"
+        };
+
+
+    }
+
+    public static class Positions {
+        public static int LANE = 1;
+        public static int JUNGLE = 2;
+        public static int ROAM = 3;
+    }
+
     public static class Game_Types {
         public static String CASUAL = "casual";
         public static String RANKED = "ranked";

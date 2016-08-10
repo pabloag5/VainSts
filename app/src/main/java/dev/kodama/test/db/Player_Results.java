@@ -5,9 +5,9 @@ package dev.kodama.test.db;
  */
 public class Player_Results {
 
-    private Player player;
-    private Hero hero;
-    private String build_type;
+//    private Player player;
+    private String hero;
+//    private String build_type;
     private String position;
     private int kills;
     private int deaths;
@@ -19,10 +19,10 @@ public class Player_Results {
     private float gold_min;
     private float kill_participation;
 
-    public Player_Results(Player player, Hero hero, String build_type, String position, int kills, int deaths, int assists, int cs, int gold, float length, int total_kills) {
-        this.player = player;
+    public Player_Results(String hero, String position, int kills, int deaths, int assists, int cs, int gold, float length, int total_kills) {
+//        this.player = player;
         this.hero = hero;
-        this.build_type = build_type;
+//        this.build_type = build_type;
         this.position = position;
         this.kills = kills;
         this.deaths = deaths;
@@ -37,33 +37,33 @@ public class Player_Results {
 
     }
 
-    public Player_Results(Player player, Hero hero, String build_type, String position, int kills, int deaths, int assists, int cs, int gold, float kda_ratio, float cs_min, float gold_min, float kill_participation) {
-        this.player = player;
-        this.hero = hero;
-        this.build_type = build_type;
-        this.position = position;
-        this.kills = kills;
-        this.deaths = deaths;
-        this.assists = assists;
-        this.cs = cs;
-        this.gold = gold;
-        this.kda_ratio = kda_ratio;
-        this.cs_min = cs_min;
-        this.gold_min = gold_min;
-        this.kill_participation = kill_participation;
-    }
+//    public Player_Results(Player player, Hero hero, String build_type, String position, int kills, int deaths, int assists, int cs, int gold, float kda_ratio, float cs_min, float gold_min, float kill_participation) {
+//        this.player = player;
+//        this.hero = hero;
+//        this.build_type = build_type;
+//        this.position = position;
+//        this.kills = kills;
+//        this.deaths = deaths;
+//        this.assists = assists;
+//        this.cs = cs;
+//        this.gold = gold;
+//        this.kda_ratio = kda_ratio;
+//        this.cs_min = cs_min;
+//        this.gold_min = gold_min;
+//        this.kill_participation = kill_participation;
+//    }
 
-    public Player getPlayer() {
-        return player;
-    }
+//    public Player getPlayer() {
+//        return player;
+//    }
 
-    public Hero getHero() {
+    public String getHero() {
         return hero;
     }
 
-    public String getBuild_type() {
-        return build_type;
-    }
+//    public String getBuild_type() {
+//        return build_type;
+//    }
 
     public String getPosition() {
         return position;

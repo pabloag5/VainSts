@@ -35,4 +35,38 @@ public class HalcyonUtils {
         }
         return position;
     }
+
+    public static String getHeroeStatistics_DBTypeFromPosition(String position) {
+        String type = "";
+        switch (position){
+            case "lane":
+                type = Constants.Statistics_DB.HEROE_LANE;
+                break;
+            case "jungle":
+                type = Constants.Statistics_DB.HEROE_JUNGLE;
+                break;
+            case "roam":
+                type = Constants.Statistics_DB.HEROE_ROAM;
+                break;
+
+        }
+        return type;
+    }
+
+    public static String getTotalStatistics_DBTypeFromPosition(String position) {
+        String type = "";
+        switch (position){
+            case "lane":
+                type = Constants.Statistics_DB.TOTAL_LANE;
+                break;
+            case "jungle":
+                type = Constants.Statistics_DB.TOTAL_JUNGLE;
+                break;
+            case "roam":
+                type = Constants.Statistics_DB.TOTAL_ROAM;
+                break;
+
+        }
+        return type;
+    }
 }
