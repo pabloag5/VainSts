@@ -46,6 +46,24 @@
     <string name="bynamebtn">by NAME</string>
     <string name="bykdaratiobtn">by KDA RATIO</string>
     <string name="bywinratiobtn">by WIN RATIO</string>
+    <string name="edit_kills">enter kills</string>
+    <string name="edit_deaths">enter deaths</string>
+    <string name="edit_assists">enter assists</string>
+    <string name="edit_cs">enter cs</string>
+    <string name="edit_gold">enter gold</string>
+    <string name="edit_total_kills">enter team kills</string>
+    <string name="Total_Kills_label">Team kills</string>
+    <string name="game_time_label">Game time</string>
+    <string name="edit_mintimegame">min</string>
+    <string name="edit_sectimegame">secs</string>
+    <string name="Queue_label">Queue</string>
+    <string name="Position_label">Position</string>
+    <string name="Hero_label">Hero</string>
+    <string name="laneplayed">Lane</string>
+    <string name="jungleplayed">Jungle</string>
+    <string name="roamplayed">Roam</string>
+    <string name="casualqueue">Casual</string>
+    <string name="rankedqueue">Ranked</string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>

@@ -2,7 +2,6 @@ package dev.kodama.test;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -10,7 +9,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()){
             case R.id.action_newgame:
-                newActivity(newgameActivity.class);
+                newActivity(NewgameActivity.class);
                 return true;
             case R.id.action_refresh:
                 Snackbar.make(findViewById(R.id.main_layout),"DONE",Snackbar.LENGTH_SHORT).show();
@@ -200,9 +198,6 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
                 .add(container, fragment)
                 .commit();
     }
-
-
-
              private class CustomAdapter extends FragmentPagerAdapter {
         private String fragments [] = {"Progress", "hero","Position"};
 
@@ -245,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
         this.secondpage=secondpage;
     }
     @Override
-    public void HerofragmentParent(int position, int secondpage,  Fragment fragment, List<gamestats> data) {
+    public void HerofragmentParent(int position, int secondpage,  Fragment fragment, List<Gamestats> data) {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.fragment=fragment;

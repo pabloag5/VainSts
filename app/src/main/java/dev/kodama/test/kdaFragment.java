@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class kdaFragment extends Fragment {
+public class KdaFragment extends Fragment {
     Button btn1kda;
     Button btn2kda;
     Button btn3kda;

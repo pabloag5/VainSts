@@ -1,5 +1,7 @@
 package dev.kodama.test.utils;
 
+import dev.kodama.test.R;
+
 /**
  * Created by researcher on 22/04/16.
  */
@@ -42,7 +44,11 @@ public final class Constants {
             "Vox",
             "Samuel"
         };
-
+        public static int[] images = {R.drawable.adagio, R.drawable.ardan, R.drawable.blackfeather, R.drawable.catherine,
+                R.drawable.celeste, R.drawable.fortress, R.drawable.glaive, R.drawable.joule,
+                R.drawable.kestrel, R.drawable.koshka, R.drawable.krul, R.drawable.petal, R.drawable.phinn,
+                R.drawable.reim, R.drawable.ringo, R.drawable.rona, R.drawable.saw, R.drawable.skaarf,
+                R.drawable.skye, R.drawable.taka, R.drawable.vox};
 
     }
 

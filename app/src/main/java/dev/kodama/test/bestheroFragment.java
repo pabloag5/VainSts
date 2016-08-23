@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class bestheroFragment extends Fragment {
+public class BestheroFragment extends Fragment {
     Button lanebtn;
     Button junglebtn;
     Button roambtn;

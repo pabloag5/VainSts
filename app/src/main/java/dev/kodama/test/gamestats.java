@@ -3,23 +3,26 @@ package dev.kodama.test;
 /**
  * Created by kodama on 3/20/16.
  */
-public class gamestats {
+public class Gamestats {
     int heroIcon;
     String  heroName;
-    double kdaRatio;
-    double winRatio;
+    float kdaRatio;
+    float winRatio;
 
-    public gamestats() {
+    public Gamestats() {
 
     }
     public String getHeroName() {
         return  heroName;
     }
-    public double getKdaRatio() {
+    public float getKdaRatio() {
         return kdaRatio;
     }
-    public double getWinRatio() {
+    public float getWinRatio() {
         return winRatio;
+    }
+    public int getHeroIcon(){
+        return heroIcon;
     }
 
 }

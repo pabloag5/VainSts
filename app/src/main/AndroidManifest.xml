@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".newgameActivity"
+        <activity android:name=".NewgameActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.newTheme"
             >

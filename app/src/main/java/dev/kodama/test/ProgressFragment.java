@@ -111,7 +111,7 @@ public class ProgressFragment extends Fragment  {
                 FragmentTransaction trans = getFragmentManager()
                         .beginTransaction();
 
-                trans.replace(R.id.progressroot, new kdaFragment());
+                trans.replace(R.id.progressroot, new KdaFragment());
 
 				/*
 				 * IMPORTANT: The following lines allow us to add the fragment
@@ -133,7 +133,7 @@ public class ProgressFragment extends Fragment  {
                 FragmentTransaction trans = getFragmentManager()
                         .beginTransaction();
 
-                trans.replace(R.id.progressroot, new bestheroFragment());
+                trans.replace(R.id.progressroot, new BestheroFragment());
 
 				trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 trans.addToBackStack(null);

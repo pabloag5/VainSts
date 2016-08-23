@@ -1,29 +1,58 @@
 package dev.kodama.test;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 
 
 /**
  * Created by kodama on 4/22/16.
  */
-public class newgameActivity extends AppCompatActivity {
+public class NewgameActivity extends AppCompatActivity implements NewGameG.CommGameDataG, ViewAdapter.CommHeroDataG{
+    ViewPager viewPager;
+    RecyclerView recyclerView;
+    private LinearLayout dotIndicator;
+    private LinearLayout btnLayout;
+    private int dotsCnt;
+    protected View view;
+    private ImageView[] dots;
+    private Button nextbtn;
+    boolean win;
+    float length;
+    String queuetype;
+    String hero;
+    String position;
+
+    private String newgamepager [] = {"generalInfo", "detailInfo"};
+    private int[] dotsIcon ={R.drawable.unselecteddot,R.drawable.selecteddot};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.newgamelayout);
+        setContentView(R.layout.addnewgame);
 
         // my_child_toolbar is defined in the layout file
         Toolbar ngToolbar = (Toolbar) findViewById(R.id.ngtoolbar);
@@ -34,8 +63,73 @@ public class newgameActivity extends AppCompatActivity {
 
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
-        
 
+        dotIndicator=(LinearLayout) findViewById(R.id.PagerCountDots);
+        btnLayout=(LinearLayout)findViewById(R.id.PagerBtn);
+
+        viewPager = (ViewPager) findViewById(R.id.newgamepager);
+        viewPager.setAdapter(new CustomAdapterAG(getSupportFragmentManager(),getApplicationContext() ));
+        viewPager.setCurrentItem(0);
+
+        dotsCnt=newgamepager.length;
+        dots=new ImageView[dotsCnt];
+        for (int i = 0; i < dotsCnt; i++) {
+            dots[i] = new ImageView(this);
+            dots[i].setImageResource(R.drawable.unselecteddot);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            );
+
+            params.setMargins(6, 0, 6, 0);
+
+            dotIndicator.addView(dots[i],params);
+        }
+
+        dots[0].setImageResource(R.drawable.selecteddot);
+
+        nextbtn=new Button(this);
+        nextbtn.setBackgroundResource(R.drawable.ic_keyboard_arrow_right_white_24dp);
+        nextbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("gameinfo",hero+" "+position+" "+queuetype+" "+String.valueOf(win)+" "+Float.toString(length));
+            }
+        });
+        nextbtn.setVisibility(View.INVISIBLE);
+        btnLayout.addView(nextbtn);
+
+
+    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i = 0; i < dotsCnt; i++) {
+                    dots[i].setImageResource(R.drawable.unselecteddot);
+                }
+
+                dots[position].setImageResource(R.drawable.selecteddot);
+                if (position==dotsCnt-1){
+                    nextbtn.setVisibility(View.VISIBLE);
+                } else nextbtn.setVisibility(View.INVISIBLE);
+
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+        /*
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         final int width = dm.widthPixels;
@@ -45,9 +139,9 @@ public class newgameActivity extends AppCompatActivity {
         lp.dimAmount=0.3f;
         getWindow().setAttributes(lp);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        */
 
-
-        getWindow().setLayout((int)(width*.95),(int)(height*.9));
+        //getWindow().setLayout((int)(width*.95),(int)(height*.9));
 
     }
 
@@ -76,7 +170,68 @@ public class newgameActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void GameDataG(boolean win, float length, String queuetype, String hero, String position) {
+        this.win=win;
+        this.length=length;
+        this.queuetype=queuetype;
+        this.hero=hero;
+        this.position=position;
+    }
+
+    @Override
+    public void HeroDataG(int position, String hero, boolean heroclick) {
+        //NewGameG newGameG = (NewGameG)getSupportFragmentManager().findFragmentById(R.id.newgamepager);
+        //newGameG.HeroDataGame(position,hero,heroclick);
+        recyclerView=(RecyclerView)findViewById(R.id.heroselector);
+        if (heroclick) {
+            recyclerView.setLayoutFrozen(true);
+            //layoutManager.setScrollEnabled(false);
+            switch (position){
+                case 0:
+                    this.position=null;
+                    break;
+                case 1:
+                    this.position="Lane";
+                    break;
+                case 2:
+                    this.position="Jungle";
+                    break;
+                case 3:
+                    this.position="Roam";
+                    break;
+                default:
+                    break;
+            }
+            this.hero=hero;
+
+        }else recyclerView.setLayoutFrozen(false);//layoutManager.setScrollEnabled(true);
+    }
 
 
+    private class CustomAdapterAG extends FragmentPagerAdapter {
 
-}
+        public CustomAdapterAG(FragmentManager supportFragmentManager, Context applicationContext) {
+            super(supportFragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new NewGameG();
+                case 1:
+                    return new NewGameD();
+                default:
+                    return null;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return newgamepager.length;
+        }
+    }
+
+
+    }

@@ -42,6 +42,24 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:text="@string/game_time_label"
+                    android:layout_weight="1"
+                    android:id="@+id/gametime_lbl"
+                    android:textSize="25dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:text="@string/Total_Kills_label"
+                    android:layout_weight="1"
+                    android:id="@+id/TeamKills_lbl"
+                    android:textSize="25dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginStart="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:text="@string/Kills_label"
                     android:layout_weight="1"
                     android:id="@+id/Kills_lbl"
@@ -112,38 +130,71 @@
                         android:textSize="20dp"
                         />
                 </RadioGroup>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:touchscreenBlocksFocus="true">
+
+                    <NumberPicker
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/minutePicker" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text=":"
+                        android:textSize="25dp"
+                        android:gravity="center"/>
+                    <NumberPicker
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/secondPicker" />
+
+                </LinearLayout>
+                <EditText android:id="@+id/edit_totalkills"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:hint="@string/edit_total_kills"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    />
                 <EditText android:id="@+id/edit_kills"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:hint="@string/edit_message"
+                    android:hint="@string/edit_kills"
                     android:layout_weight="1"
                     android:inputType="number"
                     />
                 <EditText android:id="@+id/edit_deaths"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:hint="@string/edit_message"
+                    android:hint="@string/edit_deaths"
                     android:layout_weight="1"
                     android:inputType="number"
                     />
                 <EditText android:id="@+id/edit_assists"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:hint="@string/edit_message"
+                    android:hint="@string/edit_assists"
                     android:layout_weight="1"
                     android:inputType="number"
                     />
                 <EditText android:id="@+id/edit_cs"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:hint="@string/edit_message"
+                    android:hint="@string/edit_cs"
                     android:layout_weight="1"
                     android:inputType="number"
                     />
                 <EditText android:id="@+id/edit_gold"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:hint="@string/edit_message"
+                    android:hint="@string/edit_gold"
                     android:layout_weight="1"
                     android:inputType="number"
                     />

@@ -1,15 +1,11 @@
 package dev.kodama.test;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Collections;
@@ -22,13 +18,13 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
         implements View.OnClickListener {
 
     private LayoutInflater inflater;
-    List<gamestats> data= Collections.emptyList();
+    List<Gamestats> data= Collections.emptyList();
     //private int expandedPosition = -1;
     //private boolean repeatPosition = false;
     private HeroesFragment.CommHeroDetailFragment comm;
 
 
-    public CustomViewAdapter (Context context, List<gamestats> data, HeroesFragment fragment){
+    public CustomViewAdapter (Context context, List<Gamestats> data, HeroesFragment fragment){
         inflater=LayoutInflater.from(context);
         this.data=data;
         comm = (HeroesFragment.CommHeroDetailFragment) context;
@@ -49,11 +45,11 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        gamestats current=data.get(position);
-        holder.name.setText(current.heroName);
-        holder.icon.setImageResource(current.heroIcon);
-        holder.kdaratio.setText(String.format("KDA ratio: %.1f",current.kdaRatio));
-        holder.winratio.setText(String.format("Win ratio: %.1f",current.winRatio));
+        Gamestats current=data.get(position);
+        holder.name.setText(current.getHeroName());
+        holder.icon.setImageResource(current.getHeroIcon());
+        holder.kdaratio.setText(String.format("KDA ratio: %.1f",current.getKdaRatio()));
+        holder.winratio.setText(String.format("Win ratio: %.1f",current.getWinRatio()));
         /*
         //expand code
         if (position == expandedPosition && repeatPosition==false){

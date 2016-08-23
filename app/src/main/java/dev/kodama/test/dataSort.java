@@ -7,19 +7,19 @@ import java.util.List;
 /**
  * Created by kodama on 8/2/16.
  */
-public class dataSort {
-    public void sortHeroesByName(List<gamestats> herostats) {
-        Collections.sort(herostats, new Comparator<gamestats>() {
+public class DataSort {
+    public void sortHeroesByName(List<Gamestats> herostats) {
+        Collections.sort(herostats, new Comparator<Gamestats>() {
             @Override
-            public int compare(gamestats lhs, gamestats rhs) {
+            public int compare(Gamestats lhs, Gamestats rhs) {
                 return lhs.getHeroName().compareTo(rhs.getHeroName());
             }
         });
     }
-    public void sortHeroesByWinRatio(List<gamestats> herostats) {
-        Collections.sort(herostats, new Comparator<gamestats>() {
+    public void sortHeroesByWinRatio(List<Gamestats> herostats) {
+        Collections.sort(herostats, new Comparator<Gamestats>() {
             @Override
-            public int compare(gamestats lhs, gamestats rhs) {
+            public int compare(Gamestats lhs, Gamestats rhs) {
                 if (lhs.getWinRatio()<rhs.getWinRatio()) {
                     return 1;
                 }
@@ -30,10 +30,10 @@ public class dataSort {
             }
         });
     }
-    public void sortHeroesByKdaRatio(List<gamestats> herostats){
-        Collections.sort(herostats, new Comparator<gamestats>() {
+    public void sortHeroesByKdaRatio(List<Gamestats> herostats){
+        Collections.sort(herostats, new Comparator<Gamestats>() {
             @Override
-            public int compare(gamestats lhs, gamestats rhs) {
+            public int compare(Gamestats lhs, Gamestats rhs) {
                 if (lhs.getKdaRatio()<rhs.getKdaRatio()) {
                     return 1;
                 }

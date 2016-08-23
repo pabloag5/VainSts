@@ -20,10 +20,10 @@ public class HeroesFragment extends Fragment  {
     TextView textView;
 
     //the list containing our heroes list
-    private List<gamestats> mListHeroes=new ArrayList<>();
+    private List<Gamestats> mListHeroes=new ArrayList<>();
 
     //the sorter that sorts our heroes based on sort button
-    private dataSort mdataSort = new dataSort();
+    private DataSort mdataSort = new DataSort();
 
     //sort buttons
     Button byName;
@@ -121,25 +121,25 @@ public class HeroesFragment extends Fragment  {
         }
     }
 
-    public List<gamestats> getData(){
-        List<gamestats> data=new ArrayList<>();
+    public List<Gamestats> getData(){
+        List<Gamestats> data=new ArrayList<>();
         int[] images = {R.drawable.adagio, R.drawable.ardan, R.drawable.blackfeather, R.drawable.catherine,
                 R.drawable.celeste, R.drawable.fortress, R.drawable.glaive, R.drawable.joule,
                 R.drawable.kestrel, R.drawable.koshka, R.drawable.krul, R.drawable.petal, R.drawable.phinn,
                 R.drawable.reim, R.drawable.ringo, R.drawable.rona, R.drawable.saw, R.drawable.skaarf,
                 R.drawable.skye, R.drawable.taka, R.drawable.vox};
-        double [] kdaRatio = new double[images.length];
-        double [] winRatio=new  double[images.length];
+        float [] kdaRatio = new float[images.length];
+        float [] winRatio=new  float[images.length];
         for (int i=0;i<images.length; i++)
         {
-            kdaRatio[i]=new Random().nextDouble()*18;
-            winRatio[i]=new Random().nextDouble()*100;
+            kdaRatio[i]=new Random().nextFloat()*18;
+            winRatio[i]=new Random().nextFloat()*100;
         }
         Resources res = getResources();
         String[] heroes=res.getStringArray(R.array.Heroes_name);
         for(int i=0;i<heroes.length && i<images.length; i++)
         {
-            gamestats current=new gamestats();
+            Gamestats current=new Gamestats();
             current.heroIcon=images[i];
             current.heroName=heroes[i];
             current.kdaRatio=kdaRatio[i];
@@ -196,7 +196,7 @@ public class HeroesFragment extends Fragment  {
     */
 
     public interface CommHeroDetailFragment {
-        public void HerofragmentParent (int position, int secondpage, Fragment fragment, List<gamestats> data);
+        public void HerofragmentParent (int position, int secondpage, Fragment fragment, List<Gamestats> data);
 
     }
 }
