@@ -24,7 +24,7 @@
     <LinearLayout
         android:id="@+id/PagerBottomBar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:padding="5dp"
         android:gravity="center">
@@ -55,15 +55,17 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:padding="5dp"
-        android:gravity="end">
-
-
-        <!--<ImageButton
+        android:gravity="right">
+        <Button
             android:id="@+id/btn_next"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/btn_round_semitransperant"
-            android:src="@mipmap/ic_navigation_arrow_forward" />-->
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="@string/nextbtn"
+            android:textSize="15dp"
+            android:textColor="#cccccc"
+            android:visibility="invisible"
+            android:gravity="right"/>
     </LinearLayout>
 
     </LinearLayout>

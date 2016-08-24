@@ -64,6 +64,7 @@
     <string name="roamplayed">Roam</string>
     <string name="casualqueue">Casual</string>
     <string name="rankedqueue">Ranked</string>
+    <string name="nextbtn">Next >></string>
 
     <string-array name="Heroes_name">
         <item>Adagio</item>
