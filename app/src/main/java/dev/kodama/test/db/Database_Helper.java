@@ -79,17 +79,19 @@ public class Database_Helper extends SQLiteOpenHelper {
 //                values);
 //    }
 
-    public Stats getTotalStats(SQLiteDatabase db, String total_type) {
+    public Stats getTotalStats(SQLiteDatabase db, String total_type, int game_type) {
 
-        String type = "total";
+        int type = Stats.TYPE_TOTAL;
 
-        String position = HalcyonUtils.getPositionFromStatistics_DB_type(total_type);
+        int position = HalcyonUtils.getPositionFromStatistics_DB_type(total_type);
 
         String tableName = DatabaseContract.Statistics.TABLE_NAME;
         String[] tableColumns = null;
-        String whereClause = DatabaseContract.Statistics.TYPE + " = ?";
+        String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
+                DatabaseContract.Statistics.GAME_TYPE + " = ?";
         String[] whereArgs = new String[] {
-                total_type
+                total_type,
+                game_type+""
         };
 
         Cursor c = db.query(tableName,
@@ -113,8 +115,8 @@ public class Database_Helper extends SQLiteOpenHelper {
             float kda_per_game = c.getFloat(c.getColumnIndex(DatabaseContract.Statistics.KDA_PER_GAME));
             float kill_participation_per_game = c.getFloat(c.getColumnIndex(DatabaseContract.Statistics.KILL_PARTICIPATION_PER_GAME));
 
-            String heroe = null;
-            return new Stats(wins, total_games, kills_per_game, deaths_per_game, assists_per_game, cs_min_per_game, gold_min_per_game, gold_per_game, kda_per_game, kill_participation_per_game, position, heroe, type);
+            int hero = -1;
+            return new Stats(wins, total_games, kills_per_game, deaths_per_game, assists_per_game, cs_min_per_game, gold_min_per_game, gold_per_game, kda_per_game, kill_participation_per_game, position, hero, type, game_type);
         } else {
             return null;
         }
@@ -122,17 +124,19 @@ public class Database_Helper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<Stats> getHeroeStats(SQLiteDatabase db, String heroe_type) {
+    public ArrayList<Stats> getHeroeStats(SQLiteDatabase db, String heroe_type, int game_type) {
 
-        String type = "heroe";
+        int type = Stats.TYPE_HERO;
 
-        String position = HalcyonUtils.getPositionFromStatistics_DB_type(heroe_type);
+        int position = HalcyonUtils.getPositionFromStatistics_DB_type(heroe_type);
 
         String tableName = DatabaseContract.Statistics.TABLE_NAME;
         String[] tableColumns = null;
-        String whereClause = DatabaseContract.Statistics.TYPE + " = ?";
+        String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
+            DatabaseContract.Statistics.GAME_TYPE + " = ?";
         String[] whereArgs = new String[] {
-                heroe_type
+                heroe_type,
+                game_type+""
         };
         Cursor c = db.query(tableName,
                 tableColumns,
@@ -157,8 +161,8 @@ public class Database_Helper extends SQLiteOpenHelper {
                 float kda_per_game = c.getFloat(c.getColumnIndex(DatabaseContract.Statistics.KDA_PER_GAME));
                 float kill_participation_per_game = c.getFloat(c.getColumnIndex(DatabaseContract.Statistics.KILL_PARTICIPATION_PER_GAME));
 
-                String heroe = c.getString(c.getColumnIndex(DatabaseContract.Statistics.SECOND_TYPE));
-                statsArray.add(new Stats(wins, total_games, kills_per_game, deaths_per_game, assists_per_game, cs_min_per_game, gold_min_per_game, gold_per_game, kda_per_game, kill_participation_per_game, position, heroe, type));
+                int hero = c.getInt(c.getColumnIndex(DatabaseContract.Statistics.SECOND_TYPE));
+                statsArray.add(new Stats(wins, total_games, kills_per_game, deaths_per_game, assists_per_game, cs_min_per_game, gold_min_per_game, gold_per_game, kda_per_game, kill_participation_per_game, position, hero, type, game_type));
                 c.moveToNext();
             }
 
@@ -169,15 +173,17 @@ public class Database_Helper extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<Stats> getSpecificHeroeStats(SQLiteDatabase db, String heroe) {
+    public ArrayList<Stats> getSpecificHeroeStats(SQLiteDatabase db, int hero, int game_type) {
 
-        String type = "heroe";
+        int type = Stats.TYPE_HERO;
 
         String tableName = DatabaseContract.Statistics.TABLE_NAME;
         String[] tableColumns = null;
-        String whereClause = DatabaseContract.Statistics.SECOND_TYPE + " = ?";
+        String whereClause = DatabaseContract.Statistics.SECOND_TYPE + " = ? AND "+
+                DatabaseContract.Statistics.GAME_TYPE + " = ?";
         String[] whereArgs = new String[] {
-                heroe
+                hero+"",
+                game_type+""
         };
         Cursor c = db.query(tableName,
                 tableColumns,
@@ -202,9 +208,9 @@ public class Database_Helper extends SQLiteOpenHelper {
                 float kda_per_game = c.getFloat(c.getColumnIndex(DatabaseContract.Statistics.KDA_PER_GAME));
                 float kill_participation_per_game = c.getFloat(c.getColumnIndex(DatabaseContract.Statistics.KILL_PARTICIPATION_PER_GAME));
 
-                String position = HalcyonUtils.getPositionFromStatistics_DB_type(c.getString(c.getColumnIndex(DatabaseContract.Statistics.TYPE)));
+                int position = HalcyonUtils.getPositionFromStatistics_DB_type(c.getString(c.getColumnIndex(DatabaseContract.Statistics.TYPE)));
 
-                statsArray.add(new Stats(wins, total_games, kills_per_game, deaths_per_game, assists_per_game, cs_min_per_game, gold_min_per_game, gold_per_game, kda_per_game, kill_participation_per_game, position, heroe, type));
+                statsArray.add(new Stats(wins, total_games, kills_per_game, deaths_per_game, assists_per_game, cs_min_per_game, gold_min_per_game, gold_per_game, kda_per_game, kill_participation_per_game, position, hero, type, game_type));
                 c.moveToNext();
             }
 
@@ -215,53 +221,6 @@ public class Database_Helper extends SQLiteOpenHelper {
         }
     }
 
-//    public String getHeroeNameById(SQLiteDatabase db, int hero_id) {
-//
-//
-//        String tableName = DatabaseContract.Heroes.TABLE_NAME;
-//        String[] tableColumns = null;
-//        String whereClause = DatabaseContract.Heroes._ID + " = ?";
-//        String[] whereArgs = new String[] {
-//                hero_id+""
-//        };
-//        Cursor c = db.query(tableName,
-//                tableColumns,
-//                whereClause,
-//                whereArgs,
-//                null,
-//                null,
-//                null
-//        );
-//        ArrayList<Stats> statsArray = new ArrayList<>();
-//        c.moveToFirst();
-//        String heroe_name = c.getString(c.getColumnIndex(DatabaseContract.Heroes.NAME));
-//
-//        return heroe_name;
-//    }
-//
-//    public int getHeroIdByName(SQLiteDatabase db, String name) {
-//
-//
-//        String tableName = DatabaseContract.Heroes.TABLE_NAME;
-//        String[] tableColumns = null;
-//        String whereClause = DatabaseContract.Heroes.NAME + " = ?";
-//        String[] whereArgs = new String[] {
-//                name+""
-//        };
-//        Cursor c = db.query(tableName,
-//                tableColumns,
-//                whereClause,
-//                whereArgs,
-//                null,
-//                null,
-//                null
-//        );
-//        ArrayList<Stats> statsArray = new ArrayList<>();
-//        c.moveToFirst();
-//        int hero_id = c.getInt(c.getColumnIndex(DatabaseContract.Heroes._ID));
-//
-//        return hero_id;
-//    }
 
     public void addNewGame(SQLiteDatabase db, Game game) {
         long game_id = addGame(db, game);
@@ -270,9 +229,9 @@ public class Database_Helper extends SQLiteOpenHelper {
         String totalDBPosition = HalcyonUtils.getTotalStatistics_DBTypeFromPosition(game.getResults().getPosition());
 
 
-        updateTotalStats(db, game, Constants.Statistics_DB.TOTAL_ALL);
-        updateTotalStats(db, game, totalDBPosition);
-        updateHeroStats(db, game);
+        updateTotalStats(db, game, Constants.Statistics_DB.TOTAL_ALL, game.getGame_type());
+        updateTotalStats(db, game, totalDBPosition, game.getGame_type());
+        updateHeroStats(db, game, game.getGame_type());
 
     }
 
@@ -298,7 +257,6 @@ public class Database_Helper extends SQLiteOpenHelper {
     private long addPlayerResults(SQLiteDatabase db, Player_Results results, long game_id) {
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        //TODO: Fix hero
         values.put(DatabaseContract.Player_Results.HERO, results.getHero());
         values.put(DatabaseContract.Player_Results.GAME_ID, game_id);
         values.put(DatabaseContract.Player_Results.POSITION, results.getPosition());
@@ -322,9 +280,9 @@ public class Database_Helper extends SQLiteOpenHelper {
         return newRowId;
     }
 
-    private long updateTotalStats(SQLiteDatabase db, Game game, String total_type) {
+    private long updateTotalStats(SQLiteDatabase db, Game game, String total_type, int game_type) {
 
-        Stats totalStats = getTotalStats(db, total_type);
+        Stats totalStats = getTotalStats(db, total_type, game_type);
         int total_games = 0;
         int wins = 0;
 
@@ -370,8 +328,7 @@ public class Database_Helper extends SQLiteOpenHelper {
         }
 
         ContentValues values = new ContentValues();
-        //TODO: Fix hero
-        values.put(DatabaseContract.Statistics.SECOND_TYPE, "");
+        values.put(DatabaseContract.Statistics.SECOND_TYPE, -1);
         values.put(DatabaseContract.Statistics.WINS, wins);
         values.put(DatabaseContract.Statistics.TOTAL_GAMES, total_games);
         values.put(DatabaseContract.Statistics.KILLS_PER_GAME, kills_per_game);
@@ -385,9 +342,11 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId;
-        String whereClause = DatabaseContract.Statistics.TYPE + " = ?";
+        String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
+                DatabaseContract.Statistics.GAME_TYPE + " ?";
         String[] whereArgs = new String[] {
-                total_type
+                total_type,
+                game_type+""
         };
         long result = db.update(
                 DatabaseContract.Statistics.TABLE_NAME,
@@ -400,21 +359,19 @@ public class Database_Helper extends SQLiteOpenHelper {
 
     }
 
-    private void updateHeroStats(SQLiteDatabase db, Game game) {
-        String heroe = game.getResults().getHero();
-        ArrayList<Stats> heroeStatsList = getSpecificHeroeStats(db, heroe);
-        Stats totalHeroeStats = null;
-        Stats positionHeroeStats = null;
-
-        String type = HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(game.getResults().getPosition());
+    private void updateHeroStats(SQLiteDatabase db, Game game, int game_type) {
+        int hero = game.getResults().getHero();
+        ArrayList<Stats> heroeStatsList = getSpecificHeroeStats(db, hero, game_type);
+        Stats totalHeroStats = null;
+        Stats positionHeroStats = null;
 
         for(int i = 0; heroeStatsList != null && i<heroeStatsList.size(); i++) {
             Stats tmpStats = heroeStatsList.get(i);
-            if(tmpStats.getPosition().equals(Constants.Statistics_DB.HEROE_ALL)){
-                totalHeroeStats = tmpStats;
+            if(tmpStats.getPosition() == Constants.Positions.ALL){
+                totalHeroStats = tmpStats;
             }
-            else if(tmpStats.getPosition().equals(type)) {
-                positionHeroeStats = tmpStats;
+            else if(tmpStats.getPosition() == game.getResults().getPosition()) {
+                positionHeroStats = tmpStats;
             }
         }
 
@@ -431,22 +388,22 @@ public class Database_Helper extends SQLiteOpenHelper {
         float kda_per_game;
         float kill_participation_per_game;
 
-        if(totalHeroeStats!=null){
-            int prev_total_games = totalHeroeStats.getTotal_games();
+        if(totalHeroStats!=null){
+            int prev_total_games = totalHeroStats.getTotal_games();
             total_games = prev_total_games + 1;
-            wins = totalHeroeStats.getWins();
+            wins = totalHeroStats.getWins();
             if(game.isWin()){
                 wins++;
             }
 
-            kills_per_game = (float)(totalHeroeStats.getKills_per_game()*prev_total_games + game.getResults().getKills())/total_games;
-            deaths_per_game = (float)(totalHeroeStats.getDeaths_per_game()*prev_total_games + game.getResults().getDeaths())/total_games;
-            assists_per_game = (float)(totalHeroeStats.getAssists_per_game()*prev_total_games + game.getResults().getAssists())/total_games;
-            cs_min_per_game = (float)(totalHeroeStats.getCs_min_per_game()*prev_total_games + game.getResults().getCs_min())/total_games;
-            gold_min_per_game = (float)(totalHeroeStats.getGold_min_per_game()*prev_total_games + game.getResults().getGold_min())/total_games;
-            gold_per_game = (float)(totalHeroeStats.getGold_per_game()*prev_total_games + game.getResults().getGold())/total_games;
-            kda_per_game = (float)(totalHeroeStats.getKda_per_game()*prev_total_games + game.getResults().getKda_ratio())/total_games;
-            kill_participation_per_game = (float)(totalHeroeStats.getKill_participation_per_game()*prev_total_games + game.getResults().getKill_participation())/total_games;
+            kills_per_game = (float)(totalHeroStats.getKills_per_game()*prev_total_games + game.getResults().getKills())/total_games;
+            deaths_per_game = (float)(totalHeroStats.getDeaths_per_game()*prev_total_games + game.getResults().getDeaths())/total_games;
+            assists_per_game = (float)(totalHeroStats.getAssists_per_game()*prev_total_games + game.getResults().getAssists())/total_games;
+            cs_min_per_game = (float)(totalHeroStats.getCs_min_per_game()*prev_total_games + game.getResults().getCs_min())/total_games;
+            gold_min_per_game = (float)(totalHeroStats.getGold_min_per_game()*prev_total_games + game.getResults().getGold_min())/total_games;
+            gold_per_game = (float)(totalHeroStats.getGold_per_game()*prev_total_games + game.getResults().getGold())/total_games;
+            kda_per_game = (float)(totalHeroStats.getKda_per_game()*prev_total_games + game.getResults().getKda_ratio())/total_games;
+            kill_participation_per_game = (float)(totalHeroStats.getKill_participation_per_game()*prev_total_games + game.getResults().getKill_participation())/total_games;
         }
         else {
             total_games = 1;
@@ -464,7 +421,6 @@ public class Database_Helper extends SQLiteOpenHelper {
         }
 
         ContentValues values = new ContentValues();
-        //TODO: Fix hero
         values.put(DatabaseContract.Statistics.WINS, wins);
         values.put(DatabaseContract.Statistics.TOTAL_GAMES, total_games);
         values.put(DatabaseContract.Statistics.KILLS_PER_GAME, kills_per_game);
@@ -479,10 +435,12 @@ public class Database_Helper extends SQLiteOpenHelper {
         // Insert the new row, returning the primary key value of the new row
 
         String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
-                DatabaseContract.Statistics.SECOND_TYPE + " = ?";
+                DatabaseContract.Statistics.SECOND_TYPE + " = ? AND " +
+                DatabaseContract.Statistics.GAME_TYPE + " = ?";
         String[] whereArgs = new String[] {
-                Constants.Statistics_DB.HEROE_ALL,
-                heroe
+                Constants.Statistics_DB.HERO_ALL,
+                hero+"",
+                game_type+""
         };
         long result = db.update(
                 DatabaseContract.Statistics.TABLE_NAME,
@@ -493,22 +451,22 @@ public class Database_Helper extends SQLiteOpenHelper {
 
         wins = 0;
 
-        if(positionHeroeStats!=null){
-            int prev_total_games = positionHeroeStats.getTotal_games();
+        if(positionHeroStats!=null){
+            int prev_total_games = positionHeroStats.getTotal_games();
             total_games = prev_total_games + 1;
-            wins = positionHeroeStats.getWins();
+            wins = positionHeroStats.getWins();
             if(game.isWin()){
                 wins++;
             }
 
-            kills_per_game = (float)(positionHeroeStats.getKills_per_game()*prev_total_games + game.getResults().getKills())/total_games;
-            deaths_per_game = (float)(positionHeroeStats.getDeaths_per_game()*prev_total_games + game.getResults().getDeaths())/total_games;
-            assists_per_game = (float)(positionHeroeStats.getAssists_per_game()*prev_total_games + game.getResults().getAssists())/total_games;
-            cs_min_per_game = (float)(positionHeroeStats.getCs_min_per_game()*prev_total_games + game.getResults().getCs_min())/total_games;
-            gold_min_per_game = (float)(positionHeroeStats.getGold_min_per_game()*prev_total_games + game.getResults().getGold_min())/total_games;
-            gold_per_game = (float)(positionHeroeStats.getGold_per_game()*prev_total_games + game.getResults().getGold())/total_games;
-            kda_per_game = (float)(positionHeroeStats.getKda_per_game()*prev_total_games + game.getResults().getKda_ratio())/total_games;
-            kill_participation_per_game = (float)(positionHeroeStats.getKill_participation_per_game()*prev_total_games + game.getResults().getKill_participation())/total_games;
+            kills_per_game = (float)(positionHeroStats.getKills_per_game()*prev_total_games + game.getResults().getKills())/total_games;
+            deaths_per_game = (float)(positionHeroStats.getDeaths_per_game()*prev_total_games + game.getResults().getDeaths())/total_games;
+            assists_per_game = (float)(positionHeroStats.getAssists_per_game()*prev_total_games + game.getResults().getAssists())/total_games;
+            cs_min_per_game = (float)(positionHeroStats.getCs_min_per_game()*prev_total_games + game.getResults().getCs_min())/total_games;
+            gold_min_per_game = (float)(positionHeroStats.getGold_min_per_game()*prev_total_games + game.getResults().getGold_min())/total_games;
+            gold_per_game = (float)(positionHeroStats.getGold_per_game()*prev_total_games + game.getResults().getGold())/total_games;
+            kda_per_game = (float)(positionHeroStats.getKda_per_game()*prev_total_games + game.getResults().getKda_ratio())/total_games;
+            kill_participation_per_game = (float)(positionHeroStats.getKill_participation_per_game()*prev_total_games + game.getResults().getKill_participation())/total_games;
         }
         else {
             total_games = 1;
@@ -540,10 +498,12 @@ public class Database_Helper extends SQLiteOpenHelper {
         // Insert the new row, returning the primary key value of the new row
 
         whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
-                DatabaseContract.Statistics.SECOND_TYPE + " = ?";
+                DatabaseContract.Statistics.SECOND_TYPE + " = ? AND " +
+                DatabaseContract.Statistics.GAME_TYPE + " = ?";
         whereArgs = new String[] {
                 HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(game.getResults().getPosition()),
-                heroe
+                hero + "",
+                game_type+""
         };
         long secondResult = db.update(
                 DatabaseContract.Statistics.TABLE_NAME,

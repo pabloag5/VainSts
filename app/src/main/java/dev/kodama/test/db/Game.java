@@ -13,18 +13,16 @@ public class Game {
 //    private Team home_team;
 //    private Team away_team;
     private long timestamp;
-    private String game_type;
-//    private String queue_type;
+    private int game_type;
+//    private int queue_type;
     private float vg_version;
 //    private ArrayList<Player_Results> home_team_results;
 //    private ArrayList<Player_Results> away_team_results;
     private Player_Results results;
 
-    public Game(float length, boolean win, Team home_team, Team away_team, long timestamp, String game_type, String queue_type, float vg_version, Player_Results results) {
+    public Game(float length, boolean win, long timestamp, int game_type, float vg_version, Player_Results results) {
         this.length = length;
         this.win = win;
-//        this.home_team = home_team;
-//        this.away_team = away_team;
         this.timestamp = timestamp;
         this.game_type = game_type;
 //        this.queue_type = queue_type;
@@ -56,7 +54,7 @@ public class Game {
         return timestamp;
     }
 
-    public String getGame_type() {
+    public int getGame_type() {
         return game_type;
     }
 

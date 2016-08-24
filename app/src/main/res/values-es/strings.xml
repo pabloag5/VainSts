@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">test</string>
+    <string name="bronze">Bronce</string>
+    <string name="gold">Oro</string>
+    <string name="silver">Plata</string>
+    <string name="jungle">Jungla</string>
+    <string name="lane">Línea</string>
+    <string name="roam">Soporte</string>
+</resources>

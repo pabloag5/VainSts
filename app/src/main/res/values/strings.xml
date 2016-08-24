@@ -89,4 +89,65 @@
         <item>Vox</item>
     </string-array>
 
+
+    <!--HEROES-->
+
+    <string name="adagio" translatable="false">Adagio</string>
+    <string name="ardan" translatable="false">Ardan</string>
+    <string name="blackfeather" translatable="false">Blackfeather</string>
+    <string name="catherine" translatable="false">Catherine</string>
+    <string name="celeste" translatable="false">Celeste</string>
+    <string name="fortress" translatable="false">Fortress</string>
+    <string name="glaive" translatable="false">Glaive</string>
+    <string name="joule" translatable="false">Joule</string>
+    <string name="kestrel" translatable="false">Kestrel</string>
+    <string name="koshka" translatable="false">Koshka</string>
+    <string name="krul" translatable="false">Krul</string>
+    <string name="petal" translatable="false">Petal</string>
+    <string name="phinn" translatable="false">Phinn</string>
+    <string name="reim" translatable="false">Reim</string>
+    <string name="ringo" translatable="false">Ringo</string>
+    <string name="rona" translatable="false">Rona</string>
+    <string name="samuel" translatable="false">Samuel</string>
+    <string name="saw" translatable="false">Saw</string>
+    <string name="skaarf" translatable="false">Skaarf</string>
+    <string name="skye" translatable="false">Skye</string>
+    <string name="taka" translatable="false">Taka</string>
+    <string name="vox" translatable="false">Vox</string>
+    <string name="lance" translatable="false">Lance</string>
+    <string name="lyra" translatable="false">Lyra</string>
+    <string name="ozo" translatable="false">Ozo</string>
+    <string name="alpha" translatable="false">Alpha</string>
+
+    <!--POSITIONS-->
+
+    <string name="lane">Lane</string>
+    <string name="jungle">Jungle</string>
+    <string name="roam">Roam</string>
+    <string name="all">All</string>
+
+    <!--TIERS-->
+
+    <string name="tier_1">Just Beginning</string>
+    <string name="tier_2">Getting There</string>
+    <string name="tier_3">Rock Solid</string>
+    <string name="tier_4">Worthy Foe</string>
+    <string name="tier_5">Got Swagger</string>
+    <string name="tier_6">Credible Threat</string>
+    <string name="tier_7">The Hotness</string>
+    <string name="tier_8">Simply Amazing</string>
+    <string name="tier_9">Pinnacle of Awesome</string>
+    <string name="tier_10">Vainglorious</string>
+
+    <string name="bronze">Bronze</string>
+    <string name="silver">Silver</string>
+    <string name="gold">Gold</string>
+
+    <!--GAME TYPES-->
+
+    <string name="casual_type">Casual</string>
+    <string name="ranked_type">Ranked</string>
+    <string name="private_type">Private</string>
+    <string name="tournament_type">Tournament</string>
+
 </resources>

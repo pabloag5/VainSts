@@ -6,9 +6,9 @@ package dev.kodama.test.db;
 public class Player_Results {
 
 //    private Player player;
-    private String hero;
+    private int hero;
 //    private String build_type;
-    private String position;
+    private int position;
     private int kills;
     private int deaths;
     private int assists;
@@ -19,7 +19,7 @@ public class Player_Results {
     private float gold_min;
     private float kill_participation;
 
-    public Player_Results(String hero, String position, int kills, int deaths, int assists, int cs, int gold, float length, int total_kills) {
+    public Player_Results(int hero, int position, int kills, int deaths, int assists, int cs, int gold, float length, int total_kills) {
 //        this.player = player;
         this.hero = hero;
 //        this.build_type = build_type;
@@ -57,7 +57,7 @@ public class Player_Results {
 //        return player;
 //    }
 
-    public String getHero() {
+    public int getHero() {
         return hero;
     }
 
@@ -65,7 +65,7 @@ public class Player_Results {
 //        return build_type;
 //    }
 
-    public String getPosition() {
+    public int getPosition() {
         return position;
     }
 

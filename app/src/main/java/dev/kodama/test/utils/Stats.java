@@ -1,22 +1,33 @@
 package dev.kodama.test.utils;
 
+import android.content.Context;
+
 /**
  * Created by JuanCamilo on 8/4/2016.
  */
 public class Stats {
 
+    public final static int TYPE_TOTAL = 1;
+    public final static int TYPE_HERO = 2;
+
+
     /**
-     * Total/heroe
+     * Total/hero
      */
-    private String type;
+    private int type;
     /**
      * Can be null
      */
-    private String heroe;
+    private int hero;
     /**
      * Can be null/all/lane/jungle/roam
      */
-    private String position;
+    private int position;
+
+    /**
+     * Can be Casual or Ranked
+     */
+    private int game_type;
 
     private int wins;
     private int losses;
@@ -30,7 +41,7 @@ public class Stats {
     private float kda_per_game;
     private float kill_participation_per_game;
 
-    public Stats(int wins, int total_games, float kills_per_game, float deaths_per_game, float assists_per_game, float cs_min_per_game, float gold_min_per_game, float gold_per_game, float kda_per_game, float kill_participation_per_game, String position, String heroe, String type) {
+    public Stats(int wins, int total_games, float kills_per_game, float deaths_per_game, float assists_per_game, float cs_min_per_game, float gold_min_per_game, float gold_per_game, float kda_per_game, float kill_participation_per_game, int position, int hero, int type, int game_type) {
         this.wins = wins;
         this.total_games = total_games;
         losses = total_games - wins;
@@ -43,20 +54,37 @@ public class Stats {
         this.kda_per_game = kda_per_game;
         this.kill_participation_per_game = kill_participation_per_game;
         this.position = position;
-        this.heroe = heroe;
+        this.hero = hero;
         this.type = type;
+        this.game_type = game_type;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
 
-    public String getHeroe() {
-        return heroe;
+    public int getGameType() {
+        return game_type;
     }
 
-    public String getPosition() {
+    public String getGameTypeString(Context context) {
+        return HalcyonUtils.getGameTypeStringFromId(context, game_type);
+    }
+
+    public int getHero() {
+        return hero;
+    }
+
+    public String getHeroString(Context context) {
+        return HalcyonUtils.getHeroNameFromId(context, hero);
+    }
+
+    public int getPosition() {
         return position;
+    }
+
+    public String getPositionString(Context context) {
+        return HalcyonUtils.getPositionNameFromId(context, position);
     }
 
     public int getWins() {

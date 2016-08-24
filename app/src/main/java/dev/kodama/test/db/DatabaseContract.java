@@ -19,22 +19,6 @@ public final class DatabaseContract {
     private DatabaseContract() {}
 
 
-    public static abstract class Heroes implements BaseColumns {
-        public static final String TABLE_NAME       = "heroes";
-        public static final String NAME             = "name";
-//        public static final String POSITION         = "position";
-//        public static final String TYPE             = "type";
-
-        public static final String CREATE_TABLE = "CREATE TABLE " +
-                TABLE_NAME + " (" +
-                _ID + INTEGER_TYPE + PRIMARY_KEY + AUTOINCREMENT + COMMA_SEP +
-                NAME + TEXT_TYPE + NOT_NULL + UNIQUE +
-//                POSITION + TEXT_TYPE + COMMA_SEP +
-//                TYPE + TEXT_TYPE +
-                " )";
-        public static final String DELETE_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
-    }
-
 //    public static abstract class Players implements BaseColumns {
 //        public static final String TABLE_NAME       = "players";
 //        public static final String IGN              = "ign";
@@ -103,7 +87,7 @@ public final class DatabaseContract {
                 TIMESTAMP + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 LENGTH + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 WIN + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
-                GAME_TYPE + TEXT_TYPE + NOT_NULL +
+                GAME_TYPE + INTEGER_TYPE + NOT_NULL +
 //                " FOREIGN KEY(" + AWAY_TEAM_ID + ") REFERENCES " + Teams.TABLE_NAME +
 //                "(" + Teams._ID + ")" +
                 " )";
@@ -135,13 +119,13 @@ public final class DatabaseContract {
                 TABLE_NAME + " (" +
                 _ID + INTEGER_TYPE + PRIMARY_KEY + AUTOINCREMENT + COMMA_SEP +
 //                PLAYER_ID + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
-                HERO + TEXT_TYPE + COMMA_SEP +
+                HERO + INTEGER_TYPE + COMMA_SEP +
                 GAME_ID + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
 //                ELO + TEXT_TYPE + COMMA_SEP +
 //                ELO_DETAILS + TEXT_TYPE + COMMA_SEP +
 //                HOME_TEAM + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
 //                BUILD_TYPE + TEXT_TYPE + COMMA_SEP +
-                POSITION + TEXT_TYPE + COMMA_SEP +
+                POSITION + INTEGER_TYPE + COMMA_SEP +
                 KILLS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 DEATHS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 ASSISTS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
@@ -153,8 +137,8 @@ public final class DatabaseContract {
                 KILL_PARTICIPATION + REAL_TYPE + NOT_NULL + COMMA_SEP +
 //                " FOREIGN KEY(" + PLAYER_ID + ") REFERENCES " + Players.TABLE_NAME +
 //                "(" + Players._ID + ")" + COMMA_SEP +
-                " FOREIGN KEY(" + HERO + ") REFERENCES " + Heroes.TABLE_NAME +
-                "(" + Heroes._ID + ")" + COMMA_SEP +
+//                " FOREIGN KEY(" + HERO + ") REFERENCES " + Heroes.TABLE_NAME +
+//                "(" + Heroes._ID + ")" + COMMA_SEP +
                 " FOREIGN KEY(" + GAME_ID + ") REFERENCES " + Games.TABLE_NAME +
                 "(" + Games._ID + ")" +
                 " )";
@@ -163,8 +147,12 @@ public final class DatabaseContract {
 
     public static abstract class Statistics implements BaseColumns {
         public static final String TABLE_NAME                   = "statistics";
+        //Indicates if the Statistic is total or for a hero
         public static final String TYPE                         = "type";
+        //The hero of the statistic or empty if it's a total statistic
         public static final String SECOND_TYPE                  = "second_type";
+        //Indicates if it's casual or ranked
+        public static final String GAME_TYPE                    = "game_type";
         public static final String WINS                         = "wins";
         public static final String TOTAL_GAMES                  = "total_games";
         public static final String KILLS_PER_GAME               = "kills_per_game";
@@ -180,7 +168,8 @@ public final class DatabaseContract {
                 TABLE_NAME + " (" +
                 _ID + INTEGER_TYPE + PRIMARY_KEY + AUTOINCREMENT + COMMA_SEP +
                 TYPE + TEXT_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
-                SECOND_TYPE + TEXT_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
+                SECOND_TYPE + INTEGER_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
+                GAME_TYPE + INTEGER_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
                 WINS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 TOTAL_GAMES + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 KILLS_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +
