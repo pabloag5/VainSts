@@ -89,17 +89,13 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
 
         dots[0].setImageResource(R.drawable.selecteddot);
 
-        nextbtn=new Button(this);
-        nextbtn.setBackgroundResource(R.drawable.ic_keyboard_arrow_right_white_24dp);
+        nextbtn=(Button)findViewById(R.id.btn_next);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("gameinfo",hero+" "+position+" "+queuetype+" "+String.valueOf(win)+" "+Float.toString(length));
             }
         });
-        nextbtn.setVisibility(View.INVISIBLE);
-        btnLayout.addView(nextbtn);
-
 
     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -171,15 +167,6 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
     }
 
     @Override
-    public void GameDataG(boolean win, float length, String queuetype, String hero, String position) {
-        this.win=win;
-        this.length=length;
-        this.queuetype=queuetype;
-        this.hero=hero;
-        this.position=position;
-    }
-
-    @Override
     public void HeroDataG(int position, String hero, boolean heroclick) {
         //NewGameG newGameG = (NewGameG)getSupportFragmentManager().findFragmentById(R.id.newgamepager);
         //newGameG.HeroDataGame(position,hero,heroclick);
@@ -206,6 +193,29 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
             this.hero=hero;
 
         }else recyclerView.setLayoutFrozen(false);//layoutManager.setScrollEnabled(true);
+        Log.d("HeroDataG",position+" "+hero);
+    }
+
+    @Override
+    public void gameDataG(boolean win, float length, String queuetype) {
+        this.win=win;
+        this.length=length;
+        this.queuetype=queuetype;
+    }
+
+    @Override
+    public void gameDataGwin(boolean win) {
+        this.win=win;
+    }
+
+    @Override
+    public void gameDataGqueuetype(String queuetype) {
+        this.queuetype=queuetype;
+    }
+
+    @Override
+    public void gameDataGlength(float length) {
+
     }
 
 

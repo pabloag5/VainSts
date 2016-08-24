@@ -1,16 +1,22 @@
 package dev.kodama.test;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.annotation.BoolRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.NumberPicker;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import java.util.ArrayList;
@@ -27,9 +33,16 @@ public class NewGameG extends Fragment {
     private List<Gamestats> mListHeroes=new ArrayList<>();
     private RecyclerView recyclerView;
     private ViewAdapter adapter;
+    private RadioButton queueR;
+    private RadioButton queueC;
+    private RadioButton resultwin;
+    private RadioButton resultloss;
+    private NumberPicker minutePicker;
+    private NumberPicker secondPicker;
     CustomLinearLayoutManager layoutManager= (CustomLinearLayoutManager) new CustomLinearLayoutManager(getActivity(),CustomLinearLayoutManager.HORIZONTAL,false);
 
     CommGameDataG commGameDataG;
+
     boolean win;
     String queuetype;
     String hero;
@@ -54,33 +67,108 @@ public class NewGameG extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
 
-
-
-        final NumberPicker minutePicker=(NumberPicker)view.findViewById(R.id.minutePicker);
+        //set time pickers
+        minutePicker=(NumberPicker)view.findViewById(R.id.minutePicker);
         minutePicker.setValue(0);
         minutePicker.setMinValue(0);
         minutePicker.setMaxValue(45);
 
-        final NumberPicker secondPicker=(NumberPicker)view.findViewById(R.id.secondPicker);
+        secondPicker=(NumberPicker)view.findViewById(R.id.secondPicker);
         secondPicker.setValue(0);
         secondPicker.setMinValue(0);
         secondPicker.setMaxValue(59);
 
-        final RadioGroup queue=(RadioGroup) view.findViewById(R.id.queue);
-        final RadioGroup rgresult=(RadioGroup) view.findViewById(R.id.rgresult);
-        if (queue.getCheckedRadioButtonId()==R.id.casualqueue) {
-            queuetype=Constants.Game_Types.CASUAL;
-        } else queuetype=Constants.Game_Types.RANKED;
-        if (rgresult.getCheckedRadioButtonId()==R.id.win_result) {
-            win=true;
-        } else win=false;
-        length=minutePicker.getValue()+secondPicker.getValue()/60;
+        queueR=(RadioButton) view.findViewById(R.id.rankedqueue);
+        queueC=(RadioButton) view.findViewById(R.id.casualqueue);
+        resultwin=(RadioButton) view.findViewById(R.id.win_result);
+        resultloss=(RadioButton) view.findViewById(R.id.loss_result);
+        queueR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioClickListener(v);
+            }
+        });
+        queueC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioClickListener(v);
+            }
+        });
+        resultwin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioClickListener(v);
+            }
+        });
+        resultloss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                radioClickListener(v);
+            }
+        });
+        /*queue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId==R.id.casualqueue) {
+                    queuetype=Constants.Game_Types.CASUAL;
 
-        if (hero!=null&&position!=null&&minutePicker.getValue()!=0&&secondPicker.getValue()!=0) {
-            commGameDataG.GameDataG(win,length,queuetype,hero,position);
-        }
+                } else queuetype=Constants.Game_Types.RANKED;
+            }
+        });
+        rgresult.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId==R.id.win_result) {
+                    win=true;
+                } else win=false;
+            }
+        });
+        */
+        minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                length=newVal;
+            }
+        });
+        secondPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                length=+newVal/60;
+            }
+        });
 
         return view;
+
+    }
+
+    private void radioClickListener(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rankedqueue:
+                if (checked)
+                    this.queuetype=Constants.Game_Types.RANKED;
+                    commGameDataG.gameDataGqueuetype(queuetype);
+                    break;
+            case R.id.casualqueue:
+                if (checked)
+                    this.queuetype=Constants.Game_Types.CASUAL;
+                    commGameDataG.gameDataGqueuetype(queuetype);
+                    break;
+            case R.id.win_result:
+                if (checked)
+                    this.win=true;
+                    commGameDataG.gameDataGwin(win);
+                break;
+            case R.id.loss_result:
+                if (checked)
+                    this.win=false;
+                    commGameDataG.gameDataGwin(win);
+                break;
+        }
+        //Log.d("queue",queuetype+" "+Boolean.toString(win));
 
     }
 
@@ -100,32 +188,17 @@ public class NewGameG extends Fragment {
 
     }
 
-    public void HeroDataGame(int position, String hero, boolean heroclick) {
-        if (heroclick) {
-            recyclerView.setLayoutFrozen(true);
-            //layoutManager.setScrollEnabled(false);
-            switch (position){
-                case 0:
-                    this.position=null;
-                    break;
-                case 1:
-                    this.position="Lane";
-                    break;
-                case 2:
-                    this.position="Jungle";
-                    break;
-                case 3:
-                    this.position="Roam";
-                    break;
-                default:
-                    break;
-            }
-            this.hero=hero;
-
-        }else recyclerView.setLayoutFrozen(false);//layoutManager.setScrollEnabled(true);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        commGameDataG=(CommGameDataG) context;
     }
+
+
     public interface CommGameDataG {
-        public void GameDataG(boolean win, float length, String queuetype, String hero, String position);
+        public void gameDataG(boolean win, float length, String queuetype);
+        public void gameDataGwin(boolean win);
+        public void gameDataGqueuetype(String queuetype);
+        public void gameDataGlength(float length);
     }
-
 }

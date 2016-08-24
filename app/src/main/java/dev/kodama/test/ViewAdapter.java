@@ -64,11 +64,29 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MyViewHolder>
 
     @Override
     public void onClick(View v) {
-        MyViewHolder holder = (MyViewHolder) v.getTag();
+        final MyViewHolder holder = (MyViewHolder) v.getTag();
         if (holder.radioGroup.getVisibility()==View.GONE) {
             holder.radioGroup.setVisibility(View.VISIBLE);
             comm.HeroDataG(0,null,true);
-            switch (holder.radioGroup.getCheckedRadioButtonId()){
+            holder.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    switch (checkedId){
+                        case (R.id.laneplayed):
+                            comm.HeroDataG(Constants.Positions.LANE,data.get(holder.getAdapterPosition()).getHeroName(),true);
+                            break;
+                        case (R.id.jungleplayed):
+                            comm.HeroDataG(Constants.Positions.JUNGLE,data.get(holder.getAdapterPosition()).getHeroName(),true);
+                            break;
+                        case (R.id.roamplayed):
+                            comm.HeroDataG(Constants.Positions.ROAM,data.get(holder.getAdapterPosition()).getHeroName(),true);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+            /*switch (holder.radioGroup.getCheckedRadioButtonId()){
                 case (R.id.laneplayed):
                     comm.HeroDataG(Constants.Positions.LANE,data.get(holder.getAdapterPosition()).getHeroName(),true);
                     break;
@@ -76,11 +94,11 @@ public class ViewAdapter extends RecyclerView.Adapter<ViewAdapter.MyViewHolder>
                     comm.HeroDataG(Constants.Positions.JUNGLE,data.get(holder.getAdapterPosition()).getHeroName(),true);
                     break;
                 case (R.id.roamplayed):
-                    comm.HeroDataG(Constants.Positions.LANE,data.get(holder.getAdapterPosition()).getHeroName(),true);
+                    comm.HeroDataG(Constants.Positions.ROAM,data.get(holder.getAdapterPosition()).getHeroName(),true);
                     break;
                 default:
                     break;
-            }
+            }*/
 
 
         }else {
