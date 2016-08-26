@@ -3,6 +3,7 @@ package dev.kodama.test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.BoolRes;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -39,12 +41,13 @@ public class NewGameG extends Fragment {
     private RadioButton resultloss;
     private NumberPicker minutePicker;
     private NumberPicker secondPicker;
+    private View view;
     CustomLinearLayoutManager layoutManager= (CustomLinearLayoutManager) new CustomLinearLayoutManager(getActivity(),CustomLinearLayoutManager.HORIZONTAL,false);
 
     CommGameDataG commGameDataG;
 
     boolean win;
-    String queuetype;
+    int queuetype;
     String hero;
     String position;
     float length;
@@ -72,6 +75,13 @@ public class NewGameG extends Fragment {
         minutePicker.setValue(0);
         minutePicker.setMinValue(0);
         minutePicker.setMaxValue(45);
+        minutePicker.setDividerPadding(5);
+        view=(View) minutePicker.findViewById(minutePicker.getNextFocusDownId());
+
+        if(view instanceof EditText) {
+            ((EditText) view).setTextSize(25);
+            ((EditText) view).setTextColor(Color.parseColor("#cccccc"));
+        }
 
         secondPicker=(NumberPicker)view.findViewById(R.id.secondPicker);
         secondPicker.setValue(0);
@@ -106,24 +116,7 @@ public class NewGameG extends Fragment {
                 radioClickListener(v);
             }
         });
-        /*queue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId==R.id.casualqueue) {
-                    queuetype=Constants.Game_Types.CASUAL;
 
-                } else queuetype=Constants.Game_Types.RANKED;
-            }
-        });
-        rgresult.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId==R.id.win_result) {
-                    win=true;
-                } else win=false;
-            }
-        });
-        */
         minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
@@ -196,9 +189,9 @@ public class NewGameG extends Fragment {
 
 
     public interface CommGameDataG {
-        public void gameDataG(boolean win, float length, String queuetype);
+        public void gameDataG(boolean win, float length, int queuetype);
         public void gameDataGwin(boolean win);
-        public void gameDataGqueuetype(String queuetype);
+        public void gameDataGqueuetype(int queuetype);
         public void gameDataGlength(float length);
     }
 }

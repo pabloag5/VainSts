@@ -46,4 +46,5 @@ public class NumberPicker extends android.widget.NumberPicker {
             ((EditText) view).setTextColor(Color.parseColor("#cccccc"));
         }
     }
+
 }
