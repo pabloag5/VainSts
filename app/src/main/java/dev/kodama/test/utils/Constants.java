@@ -43,32 +43,32 @@ public final class Constants {
                 R.drawable.vox
         };
 
-        public final int ADAGIO = 1;
-        public final int ARDAN = 2;
-        public final int BLACKFEATHER = 3;
-        public final int CATHERINE = 4;
-        public final int CELESTE = 5;
-        public final int FORTRESS = 6;
-        public final int GLAIVE = 7;
-        public final int JOULE = 8;
-        public final int KESTREL = 9;
-        public final int KOSHKA = 10;
-        public final int KRUL = 11;
-        public final int PETAL = 12;
-        public final int PHINN = 13;
-        public final int REIM = 14;
-        public final int RINGO = 15;
-        public final int RONA = 16;
-        public final int SAMUEL = 17;
-        public final int SAW = 18;
-        public final int SKAARF = 19;
-        public final int SKYE = 20;
-        public final int TAKA = 21;
-        public final int VOX = 22;
-        public final int LANCE = 23;
-        public final int LYRA = 24;
-        public final int OZO = 25;
-        public final int ALPHA = 26;
+        public final static int ADAGIO = 1;
+        public final static int ARDAN = 2;
+        public final static int BLACKFEATHER = 3;
+        public final static int CATHERINE = 4;
+        public final static int CELESTE = 5;
+        public final static int FORTRESS = 6;
+        public final static int GLAIVE = 7;
+        public final static int JOULE = 8;
+        public final static int KESTREL = 9;
+        public final static int KOSHKA = 10;
+        public final static int KRUL = 11;
+        public final static int PETAL = 12;
+        public final static int PHINN = 13;
+        public final static int REIM = 14;
+        public final static int RINGO = 15;
+        public final static int RONA = 16;
+        public final static int SAMUEL = 17;
+        public final static int SAW = 18;
+        public final static int SKAARF = 19;
+        public final static int SKYE = 20;
+        public final static int TAKA = 21;
+        public final static int VOX = 22;
+        public final static int LANCE = 23;
+        public final static int LYRA = 24;
+        public final static int OZO = 25;
+        public final static int ALPHA = 26;
 
         public final static Map<Integer, Integer> heroesMap = new HashMap<Integer, Integer>() {{
             put(ADAGIO, R.string.adagio);
@@ -117,10 +117,10 @@ public final class Constants {
     }
 
     public static class Game_Types {
-        public static int CASUAL = 1;
-        public static int RANKED = 2;
-        public static int PRIVATE = 3;
-        public static int TOURNAMENT = 4;
+        public final static int CASUAL = 1;
+        public final static int RANKED = 2;
+        public final static int PRIVATE = 3;
+        public final static int TOURNAMENT = 4;
 
         public final static Map<Integer, Integer> gameTypeMap = new HashMap<Integer, Integer>() {{
             put(CASUAL, R.string.casual_type);
@@ -138,16 +138,16 @@ public final class Constants {
 
     public static class Elo {
 
-        public static int TIER_1 = 1;
-        public static int TIER_2 = 2;
-        public static int TIER_3 = 3;
-        public static int TIER_4 = 4;
-        public static int TIER_5 = 5;
-        public static int TIER_6 = 6;
-        public static int TIER_7 = 7;
-        public static int TIER_8 = 8;
-        public static int TIER_9 = 9;
-        public static int TIER_10 = 10;
+        public final static int TIER_1 = 1;
+        public final static int TIER_2 = 2;
+        public final static int TIER_3 = 3;
+        public final static int TIER_4 = 4;
+        public final static int TIER_5 = 5;
+        public final static int TIER_6 = 6;
+        public final static int TIER_7 = 7;
+        public final static int TIER_8 = 8;
+        public final static int TIER_9 = 9;
+        public final static int TIER_10 = 10;
 
         public final static Map<Integer, Integer> EloMap = new HashMap<Integer, Integer>() {{
             put(TIER_1, R.string.tier_1);
@@ -163,9 +163,9 @@ public final class Constants {
         }};
         
         public static class Sub_Elo {
-            public static int BRONZE = 1;
-            public static int SILVER = 2;
-            public static int GOLD = 3;
+            public final static int BRONZE = 1;
+            public final static int SILVER = 2;
+            public final static int GOLD = 3;
 
             public final static Map<Integer, Integer> EloMap = new HashMap<Integer, Integer>() {{
                 put(BRONZE, R.string.bronze);
