@@ -39,7 +39,7 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
     private Button nextbtn;
     boolean win;
     float length;
-    String queuetype;
+    int queuetype;
     String hero;
     String position;
 
@@ -197,7 +197,7 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
     }
 
     @Override
-    public void gameDataG(boolean win, float length, String queuetype) {
+    public void gameDataG(boolean win, float length, int queuetype) {
         this.win=win;
         this.length=length;
         this.queuetype=queuetype;
@@ -209,7 +209,7 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
     }
 
     @Override
-    public void gameDataGqueuetype(String queuetype) {
+    public void gameDataGqueuetype(int queuetype) {
         this.queuetype=queuetype;
     }
 
