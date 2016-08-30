@@ -1,25 +1,14 @@
 package dev.kodama.test;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.BoolRes;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,69 +18,44 @@ import dev.kodama.test.utils.Constants;
 /**
  * Created by kodama on 8/17/16.
  */
-public class NewGameG extends Fragment {
+public class NewGame1 extends Fragment {
 
     //the list containing our heroes list
     private List<Gamestats> mListHeroes=new ArrayList<>();
+
+    //declaring private variables
     private RecyclerView recyclerView;
     private ViewAdapter adapter;
     private RadioButton queueR;
     private RadioButton queueC;
     private RadioButton resultwin;
     private RadioButton resultloss;
-    private NumberPicker minutePicker;
-    private NumberPicker secondPicker;
-    private View view;
     CustomLinearLayoutManager layoutManager= (CustomLinearLayoutManager) new CustomLinearLayoutManager(getActivity(),CustomLinearLayoutManager.HORIZONTAL,false);
 
-    CommGameDataG commGameDataG;
+    CommGameData1 commGameDataG;
 
     boolean win;
     int queuetype;
-    String hero;
-    String position;
-    float length;
 
-    public NewGameG(){
+    public NewGame1(){
 
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.newgamegeneral, container, false);
+        View view= inflater.inflate(R.layout.newgame1, container, false);
 
-        //code creates recyclerView
+        //setting recyclerView
         recyclerView=(RecyclerView)view.findViewById(R.id.heroselector);
         mListHeroes=getHero();
-
         adapter =new ViewAdapter(getActivity(),mListHeroes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-
-        //set time pickers
-        minutePicker=(NumberPicker)view.findViewById(R.id.minutePicker);
-        minutePicker.setValue(0);
-        minutePicker.setMinValue(0);
-        minutePicker.setMaxValue(45);
-        minutePicker.setDividerPadding(5);
-        view=(View) minutePicker.findViewById(minutePicker.getNextFocusDownId());
-
-        if(view instanceof EditText) {
-            ((EditText) view).setTextSize(25);
-            ((EditText) view).setTextColor(Color.parseColor("#cccccc"));
-        }
-
-        secondPicker=(NumberPicker)view.findViewById(R.id.secondPicker);
-        secondPicker.setValue(0);
-        secondPicker.setMinValue(0);
-        secondPicker.setMaxValue(59);
-
+        //declaring and setting type queue radiobuttons
         queueR=(RadioButton) view.findViewById(R.id.rankedqueue);
         queueC=(RadioButton) view.findViewById(R.id.casualqueue);
-        resultwin=(RadioButton) view.findViewById(R.id.win_result);
-        resultloss=(RadioButton) view.findViewById(R.id.loss_result);
         queueR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +68,10 @@ public class NewGameG extends Fragment {
                 radioClickListener(v);
             }
         });
+
+        //declaring and setting game result radiobuttons
+        resultwin=(RadioButton) view.findViewById(R.id.win_result);
+        resultloss=(RadioButton) view.findViewById(R.id.loss_result);
         resultwin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,19 +82,6 @@ public class NewGameG extends Fragment {
             @Override
             public void onClick(View v) {
                 radioClickListener(v);
-            }
-        });
-
-        minutePicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                length=newVal;
-            }
-        });
-        secondPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
-            @Override
-            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-                length=+newVal/60;
             }
         });
 
@@ -161,7 +116,6 @@ public class NewGameG extends Fragment {
                     commGameDataG.gameDataGwin(win);
                 break;
         }
-        //Log.d("queue",queuetype+" "+Boolean.toString(win));
 
     }
 
@@ -184,14 +138,13 @@ public class NewGameG extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        commGameDataG=(CommGameDataG) context;
+        commGameDataG=(CommGameData1) context;
     }
 
 
-    public interface CommGameDataG {
-        public void gameDataG(boolean win, float length, int queuetype);
+    public interface CommGameData1 {
         public void gameDataGwin(boolean win);
         public void gameDataGqueuetype(int queuetype);
-        public void gameDataGlength(float length);
+
     }
 }

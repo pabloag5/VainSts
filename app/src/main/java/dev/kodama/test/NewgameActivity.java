@@ -1,51 +1,56 @@
 package dev.kodama.test;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 
 /**
  * Created by kodama on 4/22/16.
  */
-public class NewgameActivity extends AppCompatActivity implements NewGameG.CommGameDataG, ViewAdapter.CommHeroDataG{
+public class NewgameActivity extends AppCompatActivity implements
+        NewGame1.CommGameData1, ViewAdapter.CommHeroDataG, NewGame2.CommGameData2{
     ViewPager viewPager;
-    RecyclerView recyclerView;
-    private LinearLayout dotIndicator;
-    private LinearLayout btnLayout;
+    RecyclerView recyclerView; //to freeze on click
+    private LinearLayout dotIndicator, numberspad;
     private int dotsCnt;
     protected View view;
     private ImageView[] dots;
     private Button nextbtn;
+    private Button backbtn;
     boolean win;
     float length;
     int queuetype;
     String hero;
     String position;
+    NumberPicker numberPicker;
+    TextView minutes;
+    TextView seconds;
+    TextView totalKills;
+    int totalkills=0;
+    View newgame2View;
 
-    private String newgamepager [] = {"generalInfo", "detailInfo"};
-    private int[] dotsIcon ={R.drawable.unselecteddot,R.drawable.selecteddot};
-
+    //declaring viewpager string
+    private String newgamepager [] = {"newgame1", "newgame2", "newgame3","newgame4"};
 
 
     @Override
@@ -64,13 +69,17 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
         // Enable the Up button
         ab.setDisplayHomeAsUpEnabled(true);
 
-        dotIndicator=(LinearLayout) findViewById(R.id.PagerCountDots);
-        btnLayout=(LinearLayout)findViewById(R.id.PagerBtn);
 
+        //viewpager setting
         viewPager = (ViewPager) findViewById(R.id.newgamepager);
         viewPager.setAdapter(new CustomAdapterAG(getSupportFragmentManager(),getApplicationContext() ));
         viewPager.setCurrentItem(0);
 
+        //declaring numberspad layout
+        numberspad=(LinearLayout)findViewById(R.id.numberspad);
+
+        //setting viewer dots indicador
+        dotIndicator=(LinearLayout) findViewById(R.id.PagerCountDots);
         dotsCnt=newgamepager.length;
         dots=new ImageView[dotsCnt];
         for (int i = 0; i < dotsCnt; i++) {
@@ -83,20 +92,32 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
             );
 
             params.setMargins(6, 0, 6, 0);
-
             dotIndicator.addView(dots[i],params);
         }
-
         dots[0].setImageResource(R.drawable.selecteddot);
 
+        //setting next button listener
         nextbtn=(Button)findViewById(R.id.btn_next);
         nextbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("gameinfo",hero+" "+position+" "+queuetype+" "+String.valueOf(win)+" "+Float.toString(length));
+                if (viewPager.getCurrentItem()!=dotsCnt-1){
+                    viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
+                } else {
+                    //code to adding game
+                }
+            }
+        });
+        //setting back button listener
+        backbtn=(Button)findViewById(R.id.btn_back);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewPager.setCurrentItem(viewPager.getCurrentItem()-1,true);
             }
         });
 
+    //viewpager listener
     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
             @Override
@@ -112,8 +133,16 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
 
                 dots[position].setImageResource(R.drawable.selecteddot);
                 if (position==dotsCnt-1){
-                    nextbtn.setVisibility(View.VISIBLE);
-                } else nextbtn.setVisibility(View.INVISIBLE);
+                    nextbtn.setText(getString(R.string.addgametbtn));
+                    numberspad.setVisibility(View.VISIBLE);
+                    numberPicker.setVisibility(View.GONE);
+                } else {
+                    nextbtn.setText(getString(R.string.nextbtn));
+                    numberPicker.setVisibility(View.VISIBLE);
+                }
+                if (position==0){
+                    backbtn.setVisibility(View.INVISIBLE);
+                } else backbtn.setVisibility(View.VISIBLE);
 
 
             }
@@ -124,6 +153,20 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
             }
         });
 
+        //setting numberPicker
+        numberPicker=(NumberPicker)findViewById(R.id.numberPicker);
+
+        numberPicker.setMinValue(0);
+        numberPicker.setMaxValue(59);
+        numberPicker.setValue(20);
+        numberPicker.setScaleX(1.5f);
+        numberPicker.setScaleY(1.5f);
+        numberPicker.setWrapSelectorWheel(true);
+
+        //initializing NewGame2 fragment views
+        minutes=(TextView) view.findViewById(R.id.minutestxt);
+        seconds=(TextView) view.findViewById(R.id.secondstxt);
+        totalKills=(TextView)view.findViewById(R.id.totalkills);
 
         /*
         DisplayMetrics dm = new DisplayMetrics();
@@ -168,8 +211,7 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
 
     @Override
     public void HeroDataG(int position, String hero, boolean heroclick) {
-        //NewGameG newGameG = (NewGameG)getSupportFragmentManager().findFragmentById(R.id.newgamepager);
-        //newGameG.HeroDataGame(position,hero,heroclick);
+
         recyclerView=(RecyclerView)findViewById(R.id.heroselector);
         if (heroclick) {
             recyclerView.setLayoutFrozen(true);
@@ -196,12 +238,6 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
         Log.d("HeroDataG",position+" "+hero);
     }
 
-    @Override
-    public void gameDataG(boolean win, float length, int queuetype) {
-        this.win=win;
-        this.length=length;
-        this.queuetype=queuetype;
-    }
 
     @Override
     public void gameDataGwin(boolean win) {
@@ -214,7 +250,31 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
     }
 
     @Override
-    public void gameDataGlength(float length) {
+    public void gameDataView(View view) {
+        newgame2View=view;
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                switch (newgame2View.getId()){
+                    case (R.id.minutestxt):
+                        minutes.setText(newVal);
+                        length=newVal;
+                        break;
+                    case (R.id.secondstxt):
+                        seconds.setText(newVal);
+                        length+=newVal/60;
+                        Log.d("length",Float.toString(length));
+                        break;
+                    case (R.id.totalkills):
+                        totalKills.setText(newVal);
+                        totalkills=newVal;
+                        Log.d("total kills", Integer.toString(totalkills));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -229,9 +289,13 @@ public class NewgameActivity extends AppCompatActivity implements NewGameG.CommG
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new NewGameG();
+                    return new NewGame1();
                 case 1:
-                    return new NewGameD();
+                    return new NewGame2();
+                case 2:
+                    return new NewGame3();
+                case 3:
+                    return new NewGame4();
                 default:
                     return null;
             }

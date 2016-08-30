@@ -34,5 +34,17 @@
         <item name="android:maxHeight">5dp</item>
 
     </style>
+    <!-- changes the default colours for EditTexts, including non-text elements (also works with the DatePicker -->
+
+    <style name="appCompatStyle" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#cccccc</item>
+        <item name="colorControlActivated">#cccccc</item>
+        <item name="android:editTextStyle">@style/editTextStyle</item>
+    </style>
+
+    <!-- changes the default text colour for the EditTexts -->
+    <style name="editTextStyle" parent="android:style/Widget.EditText">
+        <item name="android:textColor">#cccccc</item>
+    </style>
 
 </resources>
