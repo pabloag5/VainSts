@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">test</string>
+    <string name="app_name">Halcyon Stats</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Save</string>
     <string name="text_send">PRUEBA</string>
