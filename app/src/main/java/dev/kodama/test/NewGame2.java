@@ -72,6 +72,24 @@ public class NewGame2 extends Fragment {
         commGameData2=(CommGameData2) context;
     }
 
+    //method call from NewGameActivity to update TextViews text
+    public void setValToView(int id, int val){
+        switch (id){
+            case R.id.minutestxt:
+                minutes.setText(Integer.toString(val));
+                break;
+            case R.id.secondstxt:
+                seconds.setText(Integer.toString(val));
+                break;
+            case R.id.totalkills:
+                totalKills.setText(Integer.toString(val));
+                break;
+            default:
+                break;
+        }
+    }
+
+    //interface to send data to NewGameActivity
     public interface CommGameData2 {
         public void gameDataView (View view);
     }

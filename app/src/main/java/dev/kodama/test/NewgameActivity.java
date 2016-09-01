@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,9 @@ import org.w3c.dom.Text;
  * Created by kodama on 4/22/16.
  */
 public class NewgameActivity extends AppCompatActivity implements
-        NewGame1.CommGameData1, ViewAdapter.CommHeroDataG, NewGame2.CommGameData2{
+        NewGame1.CommGameData1, ViewAdapter.CommHeroDataG, NewGame2.CommGameData2, NewGame3.CommGameData3,
+        NewGame4.CommGameData4{
+
     ViewPager viewPager;
     RecyclerView recyclerView; //to freeze on click
     private LinearLayout dotIndicator, numberspad;
@@ -38,16 +41,21 @@ public class NewgameActivity extends AppCompatActivity implements
     private Button nextbtn;
     private Button backbtn;
     boolean win;
-    float length;
+    float minutes;
+    float seconds;
     int queuetype;
     String hero;
     String position;
+    String csVal="";
+    String goldVal="";
     NumberPicker numberPicker;
-    TextView minutes;
-    TextView seconds;
-    TextView totalKills;
     int totalkills=0;
+    int killsVal=0;
+    int deathsVal=0;
+    int assistsVal=0;
     View newgame2View;
+    View newgame3View;
+    View newgame4View;
 
     //declaring viewpager string
     private String newgamepager [] = {"newgame1", "newgame2", "newgame3","newgame4"};
@@ -105,6 +113,11 @@ public class NewgameActivity extends AppCompatActivity implements
                     viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
                 } else {
                     //code to adding game
+                    Log.d("New Game",Integer.toString(queuetype)+" "+hero+" "+position+
+                            " "+Boolean.toString(win)+ " "+Float.toString(minutes+seconds)+
+                            " "+Integer.toString(totalkills)+ " "+Integer.toString(killsVal)+
+                            " "+Integer.toString(deathsVal)+ " "+Integer.toString(assistsVal)+
+                            " "+csVal+ " "+goldVal);
                 }
             }
         });
@@ -139,6 +152,7 @@ public class NewgameActivity extends AppCompatActivity implements
                 } else {
                     nextbtn.setText(getString(R.string.nextbtn));
                     numberPicker.setVisibility(View.VISIBLE);
+                    numberspad.setVisibility(View.GONE);
                 }
                 if (position==0){
                     backbtn.setVisibility(View.INVISIBLE);
@@ -155,18 +169,115 @@ public class NewgameActivity extends AppCompatActivity implements
 
         //setting numberPicker
         numberPicker=(NumberPicker)findViewById(R.id.numberPicker);
-
         numberPicker.setMinValue(0);
         numberPicker.setMaxValue(59);
         numberPicker.setValue(20);
-        numberPicker.setScaleX(1.5f);
-        numberPicker.setScaleY(1.5f);
+        numberPicker.setScaleX(1.2f);
+        numberPicker.setScaleY(1.2f);
         numberPicker.setWrapSelectorWheel(true);
 
-        //initializing NewGame2 fragment views
-        minutes=(TextView) view.findViewById(R.id.minutestxt);
-        seconds=(TextView) view.findViewById(R.id.secondstxt);
-        totalKills=(TextView)view.findViewById(R.id.totalkills);
+        //setting numberspad
+        Button btn1=(Button) findViewById(R.id.btn1);
+        Button btn2=(Button) findViewById(R.id.btn2);
+        Button btn3=(Button) findViewById(R.id.btn3);
+        Button btn4=(Button) findViewById(R.id.btn4);
+        Button btn5=(Button) findViewById(R.id.btn5);
+        Button btn6=(Button) findViewById(R.id.btn6);
+        Button btn7=(Button) findViewById(R.id.btn7);
+        Button btn8=(Button) findViewById(R.id.btn8);
+        Button btn9=(Button) findViewById(R.id.btn9);
+        Button btn0=(Button) findViewById(R.id.btn0);
+        Button btndelete=(Button)findViewById(R.id.btndelete);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("1");
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("2");
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("3");
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("4");
+            }
+        });
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("5");
+            }
+        });
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("6");
+            }
+        });
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("7");
+            }
+        });
+        btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("8");
+            }
+        });
+        btn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("9");
+            }
+        });
+        btn0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                numberpadClick("0");
+            }
+        });
+        btndelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (newgame4View != null) {
+                    final NewGame4 f4 = (NewGame4) getSupportFragmentManager()
+                            .findFragmentByTag("android:switcher:" + R.id.newgamepager + ":" + 3);
+                    switch (newgame4View.getId()) {
+                        case R.id.cstxt:
+                            if (!csVal.equals("0")) {
+                                if (csVal.length() > 0) {
+                                    csVal = csVal.substring(0, csVal.length() - 1);
+                                    f4.eraseLastChar(newgame4View.getId());
+                                }
+                            }
+                            break;
+                        case R.id.goldtxt:
+                            if (!goldVal.equals("0")) {
+                                if (goldVal.length() > 0) {
+                                    goldVal=goldVal.substring(0, goldVal.length() - 1);
+                                    f4.eraseLastChar(newgame4View.getId());
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        });
+
 
         /*
         DisplayMetrics dm = new DisplayMetrics();
@@ -209,6 +320,30 @@ public class NewgameActivity extends AppCompatActivity implements
 
     }
 
+    public void numberpadClick(String number){
+        if (newgame4View != null) {
+            final NewGame4 f4 = (NewGame4) getSupportFragmentManager()
+                    .findFragmentByTag("android:switcher:" + R.id.newgamepager + ":" + 3);
+            switch (newgame4View.getId()) {
+                case R.id.cstxt:
+                    if (csVal.equals("0")) {
+                        csVal = number;
+                    } else csVal += number;
+                    f4.setValToView(newgame4View.getId(), number);
+                    break;
+                case R.id.goldtxt:
+                    if (goldVal.equals("0")){
+                        goldVal = number;
+                    } else goldVal+=number;
+                    f4.setValToView(newgame4View.getId(), number);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    //HeroDataG: method from hero selector recyclerView
     @Override
     public void HeroDataG(int position, String hero, boolean heroclick) {
 
@@ -238,7 +373,7 @@ public class NewgameActivity extends AppCompatActivity implements
         Log.d("HeroDataG",position+" "+hero);
     }
 
-
+    //gamedataGwin/gameDataGqueuetype: methods from NewGame1 fragment capturing win and queuetype radiobuttons
     @Override
     public void gameDataGwin(boolean win) {
         this.win=win;
@@ -249,24 +384,26 @@ public class NewgameActivity extends AppCompatActivity implements
         this.queuetype=queuetype;
     }
 
+    //gameDataView: method call from NewGame2 fragment capturing data from total kills and game time
     @Override
     public void gameDataView(View view) {
         newgame2View=view;
+        final NewGame2 f2= (NewGame2) getSupportFragmentManager()
+                .findFragmentByTag("android:switcher:"+R.id.newgamepager+":"+1);
         numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 switch (newgame2View.getId()){
                     case (R.id.minutestxt):
-                        minutes.setText(newVal);
-                        length=newVal;
+                        f2.setValToView(newgame2View.getId(),newVal);
+                        minutes=newVal;
                         break;
                     case (R.id.secondstxt):
-                        seconds.setText(newVal);
-                        length+=newVal/60;
-                        Log.d("length",Float.toString(length));
+                        f2.setValToView(newgame2View.getId(),newVal);
+                        seconds= (float) (newVal/60.0);
                         break;
                     case (R.id.totalkills):
-                        totalKills.setText(newVal);
+                        f2.setValToView(newgame2View.getId(),newVal);
                         totalkills=newVal;
                         Log.d("total kills", Integer.toString(totalkills));
                         break;
@@ -278,8 +415,49 @@ public class NewgameActivity extends AppCompatActivity implements
 
     }
 
+    //gameDataKDA: method call from NewGame3 fragment capturing KDA views
+    @Override
+    public void gameDataKDA(View view) {
+        newgame3View=view;
+        final NewGame3 f3= (NewGame3) getSupportFragmentManager()
+                .findFragmentByTag("android:switcher:"+R.id.newgamepager+":"+2);
+        numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                switch (newgame3View.getId()){
+                    case (R.id.killstxt):
+                        f3.setValToView(newgame3View.getId(),newVal);
+                        killsVal=newVal;
+                        Log.d("length",Integer.toString(killsVal));
+                        break;
+                    case (R.id.deathstxt):
+                        f3.setValToView(newgame3View.getId(),newVal);
+                        deathsVal=newVal;
+                        Log.d("length",Integer.toString(deathsVal));
+                        break;
+                    case (R.id.assiststxt):
+                        f3.setValToView(newgame3View.getId(),newVal);
+                        assistsVal=newVal;
+                        Log.d("total kills", Integer.toString(assistsVal));
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
 
-    private class CustomAdapterAG extends FragmentPagerAdapter {
+    //gameDataCSGold: method call from NewGame4 fragment capturing CS and Gold views
+    @Override
+    public void gameDataCSGold(View view, String currentVal) {
+        newgame4View=view;
+        if (newgame4View.getId()==R.id.cstxt){
+            csVal=currentVal;
+        } else goldVal=currentVal;
+    }
+
+    //ViewPager adapter class
+    private class CustomAdapterAG extends FragmentStatePagerAdapter {
 
         public CustomAdapterAG(FragmentManager supportFragmentManager, Context applicationContext) {
             super(supportFragmentManager);

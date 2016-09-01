@@ -154,6 +154,7 @@
     <string name="ranked_type">Ranked</string>
     <string name="private_type">Private</string>
     <string name="tournament_type">Tournament</string>
+
     <string name="number1">1</string>
     <string name="number6">6</string>
     <string name="number3">3</string>
@@ -164,5 +165,6 @@
     <string name="number9">9</string>
     <string name="number7">7</string>
     <string name="number4">4</string>
+    <string name="delete"><![CDATA[<-]]></string>
 
 </resources>

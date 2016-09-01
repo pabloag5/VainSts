@@ -141,7 +141,7 @@ public class NewGame1 extends Fragment {
         commGameDataG=(CommGameData1) context;
     }
 
-
+    //interface to send data to NewGameActivity
     public interface CommGameData1 {
         public void gameDataGwin(boolean win);
         public void gameDataGqueuetype(int queuetype);

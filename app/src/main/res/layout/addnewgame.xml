@@ -46,7 +46,8 @@
                 android:textAllCaps="false"
                 android:textSize="15dp"
                 android:textColor="#cccccc"
-                android:gravity="left"/>
+                android:gravity="left"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
