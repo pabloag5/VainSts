@@ -44,7 +44,7 @@
                 android:background="@android:color/transparent"
                 android:text="@string/backbtn"
                 android:textAllCaps="false"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textColor="#cccccc"
                 android:gravity="left"
                 android:visibility="invisible"/>
@@ -74,7 +74,7 @@
                 android:background="@android:color/transparent"
                 android:text="@string/nextbtn"
                 android:textAllCaps="false"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textColor="#cccccc"
                 android:gravity="right"/>
         </LinearLayout>

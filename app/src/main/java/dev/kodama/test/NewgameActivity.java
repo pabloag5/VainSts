@@ -112,7 +112,7 @@ public class NewgameActivity extends AppCompatActivity implements
                 if (viewPager.getCurrentItem()!=dotsCnt-1){
                     viewPager.setCurrentItem(viewPager.getCurrentItem()+1);
                 } else {
-                    //code to adding game
+                    //code to adding game to database
                     Log.d("New Game",Integer.toString(queuetype)+" "+hero+" "+position+
                             " "+Boolean.toString(win)+ " "+Float.toString(minutes+seconds)+
                             " "+Integer.toString(totalkills)+ " "+Integer.toString(killsVal)+
@@ -259,6 +259,7 @@ public class NewgameActivity extends AppCompatActivity implements
                             if (!csVal.equals("0")) {
                                 if (csVal.length() > 0) {
                                     csVal = csVal.substring(0, csVal.length() - 1);
+                                    //method from NewGame4 to update textviews
                                     f4.eraseLastChar(newgame4View.getId());
                                 }
                             }
@@ -267,6 +268,7 @@ public class NewgameActivity extends AppCompatActivity implements
                             if (!goldVal.equals("0")) {
                                 if (goldVal.length() > 0) {
                                     goldVal=goldVal.substring(0, goldVal.length() - 1);
+                                    //method from NewGame4 to update textviews
                                     f4.eraseLastChar(newgame4View.getId());
                                 }
                             }
@@ -329,12 +331,14 @@ public class NewgameActivity extends AppCompatActivity implements
                     if (csVal.equals("0")) {
                         csVal = number;
                     } else csVal += number;
+                    //method from NewGame4 to update textviews
                     f4.setValToView(newgame4View.getId(), number);
                     break;
                 case R.id.goldtxt:
                     if (goldVal.equals("0")){
                         goldVal = number;
                     } else goldVal+=number;
+                    //method from NewGame4 to update textviews
                     f4.setValToView(newgame4View.getId(), number);
                     break;
                 default:
@@ -395,14 +399,17 @@ public class NewgameActivity extends AppCompatActivity implements
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 switch (newgame2View.getId()){
                     case (R.id.minutestxt):
+                        //method from NewGame2 to update textviews
                         f2.setValToView(newgame2View.getId(),newVal);
                         minutes=newVal;
                         break;
                     case (R.id.secondstxt):
+                        //method from NewGame2 to update textviews
                         f2.setValToView(newgame2View.getId(),newVal);
                         seconds= (float) (newVal/60.0);
                         break;
                     case (R.id.totalkills):
+                        //method from NewGame2 to update textviews
                         f2.setValToView(newgame2View.getId(),newVal);
                         totalkills=newVal;
                         Log.d("total kills", Integer.toString(totalkills));
@@ -426,16 +433,19 @@ public class NewgameActivity extends AppCompatActivity implements
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
                 switch (newgame3View.getId()){
                     case (R.id.killstxt):
+                        //method from NewGame3 to update textviews
                         f3.setValToView(newgame3View.getId(),newVal);
                         killsVal=newVal;
                         Log.d("length",Integer.toString(killsVal));
                         break;
                     case (R.id.deathstxt):
+                        //method from NewGame3 to update textviews
                         f3.setValToView(newgame3View.getId(),newVal);
                         deathsVal=newVal;
                         Log.d("length",Integer.toString(deathsVal));
                         break;
                     case (R.id.assiststxt):
+                        //method from NewGame3 to update textviews
                         f3.setValToView(newgame3View.getId(),newVal);
                         assistsVal=newVal;
                         Log.d("total kills", Integer.toString(assistsVal));
