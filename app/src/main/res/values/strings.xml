@@ -2,7 +2,6 @@
     <string name="app_name">Halcyon Stats</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Save</string>
-    <string name="text_send">PRUEBA</string>
     <string name="Result_label">Win/Loss</string>
     <string name="Kills_label">Kills</string>
     <string name="Deaths_label">Deaths</string>
@@ -21,10 +20,11 @@
     <string name="wins_total_lbl">WINS</string>
     <string name="losses_total">100</string>
     <string name="losses_total_lbl">LOSSES</string>
-    <string name="matches_total">600</string>
-    <string name="matches_total_lbl">MATCHES</string>
+    <string name="games_total">600</string>
+    <string name="games_total_lbl">GAMES</string>
     <string name="kda_value">7.3</string>
     <string name="kda_lbl">KDA</string>
+    <string name="kda_title">K/D/A</string>
     <string name="best_hero_button">BEST HERO PERFORMANCE</string>
     <string name="bronce_lbl">BRONCE</string>
     <string name="silver_lbl">SILVER</string>
@@ -40,6 +40,9 @@
     <string name="junglebtn">JUNGLE</string>
     <string name="roambtn">ROAM</string>
     <string name="overall_title">OVERALL</string>
+    <string name="heroes_title">HEROES</string>
+    <string name="recent_games_title">RECENT GAMES</string>
+    <string name="roles_title">ROLES</string>
     <string name="winratioPos">50%</string>
     <string name="win_ratio_title">WIN RATIO</string>
     <string name="average_title">AVERAGE</string>
@@ -50,14 +53,14 @@
     <string name="edit_deaths">enter deaths</string>
     <string name="edit_assists">enter assists</string>
     <string name="edit_cs">enter cs</string>
-    <string name="edit_gold">enter gold</string>
+    <string name="edit_gold">gold</string>
     <string name="edit_total_kills">enter team kills</string>
     <string name="Total_Kills_label">Team kills</string>
-    <string name="game_time_label">Game time</string>
+    <string name="game_time_label">time</string>
     <string name="edit_mintimegame">min</string>
     <string name="edit_sectimegame">secs</string>
     <string name="Queue_label">Queue</string>
-    <string name="Position_label">Position</string>
+    <string name="Role_label">Role</string>
     <string name="Hero_label">Hero</string>
     <string name="laneplayed">Lane</string>
     <string name="jungleplayed">Jungle</string>
@@ -87,11 +90,18 @@
         <item>Reim</item>
         <item>Ringo</item>
         <item>Rona</item>
+        <item>Samuel</item>
         <item>Saw</item>
         <item>Skaarf</item>
         <item>Skye</item>
         <item>Taka</item>
         <item>Vox</item>
+        <item>Lance</item>
+        <item>Lyra</item>
+        <item>Ozo</item>
+        <item>Alpha</item>
+        <item>Gwen</item>
+        <item>Baron</item>
     </string-array>
 
 
@@ -123,6 +133,8 @@
     <string name="lyra" translatable="false">Lyra</string>
     <string name="ozo" translatable="false">Ozo</string>
     <string name="alpha" translatable="false">Alpha</string>
+    <string name="Gwen" translatable="false">Gwen</string>
+    <string name="Baron" translatable="false">Baron</string>
 
     <!--POSITIONS-->
 
@@ -166,5 +178,9 @@
     <string name="number7">7</string>
     <string name="number4">4</string>
     <string name="delete"><![CDATA[<-]]></string>
+    <string name="IGN">in game name</string>
+    <string name="game_result">game result</string>
+    <string name="role_played">role</string>
+    <string name="kda_game">1/1/1</string>
 
 </resources>

@@ -15,20 +15,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import dev.kodama.test.utils.Constants;
+
 
 public class HeroesFragment extends Fragment  {
-    TextView textView;
+    //TextView textView;
 
     //the list containing our heroes list
     private List<Gamestats> mListHeroes=new ArrayList<>();
 
     //the sorter that sorts our heroes based on sort button
-    private DataSort mdataSort = new DataSort();
+    //private DataSort mdataSort = new DataSort();
 
     //sort buttons
-    Button byName;
-    Button byKdaRatio;
-    Button byWinRatio;
+    //Button byName;
+    //Button byKdaRatio;
+    //Button byWinRatio;
 
     //variables for recyclerview
     private RecyclerView recyclerView;
@@ -48,10 +50,10 @@ public class HeroesFragment extends Fragment  {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.heroessummarylayout, container, false);
 
-        byName=(Button) view.findViewById(R.id.bynamebtn);
-        byKdaRatio=(Button)view.findViewById(R.id.bykdaratiobtn);
-        byWinRatio=(Button)view.findViewById(R.id.bywinratiobtn);
-
+        //byName=(Button) view.findViewById(R.id.bynamebtn);
+        //byKdaRatio=(Button)view.findViewById(R.id.bykdaratiobtn);
+        //byWinRatio=(Button)view.findViewById(R.id.bywinratiobtn);
+        /*
         byName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,8 +81,11 @@ public class HeroesFragment extends Fragment  {
                 Sorthero(v);
             }
         });
+        */
+
 
         //code creates recyclerView
+
         recyclerView=(RecyclerView)view.findViewById(R.id.list_content);
         mListHeroes=getData();
 
@@ -104,6 +109,7 @@ public class HeroesFragment extends Fragment  {
 
     }
 
+    /*
     private void Sorthero(View btn) {
         //games queries
         switch (btn.getId()){
@@ -120,14 +126,11 @@ public class HeroesFragment extends Fragment  {
                 break;
         }
     }
+    */
 
     public List<Gamestats> getData(){
         List<Gamestats> data=new ArrayList<>();
-        int[] images = {R.drawable.adagio, R.drawable.ardan, R.drawable.blackfeather, R.drawable.catherine,
-                R.drawable.celeste, R.drawable.fortress, R.drawable.glaive, R.drawable.joule,
-                R.drawable.kestrel, R.drawable.koshka, R.drawable.krul, R.drawable.petal, R.drawable.phinn,
-                R.drawable.reim, R.drawable.ringo, R.drawable.rona, R.drawable.saw, R.drawable.skaarf,
-                R.drawable.skye, R.drawable.taka, R.drawable.vox};
+        /*
         float [] kdaRatio = new float[images.length];
         float [] winRatio=new  float[images.length];
         for (int i=0;i<images.length; i++)
@@ -135,15 +138,14 @@ public class HeroesFragment extends Fragment  {
             kdaRatio[i]=new Random().nextFloat()*18;
             winRatio[i]=new Random().nextFloat()*100;
         }
+        */
         Resources res = getResources();
         String[] heroes=res.getStringArray(R.array.Heroes_name);
-        for(int i=0;i<heroes.length && i<images.length; i++)
+        for(int i = 0; i<heroes.length && i< Constants.Heroes.images.length; i++)
         {
             Gamestats current=new Gamestats();
-            current.heroIcon=images[i];
+            current.heroIcon= Constants.Heroes.images[i];
             current.heroName=heroes[i];
-            current.kdaRatio=kdaRatio[i];
-            current.winRatio=winRatio[i];
             data.add(current);
         }
 
@@ -164,16 +166,18 @@ public class HeroesFragment extends Fragment  {
      //   outState.putString("current_message", message);
     }
 
+    /*
     public void scrollRV(int position, boolean repeatPosition) {
 
-        /*code for modifying layout: expanding item when pressed
+        //code for modifying layout: expanding item when pressed
         if (repeatPosition==false){
             layoutManager.scrollToPositionWithOffset(position,20);
             layoutManager.setScrollEnabled(false);
         } else layoutManager.setScrollEnabled(true);
-*/
-    }
 
+    }
+    */
+    /*
     public void SortByHeroName() {
         mdataSort.sortHeroesByName(mListHeroes);
         adapter.notifyDataSetChanged();
@@ -188,6 +192,7 @@ public class HeroesFragment extends Fragment  {
         mdataSort.sortHeroesByWinRatio(mListHeroes);
         adapter.notifyDataSetChanged();
     }
+    */
 /*
     @Override
     public void sendPosition(int position, boolean repeatPosition) {

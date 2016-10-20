@@ -4,35 +4,133 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:paddingTop="40dp"
-    android:paddingBottom="10dp"
     android:baselineAligned="false"
-    android:background="@drawable/app_background">
+    android:background="@color/colorBackground">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/skill_tier_title"
-        android:id="@+id/skill_tier_lbl"
-        android:textSize="20dp"
-        android:gravity="center_horizontal"
-        android:textColor="#cccccc" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/skill_tier"
-        android:id="@+id/skill_tier"
-        android:textSize="30dp"
-        android:gravity="center_horizontal"
-        android:layout_margin="5dp"
-        android:textColor="#ffffff" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/fold_overall">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/overallimage"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/IGN"
+            android:id="@+id/ign_lbl"
+            android:textSize="24dp"
+            android:gravity="center_horizontal"
+            android:textColor="#26e899"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skill_tier"
+            android:id="@+id/skill_tier"
+            android:textSize="12dp"
+            android:gravity="center_horizontal"
+            android:layout_margin="3dp"
+            android:textColor="#ffffff" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/skill_tier_title"
+            android:id="@+id/skill_tier_lbl"
+            android:textSize="10dp"
+            android:gravity="center_horizontal"
+            android:textColor="#70ffffff"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/games_total"
+                    android:id="@+id/games_total"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/games_total_lbl"
+                    android:textSize="12dp"
+                    android:textColor="#70ffffff" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:gravity="center_horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wins_total"
+                    android:id="@+id/wins_total"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wins_total_lbl"
+                    android:id="@+id/losses_total_lbl"
+                    android:textSize="12dp"
+                    android:textColor="#70ffffff" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/losses_total"
+                    android:id="@+id/losses_total"
+                    android:textSize="18dp"
+                    android:textColor="#ffffff" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/losses_total_lbl"
+                    android:textSize="12dp"
+                    android:textColor="#70ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
     <!--
-    <com.github.mikephil.charting.charts.HorizontalBarChart
-        android:id="@+id/rankchart"
-        android:layout_width="300dp"
-        android:layout_height="80dp"
-        android:gravity="center_vertical" />
-        -->
     <ProgressBar
         android:layout_width="270dp"
         android:layout_height="40dp"
@@ -44,141 +142,116 @@
         android:progressDrawable="@drawable/customprogressbar"
         android:minHeight="15dp"
         android:layout_marginTop="15dp" />
+    -->
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="15dp">
-            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/kdaDetail"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bronce_lbl"
-                android:id="@+id/bronce_lbl"
-                android:textSize="15dp"
-                android:paddingBottom="25dp"
-                android:textColor="#ffffff" />
-            <TextView
+                android:gravity="left">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_right_white_24dp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wins_total"
-                android:id="@+id/wins_total"
-                android:textSize="30dp"
-                android:padding="5dp"
-                android:textColor="#ffffff" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wins_total_lbl"
-                android:id="@+id/wins_total_lbl"
-                android:textSize="15dp"
-                android:padding="5dp"
-                android:textColor="#ffffff" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kda_value"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp"
+                    android:gravity="center_horizontal"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kda_lbl"
+                    android:textColor="#70ffffff"
+                    android:textSize="12dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#45ffffff"/>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            android:gravity="center_horizontal"
-            >
-            <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/winratioDetail">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/silver_lbl"
-                android:id="@+id/silver_lbl"
-                android:textSize="15dp"
-                android:paddingBottom="25dp"
-                android:textColor="#ffffff" />
-            <TextView
+                android:gravity="left">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_keyboard_arrow_right_white_24dp"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/losses_total"
-                android:id="@+id/losses_total"
-                android:textSize="30dp"
-                android:padding="5dp"
-                android:textColor="#ffffff" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/losses_total_lbl"
-                android:id="@+id/losses_total_lbl"
-                android:textSize="15dp"
-                android:padding="5dp"
-                android:textColor="#ffffff" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="15dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gold_lbl"
-                android:id="@+id/gold_lbl"
-                android:textSize="15dp"
-                android:paddingBottom="25dp"
-                android:textColor="#ffffff"
-                android:textAlignment="textEnd"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/matches_total"
-                android:id="@+id/matches_total"
-                android:textSize="30dp"
-                android:padding="5dp"
-                android:textColor="#ffffff" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/matches_total_lbl"
-                android:id="@+id/matches_total_lbl"
-                android:textSize="15dp"
-                android:padding="5dp"
-                android:textColor="#ffffff" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/winratioPos"
+                    android:textColor="#ffffff"
+                    android:textSize="24dp"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/win_ratio_title"
+                    android:textColor="#70ffffff"
+                    android:textSize="12dp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_keyboard_arrow_right_white_24dp"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/kda_button"
-        android:textSize="20dp"
-        android:elevation="20dp"
-        android:layout_marginTop="15dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="1dp"
-        android:paddingLeft="80dp"
-        android:paddingRight="80dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/app_background"
-        android:shadowColor="#000000"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/best_hero_button"
-        android:id="@+id/best_hero_button"
-        android:textSize="20dp"
-        android:elevation="10dp"
-        android:layout_marginTop="5dp"
-
-        android:paddingLeft="15dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="1dp"
-        android:paddingRight="15dp"
-        android:shadowColor="#000000"
-        android:textColor="#ffffff"
-        android:background="@drawable/app_background" />
 
 </LinearLayout>

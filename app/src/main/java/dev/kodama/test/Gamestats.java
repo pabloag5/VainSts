@@ -1,10 +1,13 @@
 package dev.kodama.test;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by kodama on 3/20/16.
  */
 public class Gamestats {
     int heroIcon;
+    Drawable heroImage;
     String  heroName;
     float kdaRatio;
     float winRatio;
@@ -23,6 +26,9 @@ public class Gamestats {
     }
     public int getHeroIcon(){
         return heroIcon;
+    }
+    public Drawable getHeroImage() {
+        return heroImage;
     }
 
 }

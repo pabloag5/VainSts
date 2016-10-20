@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 /**
  * Created by kodama on 6/24/16.
  */
-public class PositionsRoot extends Fragment {
+public class RoleRoot extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.positionrootlayout, container, false);

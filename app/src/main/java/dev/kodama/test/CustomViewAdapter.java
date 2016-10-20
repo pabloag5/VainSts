@@ -46,10 +46,10 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Gamestats current=data.get(position);
-        holder.name.setText(current.getHeroName());
+        //holder.name.setText(current.getHeroName());
         holder.icon.setImageResource(current.getHeroIcon());
-        holder.kdaratio.setText(String.format("KDA ratio: %.1f",current.getKdaRatio()));
-        holder.winratio.setText(String.format("Win ratio: %.1f",current.getWinRatio()));
+        //holder.kdaratio.setText(String.format("KDA ratio: %.1f",current.getKdaRatio()));
+        //holder.winratio.setText(String.format("Win ratio: %.1f",current.getWinRatio()));
         /*
         //expand code
         if (position == expandedPosition && repeatPosition==false){
@@ -93,10 +93,10 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
 
     //create subclass ViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView name;
+        //TextView name;
         ImageView icon;
-        TextView kdaratio;
-        TextView winratio;
+        //TextView kdaratio;
+        //TextView winratio;
 
         /*defining layout to expand
         LinearLayout llExpandedDetail;
@@ -105,10 +105,10 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            name= (TextView) itemView.findViewById(R.id.Hero_name);
-            icon= (ImageView) itemView.findViewById(R.id.Hero_image);
-            kdaratio= (TextView) itemView.findViewById(R.id.KDA_Ratio);
-            winratio= (TextView) itemView.findViewById(R.id.Win_ratio);
+            //name= (TextView) itemView.findViewById(R.id.Hero_name);
+            icon= (ImageView) itemView.findViewById(R.id.hero_image);
+            //kdaratio= (TextView) itemView.findViewById(R.id.KDA_Ratio);
+            //winratio= (TextView) itemView.findViewById(R.id.Win_ratio);
 
             /*code to expand layout
             llExpandedDetail= (LinearLayout) itemView.findViewById(R.id.llExpandDetail);

@@ -1,12 +1,18 @@
 package dev.kodama.test;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 
@@ -19,6 +25,7 @@ public class ProgressFragment extends Fragment  {
     Button kdabutton;
     Button bestherobutton;
     CommunicatorKdaFragment comm;
+    ImageView overallImage;
 
 
     @Override
@@ -99,6 +106,8 @@ public class ProgressFragment extends Fragment  {
 //        yr.setInverted(true);
 
         //setData(1, 15);*/
+
+        /*
         comm = (CommunicatorKdaFragment) getActivity();
         kdabutton= (Button) view.findViewById(R.id.kda_button);
         String kdabtn = getString(R.string.kda_lbl)+"  "+getString(R.string.kda_value);
@@ -112,19 +121,22 @@ public class ProgressFragment extends Fragment  {
                         .beginTransaction();
 
                 trans.replace(R.id.progressroot, new KdaFragment());
+                */
 
 				/*
 				 * IMPORTANT: The following lines allow us to add the fragment
 				 * to the stack and return to it later, by pressing back
 				 */
                 //trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                /*
                 trans.addToBackStack(null);
 
                 trans.commit();
 
             }
         });
-
+        */
+        /*
         bestherobutton= (Button) view.findViewById(R.id.best_hero_button);
         bestherobutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,10 +153,21 @@ public class ProgressFragment extends Fragment  {
                 trans.commit();
             }
         });
+        */
+        int image = R.drawable.catherine;
+
+        overallImage = (ImageView)view.findViewById(R.id.overallimage);
+        overallImage.setImageDrawable(circleImage(image));
 
         return view;
     }
 
+    public Drawable circleImage (int image){
+        Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), image);
+        RoundedBitmapDrawable circularImage = RoundedBitmapDrawableFactory.create(getResources(), bitmapImage);
+        circularImage.setCircular(true);
+        return circularImage;
+    }
     public interface CommunicatorKdaFragment {
         public void fragmentParent (Fragment fragment, int secondpage);
 

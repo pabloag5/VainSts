@@ -36,11 +36,18 @@ public final class Constants {
                 R.drawable.reim,
                 R.drawable.ringo,
                 R.drawable.rona,
+                R.drawable.samuel,
                 R.drawable.saw,
                 R.drawable.skaarf,
                 R.drawable.skye,
                 R.drawable.taka,
-                R.drawable.vox
+                R.drawable.vox,
+                R.drawable.lance,
+                R.drawable.lyra,
+                R.drawable.ozo,
+                R.drawable.alpha
+                //R.drawable.gwen,
+                //R.drawable.baron
         };
 
         public final static int ADAGIO = 1;
@@ -69,6 +76,8 @@ public final class Constants {
         public final static int LYRA = 24;
         public final static int OZO = 25;
         public final static int ALPHA = 26;
+        public final static int GWEN = 27;
+        public final static int BARON = 28;
 
         public final static Map<Integer, Integer> heroesMap = new HashMap<Integer, Integer>() {{
             put(ADAGIO, R.string.adagio);
@@ -97,6 +106,8 @@ public final class Constants {
             put(LYRA, R.string.lyra);
             put(OZO, R.string.ozo);
             put(ALPHA, R.string.alpha);
+            put(GWEN, R.string.Gwen);
+            put(BARON, R.string.Baron);
         }};
 
 
