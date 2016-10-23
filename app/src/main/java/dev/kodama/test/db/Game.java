@@ -1,7 +1,5 @@
 package dev.kodama.test.db;
 
-import java.util.ArrayList;
-
 /**
  * Created by researcher on 12/05/16.
  */
@@ -9,9 +7,12 @@ public class Game {
 
     private float length;
 //    private boolean home_team_win;
-    private boolean win;
+    private boolean victory;
 //    private Team home_team;
 //    private Team away_team;
+    /**
+     * Date the game was played in unixtime milliseconds since 1970
+     */
     private long timestamp;
     private int game_type;
 //    private int queue_type;
@@ -20,13 +21,20 @@ public class Game {
 //    private ArrayList<Player_Results> away_team_results;
     private Player_Results results;
 
-    public Game(float length, boolean win, long timestamp, int game_type, float vg_version, Player_Results results) {
+    private int total_kills;
+
+    private int total_deaths;
+
+    public Game(float length, boolean victory, long timestamp, int game_type, float vg_version, Player_Results results, int total_kills, int total_deaths) {
         this.length = length;
-        this.win = win;
+        this.victory = victory;
         this.timestamp = timestamp;
         this.game_type = game_type;
 //        this.queue_type = queue_type;
         this.vg_version = vg_version;
+        this.total_kills = total_kills;
+        this.total_deaths = total_deaths;
+
         this.results = results;
     }
 
@@ -46,8 +54,8 @@ public class Game {
 //        return away_team;
 //    }
 
-    public boolean isWin() {
-        return win;
+    public boolean isVictory() {
+        return victory;
     }
 
     public long getTimestamp() {
@@ -68,6 +76,14 @@ public class Game {
 
     public Player_Results getResults() {
         return results;
+    }
+
+    public int getTotalDeaths() {
+        return total_deaths;
+    }
+
+    public int getTotalKills() {
+        return total_kills;
     }
 
 //    public ArrayList<Player_Results> getAway_team_results() {

@@ -50,64 +50,69 @@ public final class Constants {
                 //R.drawable.baron
         };
 
-        public final static int ADAGIO = 1;
-        public final static int ARDAN = 2;
-        public final static int BLACKFEATHER = 3;
-        public final static int CATHERINE = 4;
-        public final static int CELESTE = 5;
-        public final static int FORTRESS = 6;
-        public final static int GLAIVE = 7;
-        public final static int JOULE = 8;
-        public final static int KESTREL = 9;
-        public final static int KOSHKA = 10;
-        public final static int KRUL = 11;
-        public final static int PETAL = 12;
-        public final static int PHINN = 13;
-        public final static int REIM = 14;
-        public final static int RINGO = 15;
-        public final static int RONA = 16;
-        public final static int SAMUEL = 17;
-        public final static int SAW = 18;
-        public final static int SKAARF = 19;
-        public final static int SKYE = 20;
-        public final static int TAKA = 21;
-        public final static int VOX = 22;
-        public final static int LANCE = 23;
-        public final static int LYRA = 24;
-        public final static int OZO = 25;
-        public final static int ALPHA = 26;
-        public final static int GWEN = 27;
-        public final static int BARON = 28;
+        public static class Ids {
+
+            public final static int NO_HERO = -1;
+
+            public final static int ADAGIO = 1;
+            public final static int ARDAN = 2;
+            public final static int BLACKFEATHER = 3;
+            public final static int CATHERINE = 4;
+            public final static int CELESTE = 5;
+            public final static int FORTRESS = 6;
+            public final static int GLAIVE = 7;
+            public final static int JOULE = 8;
+            public final static int KESTREL = 9;
+            public final static int KOSHKA = 10;
+            public final static int KRUL = 11;
+            public final static int PETAL = 12;
+            public final static int PHINN = 13;
+            public final static int REIM = 14;
+            public final static int RINGO = 15;
+            public final static int RONA = 16;
+            public final static int SAMUEL = 17;
+            public final static int SAW = 18;
+            public final static int SKAARF = 19;
+            public final static int SKYE = 20;
+            public final static int TAKA = 21;
+            public final static int VOX = 22;
+            public final static int LANCE = 23;
+            public final static int LYRA = 24;
+            public final static int OZO = 25;
+            public final static int ALPHA = 26;
+            public final static int GWEN = 27;
+            public final static int BARON = 28;
+        }
 
         public final static Map<Integer, Integer> heroesMap = new HashMap<Integer, Integer>() {{
-            put(ADAGIO, R.string.adagio);
-            put(ARDAN, R.string.ardan);
-            put(BLACKFEATHER, R.string.blackfeather);
-            put(CATHERINE, R.string.catherine);
-            put(CELESTE, R.string.celeste);
-            put(FORTRESS, R.string.fortress);
-            put(GLAIVE, R.string.glaive);
-            put(JOULE, R.string.joule);
-            put(KESTREL, R.string.kestrel);
-            put(KOSHKA, R.string.koshka);
-            put(KRUL, R.string.krul);
-            put(PETAL, R.string.petal);
-            put(PHINN, R.string.phinn);
-            put(REIM, R.string.reim);
-            put(RINGO, R.string.ringo);
-            put(RONA, R.string.rona);
-            put(SAMUEL, R.string.samuel);
-            put(SAW, R.string.saw);
-            put(SKAARF, R.string.skaarf);
-            put(SKYE, R.string.skye);
-            put(TAKA, R.string.taka);
-            put(VOX, R.string.vox);
-            put(LANCE, R.string.lance);
-            put(LYRA, R.string.lyra);
-            put(OZO, R.string.ozo);
-            put(ALPHA, R.string.alpha);
-            put(GWEN, R.string.Gwen);
-            put(BARON, R.string.Baron);
+            put(Ids.ADAGIO, R.string.adagio);
+            put(Ids.ARDAN, R.string.ardan);
+            put(Ids.BLACKFEATHER, R.string.blackfeather);
+            put(Ids.CATHERINE, R.string.catherine);
+            put(Ids.CELESTE, R.string.celeste);
+            put(Ids.FORTRESS, R.string.fortress);
+            put(Ids.GLAIVE, R.string.glaive);
+            put(Ids.JOULE, R.string.joule);
+            put(Ids.KESTREL, R.string.kestrel);
+            put(Ids.KOSHKA, R.string.koshka);
+            put(Ids.KRUL, R.string.krul);
+            put(Ids.PETAL, R.string.petal);
+            put(Ids.PHINN, R.string.phinn);
+            put(Ids.REIM, R.string.reim);
+            put(Ids.RINGO, R.string.ringo);
+            put(Ids.RONA, R.string.rona);
+            put(Ids.SAMUEL, R.string.samuel);
+            put(Ids.SAW, R.string.saw);
+            put(Ids.SKAARF, R.string.skaarf);
+            put(Ids.SKYE, R.string.skye);
+            put(Ids.TAKA, R.string.taka);
+            put(Ids.VOX, R.string.vox);
+            put(Ids.LANCE, R.string.lance);
+            put(Ids.LYRA, R.string.lyra);
+            put(Ids.OZO, R.string.ozo);
+            put(Ids.ALPHA, R.string.alpha);
+            put(Ids.GWEN, R.string.Gwen);
+            put(Ids.BARON, R.string.Baron);
         }};
 
 
@@ -189,14 +194,19 @@ public final class Constants {
 
     public final static class Statistics_DB {
 
-        public final static String TOTAL_ALL = "total";
-        public final static String TOTAL_LANE = "total_lane";
-        public final static String TOTAL_JUNGLE = "total_jungle";
-        public final static String TOTAL_ROAM = "total_roam";
-        public final static String HERO_ALL = "heroe";
-        public final static String HERO_LANE = "heroe_lane";
-        public final static String HERO_JUNGLE = "heroe_jungle";
-        public final static String HERO_ROAM = "heroe_roam";
+        public final static class Totals {
+            public final static String TOTAL_ALL = "total";
+            public final static String TOTAL_LANE = "total_lane";
+            public final static String TOTAL_JUNGLE = "total_jungle";
+            public final static String TOTAL_ROAM = "total_roam";
+        }
+
+        public final static class Heroes {
+            public final static String HERO_ALL = "heroe";
+            public final static String HERO_LANE = "heroe_lane";
+            public final static String HERO_JUNGLE = "heroe_jungle";
+            public final static String HERO_ROAM = "heroe_roam";
+        }
     }
 
 

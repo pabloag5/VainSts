@@ -10,28 +10,28 @@ public class HalcyonUtils {
     public static int getPositionFromStatistics_DB_type(String type) {
         int position = 0;
         switch (type){
-            case Constants.Statistics_DB.HERO_ALL:
+            case Constants.Statistics_DB.Heroes.HERO_ALL:
                 position = Constants.Positions.ALL;
                 break;
-            case Constants.Statistics_DB.HERO_LANE:
+            case Constants.Statistics_DB.Heroes.HERO_LANE:
                 position = Constants.Positions.LANE;
                 break;
-            case Constants.Statistics_DB.HERO_JUNGLE:
+            case Constants.Statistics_DB.Heroes.HERO_JUNGLE:
                 position = Constants.Positions.JUNGLE;
                 break;
-            case Constants.Statistics_DB.HERO_ROAM:
+            case Constants.Statistics_DB.Heroes.HERO_ROAM:
                 position = Constants.Positions.ROAM;
                 break;
-            case Constants.Statistics_DB.TOTAL_ALL:
+            case Constants.Statistics_DB.Totals.TOTAL_ALL:
                 position = Constants.Positions.ALL;
                 break;
-            case Constants.Statistics_DB.TOTAL_LANE:
+            case Constants.Statistics_DB.Totals.TOTAL_LANE:
                 position = Constants.Positions.LANE;
                 break;
-            case Constants.Statistics_DB.TOTAL_JUNGLE:
+            case Constants.Statistics_DB.Totals.TOTAL_JUNGLE:
                 position = Constants.Positions.JUNGLE;
                 break;
-            case Constants.Statistics_DB.TOTAL_ROAM:
+            case Constants.Statistics_DB.Totals.TOTAL_ROAM:
                 position = Constants.Positions.JUNGLE;
                 break;
         }
@@ -42,13 +42,13 @@ public class HalcyonUtils {
         String type = "";
         switch (position){
             case Constants.Positions.LANE:
-                type = Constants.Statistics_DB.HERO_LANE;
+                type = Constants.Statistics_DB.Heroes.HERO_LANE;
                 break;
             case Constants.Positions.JUNGLE:
-                type = Constants.Statistics_DB.HERO_JUNGLE;
+                type = Constants.Statistics_DB.Heroes.HERO_JUNGLE;
                 break;
             case Constants.Positions.ROAM:
-                type = Constants.Statistics_DB.HERO_ROAM;
+                type = Constants.Statistics_DB.Heroes.HERO_ROAM;
                 break;
 
         }
@@ -59,13 +59,13 @@ public class HalcyonUtils {
         String type = "";
         switch (position){
             case Constants.Positions.LANE:
-                type = Constants.Statistics_DB.TOTAL_LANE;
+                type = Constants.Statistics_DB.Totals.TOTAL_LANE;
                 break;
             case Constants.Positions.JUNGLE:
-                type = Constants.Statistics_DB.TOTAL_JUNGLE;
+                type = Constants.Statistics_DB.Totals.TOTAL_JUNGLE;
                 break;
             case Constants.Positions.ROAM:
-                type = Constants.Statistics_DB.TOTAL_ROAM;
+                type = Constants.Statistics_DB.Totals.TOTAL_ROAM;
                 break;
 
         }
@@ -147,5 +147,27 @@ public class HalcyonUtils {
         }
 
         return gameTypeName;
+    }
+
+    /**
+     * Get the float value of the length of a game
+     * @param minutes number of minutes
+     * @param seconds number of seconds
+     * @return float representing the time of the game
+     */
+    public static float getLengthFrom(int minutes, int seconds) {
+        return minutes + ((float) seconds/60);
+    }
+
+    /**
+     * Get the minutes and seconds of a game length in a float value
+     * @param length float value of the length of a game
+     * @return Array of size 2 where index 0 has minutes and index 1 has seconds
+     */
+    public static int[] getLengthFrom(float length) {
+        return new int[] {
+                (int) Math.floor(length),
+                (int) ((length % 1)*60)
+        };
     }
 }

@@ -76,17 +76,21 @@ public final class DatabaseContract {
 //        public static final String HOME_TEAM_WIN    = "home_team_win";
 //        public static final String HOME_TEAM_ID     = "home_team_id";
 //        public static final String AWAY_TEAM_ID     = "away_team_id";
-        public static final String WIN              = "win";
+        public static final String VICTORY          = "victory";
         public static final String GAME_TYPE        = "game_type";
 //        public static final String QUEUE_TYPE       = "queue_type";
 //        public static final String VG_VERSION       = "vg_version";
+        public static final String TOTAL_KILLS      = "total_kills";
+        public static final String TOTAL_DEATHS     = "total_deaths";
 
         public static final String CREATE_TABLE = "CREATE TABLE " +
                 TABLE_NAME + " (" +
                 _ID + INTEGER_TYPE + PRIMARY_KEY + AUTOINCREMENT + COMMA_SEP +
                 TIMESTAMP + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 LENGTH + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
-                WIN + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
+                VICTORY + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
+                TOTAL_KILLS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
+                TOTAL_DEATHS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 GAME_TYPE + INTEGER_TYPE + NOT_NULL +
 //                " FOREIGN KEY(" + AWAY_TEAM_ID + ") REFERENCES " + Teams.TABLE_NAME +
 //                "(" + Teams._ID + ")" +

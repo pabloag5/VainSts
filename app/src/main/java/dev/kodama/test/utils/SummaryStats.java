@@ -5,27 +5,27 @@ import android.content.Context;
 /**
  * Created by JuanCamilo on 8/4/2016.
  */
-public class Stats {
+public class SummaryStats {
 
     public final static int TYPE_TOTAL = 1;
     public final static int TYPE_HERO = 2;
 
 
     /**
-     * Total/hero
+     * Either {@link #TYPE_TOTAL } or {@link #TYPE_HERO }
      */
     private int type;
     /**
-     * Can be null
+     * One of {@link Constants.Heroes.Ids}
      */
-    private int hero;
+    private int heroId;
     /**
-     * Can be null/all/lane/jungle/roam
+     * One of {@link Constants.Positions}
      */
     private int position;
 
     /**
-     * Can be Casual or Ranked
+     * One of {@link Constants.Game_Types}
      */
     private int game_type;
 
@@ -41,7 +41,7 @@ public class Stats {
     private float kda_per_game;
     private float kill_participation_per_game;
 
-    public Stats(int wins, int total_games, float kills_per_game, float deaths_per_game, float assists_per_game, float cs_min_per_game, float gold_min_per_game, float gold_per_game, float kda_per_game, float kill_participation_per_game, int position, int hero, int type, int game_type) {
+    public SummaryStats(int wins, int total_games, float kills_per_game, float deaths_per_game, float assists_per_game, float cs_min_per_game, float gold_min_per_game, float gold_per_game, float kda_per_game, float kill_participation_per_game, int position, int heroId, int type, int game_type) {
         this.wins = wins;
         this.total_games = total_games;
         losses = total_games - wins;
@@ -54,7 +54,7 @@ public class Stats {
         this.kda_per_game = kda_per_game;
         this.kill_participation_per_game = kill_participation_per_game;
         this.position = position;
-        this.hero = hero;
+        this.heroId = heroId;
         this.type = type;
         this.game_type = game_type;
     }
@@ -71,12 +71,15 @@ public class Stats {
         return HalcyonUtils.getGameTypeStringFromId(context, game_type);
     }
 
-    public int getHero() {
-        return hero;
+    public int getHeroId() {
+        return heroId;
     }
 
     public String getHeroString(Context context) {
-        return HalcyonUtils.getHeroNameFromId(context, hero);
+        if(heroId!= Constants.Heroes.Ids.NO_HERO)
+            return HalcyonUtils.getHeroNameFromId(context, heroId);
+        else
+            return null;
     }
 
     public int getPosition() {
