@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import com.github.mikephil.charting.charts.HorizontalBarChart;
 /**
  * Created by kodama on 4/20/16.
  */
-public class ProgressFragment extends Fragment  {
+public class overallFragment extends Fragment  {
 
     HorizontalBarChart rankchart;
     Button kdabutton;
@@ -30,7 +29,7 @@ public class ProgressFragment extends Fragment  {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.progresslayout,container,false);
+        View view = inflater.inflate(R.layout.overalllayout,container,false);
 
         /*
         //code using chart lib
@@ -115,7 +114,7 @@ public class ProgressFragment extends Fragment  {
         kdabutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comm.fragmentParent(new ProgressFragment(),0);
+                comm.fragmentParent(new overallFragment(),0);
 
                 FragmentTransaction trans = getFragmentManager()
                         .beginTransaction();
@@ -141,7 +140,7 @@ public class ProgressFragment extends Fragment  {
         bestherobutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                comm.fragmentParent(new ProgressFragment(),0);
+                comm.fragmentParent(new overallFragment(),0);
                 FragmentTransaction trans = getFragmentManager()
                         .beginTransaction();
 

@@ -11,17 +11,21 @@
         android:title="@string/add_new_game"
         app:showAsAction="ifRoom" />
     <!-- "Refresh", should appear as action button if possible -->
+    <!--
     <item
         android:id="@+id/action_refresh"
         android:orderInCategory="100"
         android:icon="@drawable/ic_refresh_white_24dp"
         android:title="@string/update"
         app:showAsAction="ifRoom" />
+        -->
     <!-- Settings, should always be in the overflow -->
+    <!--
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+        -->
 
 </menu>

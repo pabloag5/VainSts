@@ -1,6 +1,7 @@
 package dev.kodama.test.utils;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 
 /**
  * Created by JuanCamilo on 8/4/2016.
@@ -85,6 +86,14 @@ public class HalcyonUtils {
         }
 
         return heroName;
+
+    }
+
+    public static Integer getHeroIconFromId(Context context, int hero_id) {
+
+        Integer hero_icon_id = Constants.Heroes.iconsMap.get(hero_id);
+
+        return hero_icon_id;
 
     }
 

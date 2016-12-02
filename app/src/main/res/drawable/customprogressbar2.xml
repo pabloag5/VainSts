@@ -28,7 +28,7 @@
                     android:bottomRightRadius="80dp"
                     android:topRightRadius="80dp"/>
                 <solid
-                    android:color="#fc5672"/>
+                    android:color="#00d0d2"/>
 
             </shape>
         </clip>

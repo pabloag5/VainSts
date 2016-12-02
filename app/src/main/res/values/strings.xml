@@ -1,15 +1,12 @@
 <resources>
     <string name="app_name">Halcyon Stats</string>
-    <string name="edit_message">Enter a message</string>
     <string name="button_send">Save</string>
     <string name="Result_label">Win/Loss</string>
-    <string name="Kills_label">Kills</string>
-    <string name="Deaths_label">Deaths</string>
-    <string name="Assists_label">Assists</string>
+    <string name="Kills_label">KILLS</string>
+    <string name="Deaths_label">DEATHS</string>
+    <string name="Assists_label">ASSISTS</string>
     <string name="CS_label">CS</string>
-    <string name="Gold_label">Gold</string>
-    <string name="win_radio">Win</string>
-    <string name="loss_radio">Loss</string>
+    <string name="gold_label">GOLD</string>
     <string name="action_settings">Settings</string>
     <string name="add_new_game">New Game</string>
     <string name="update">Update</string>
@@ -25,17 +22,18 @@
     <string name="kda_value">7.3</string>
     <string name="kda_lbl">KDA</string>
     <string name="kda_title">K/D/A</string>
-    <string name="best_hero_button">BEST HERO PERFORMANCE</string>
-    <string name="bronce_lbl">BRONCE</string>
-    <string name="silver_lbl">SILVER</string>
-    <string name="gold_lbl">GOLD</string>
+    <string name="best_hero_button">BEST HEROES PERFORMANCE v</string>
     <string name="btn1kda">LAST10</string>
     <string name="btn2kda">WEEKLY</string>
     <string name="btn3kda">SEASON</string>
-    <string name="kdacell1albl">WINS</string>
-    <string name="kdacell1aval">50</string>
-    <string name="kdacell1blbl">WINS RATIO</string>
-    <string name="kdacell1bval">30%</string>
+    <string name="win_lbl">WIN</string>
+    <string name="loss_lbl">LOSS</string>
+    <string name="kills_value">7</string>
+    <string name="deaths_value">2</string>
+    <string name="assists_value">8</string>
+    <string name="cs_value">101</string>
+    <string name="gold_value">9560</string>
+    <string name="time_value">18:50</string>
     <string name="lanebtn">LANE</string>
     <string name="junglebtn">JUNGLE</string>
     <string name="roambtn">ROAM</string>
@@ -43,12 +41,16 @@
     <string name="heroes_title">HEROES</string>
     <string name="recent_games_title">RECENT GAMES</string>
     <string name="roles_title">ROLES</string>
-    <string name="winratioPos">50%</string>
-    <string name="win_ratio_title">WIN RATIO</string>
+    <string name="winratio_value">50%</string>
+    <string name="win_ratio_lbl">WIN RATIO</string>
     <string name="average_title">AVERAGE</string>
-    <string name="bynamebtn">by NAME</string>
+    <string name="killpart_value">80%</string>
+    <string name="killpart_lbl">KILL PART.</string>
+
+    <string name="bycsbtn">by CS</string>
     <string name="bykdaratiobtn">by KDA RATIO</string>
     <string name="bywinratiobtn">by WIN RATIO</string>
+    <string name="bygoldbtn">by GOLD</string>
     <string name="edit_kills">enter kills</string>
     <string name="edit_deaths">enter deaths</string>
     <string name="edit_assists">enter assists</string>
@@ -71,6 +73,11 @@
     <string name="backbtn">&lt;&lt; Back</string>
     <string name="addgametbtn">Add Game</string>
     <string name="timesymbol">:</string>
+
+    <string name="kdacell1albl"></string>
+    <string name="kdacell1aval"></string>
+    <string name="kdacell1blbl"></string>
+    <string name="kdacell1bval"></string>
 
 
     <string-array name="Heroes_name">
@@ -177,7 +184,7 @@
     <string name="number9">9</string>
     <string name="number7">7</string>
     <string name="number4">4</string>
-    <string name="delete"><![CDATA[<-]]></string>
+    <string name="delete">&lt;-</string>
     <string name="IGN">in game name</string>
     <string name="game_result">game result</string>
     <string name="role_played">role</string>

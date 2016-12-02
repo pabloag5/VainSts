@@ -87,7 +87,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/win_radio"
+                android:text="@string/win_lbl"
                 android:textSize="25dp"
                 android:textColor="@drawable/textcolorselector"
                 android:button="@android:color/transparent"/>
@@ -97,7 +97,7 @@
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 android:layout_marginLeft="10dp"
-                android:text="@string/loss_radio"
+                android:text="@string/loss_lbl"
                 android:textSize="25dp"
                 android:textColor="@drawable/textcolorselector"
                 android:button="@android:color/transparent"/>

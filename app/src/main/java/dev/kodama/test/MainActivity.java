@@ -1,6 +1,5 @@
 package dev.kodama.test;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -24,7 +22,7 @@ import android.widget.PopupWindow;
 import java.util.List;
 
 //Main Activity
-public class MainActivity extends AppCompatActivity implements ProgressFragment.CommunicatorKdaFragment, HeroesFragment.CommHeroDetailFragment
+public class MainActivity extends AppCompatActivity implements overallFragment.CommunicatorKdaFragment, HeroesFragment.CommHeroDetailFragment
          {
     private PopupWindow newgame;
     private LayoutInflater layoutInflater;
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
         tabLayout.getTabAt(0).setIcon(tabicons[3]);
         tabLayout.getTabAt(1).setIcon(tabicons[1]);
         tabLayout.getTabAt(2).setIcon(tabicons[2]);
+        tabLayout.getTabAt(3).setIcon(tabicons[2]);
 
         //tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorBackground));
@@ -78,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
                         tabLayout.getTabAt(0).setIcon(tabicons[3]);
                         tabLayout.getTabAt(1).setIcon(tabicons[1]);
                         tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        tabLayout.getTabAt(3).setIcon(tabicons[2]);
                         getSupportActionBar().setTitle(getResources().getText(R.string.overall_title));
                         /*
                         if (secondpage==0) {
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
                         tabLayout.getTabAt(0).setIcon(tabicons[0]);
                         tabLayout.getTabAt(1).setIcon(tabicons[4]);
                         tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        tabLayout.getTabAt(3).setIcon(tabicons[2]);
                         getSupportActionBar().setTitle(getResources().getText(R.string.heroes_title));
                         /*
                         if (secondpage==1) {
@@ -104,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
                         tabLayout.getTabAt(0).setIcon(tabicons[0]);
                         tabLayout.getTabAt(1).setIcon(tabicons[1]);
                         tabLayout.getTabAt(2).setIcon(tabicons[5]);
-                        getSupportActionBar().setTitle(getResources().getText(R.string.recent_games_title));
+                        tabLayout.getTabAt(3).setIcon(tabicons[2]);
+                        getSupportActionBar().setTitle(getResources().getText(R.string.roles_title));
                         /*
                         if (secondpage==2) {
                             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -112,6 +114,14 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
                         */
                         break;
 
+                    }
+                    case 3: {
+                        tabLayout.getTabAt(0).setIcon(tabicons[0]);
+                        tabLayout.getTabAt(1).setIcon(tabicons[1]);
+                        tabLayout.getTabAt(2).setIcon(tabicons[2]);
+                        tabLayout.getTabAt(3).setIcon(tabicons[5]);
+                        getSupportActionBar().setTitle(getResources().getText(R.string.recent_games_title));
+                        break;
                     }
                 }
             }
@@ -214,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
      private class CustomAdapter extends FragmentStatePagerAdapter {
         private String fragments [] = {getResources().getText(R.string.overall_title).toString(),
                 getResources().getText(R.string.heroes_title).toString(),
+                getResources().getText(R.string.roles_title).toString(),
                 getResources().getText(R.string.recent_games_title).toString()};
 
 
@@ -226,12 +237,13 @@ public class MainActivity extends AppCompatActivity implements ProgressFragment.
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return new ProgressRoot();
+                    return new overallRoot();
                 case 1:
                     return new HeroesRoot();
                 case 2:
+                    return new roleRoot();
+                case 3:
                     return new recentGamesFragment();
-
                 default:
                     return null;
             }

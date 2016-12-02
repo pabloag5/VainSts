@@ -45,9 +45,9 @@ public final class Constants {
                 R.drawable.lance,
                 R.drawable.lyra,
                 R.drawable.ozo,
-                R.drawable.alpha
-                //R.drawable.gwen,
-                //R.drawable.baron
+                R.drawable.alpha,
+                R.drawable.gwen,
+                R.drawable.baron
         };
 
         public static class Ids {
@@ -84,6 +84,38 @@ public final class Constants {
             public final static int BARON = 28;
         }
 
+        public final static Map<Integer, Integer> iconsMap = new HashMap<Integer, Integer>() {{
+            put(Ids.ADAGIO, R.drawable.adagio);
+            put(Ids.ARDAN, R.drawable.ardan);
+            put(Ids.BLACKFEATHER, R.drawable.blackfeather);
+            put(Ids.CATHERINE, R.drawable.catherine);
+            put(Ids.CELESTE, R.drawable.celeste);
+            put(Ids.FORTRESS, R.drawable.fortress);
+            put(Ids.GLAIVE, R.drawable.glaive);
+            put(Ids.JOULE, R.drawable.joule);
+            put(Ids.KESTREL, R.drawable.kestrel);
+            put(Ids.KOSHKA, R.drawable.koshka);
+            put(Ids.KRUL, R.drawable.krul);
+            put(Ids.PETAL, R.drawable.petal);
+            put(Ids.PHINN, R.drawable.phinn);
+            put(Ids.REIM, R.drawable.reim);
+            put(Ids.RINGO, R.drawable.ringo);
+            put(Ids.RONA, R.drawable.rona);
+            put(Ids.SAMUEL, R.drawable.samuel);
+            put(Ids.SAW, R.drawable.saw);
+            put(Ids.SKAARF, R.drawable.skaarf);
+            put(Ids.SKYE, R.drawable.skye);
+            put(Ids.TAKA, R.drawable.taka);
+            put(Ids.VOX, R.drawable.vox);
+            put(Ids.LANCE, R.drawable.lance);
+            put(Ids.LYRA, R.drawable.lyra);
+            put(Ids.OZO, R.drawable.ozo);
+            put(Ids.ALPHA, R.drawable.alpha);
+            put(Ids.GWEN, R.drawable.gwen);
+            put(Ids.BARON, R.drawable.baron);
+        }};
+
+
         public final static Map<Integer, Integer> heroesMap = new HashMap<Integer, Integer>() {{
             put(Ids.ADAGIO, R.string.adagio);
             put(Ids.ARDAN, R.string.ardan);
@@ -114,7 +146,6 @@ public final class Constants {
             put(Ids.GWEN, R.string.Gwen);
             put(Ids.BARON, R.string.Baron);
         }};
-
 
     }
 
@@ -208,6 +239,7 @@ public final class Constants {
             public final static String HERO_ROAM = "heroe_roam";
         }
     }
+
 
 
 }

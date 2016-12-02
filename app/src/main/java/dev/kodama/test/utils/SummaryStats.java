@@ -133,4 +133,10 @@ public class SummaryStats {
     public float getKill_participation_per_game() {
         return kill_participation_per_game;
     }
+
+    public float getWinRatio() {
+        return wins/total_games;
+    }
+
+
 }

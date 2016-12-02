@@ -10,16 +10,16 @@ import android.view.ViewGroup;
 /**
  * Created by kodama on 6/24/16.
  */
-public class RoleRoot extends Fragment {
+public class roleRoot extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.positionrootlayout, container, false);
+        View view = inflater.inflate(R.layout.rolerootlayout, container, false);
         FragmentTransaction transaction = getFragmentManager()
                 .beginTransaction();
 		/*
 		Create fragment with fragment container
 		 */
-        transaction.replace(R.id.positionroot, new PositionsFragment());
+        transaction.replace(R.id.positionroot, new roleFragment());
         transaction.commit();
 
         return view;
