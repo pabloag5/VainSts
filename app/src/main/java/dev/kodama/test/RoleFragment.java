@@ -1,8 +1,6 @@
 package dev.kodama.test;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -27,48 +25,115 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import dev.kodama.test.db.Database_Helper;
+import dev.kodama.test.db.DatabaseTransactions;
 import dev.kodama.test.utils.Constants;
 import dev.kodama.test.utils.HalcyonUtils;
-import dev.kodama.test.utils.Stats;
 import dev.kodama.test.utils.SummaryStats;
 
 /**
  * Created by kodama on 4/20/16.
  */
-public class roleFragment extends Fragment {
+public class RoleFragment extends Fragment {
 
-    Button bestHeroesBtn;
+    Button bestHeroesBtn, laneBtn, jungleBtn, roamBtn;
     LinearLayout expandLayout;
-    RecyclerView bestheroeslist;
     RadioGroup sortHeroes;
     private DataSort mdataSort = new DataSort();
     private List<SummaryStats> mListHeroes=new ArrayList<>();
+    private SummaryStats roleStats;
     private RecyclerView recyclerView;
     private bestHeroesViewAdapter adapter;
     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-    SQLiteDatabase db;
-
-
+    DatabaseTransactions dbTrans = DatabaseTransactions.getInstance(getContext());
+    TextView roleWR, roleKDA, roleKP, roleKills, roleDeaths, roleAssists, roleCS, roleGold, roleTime;
+    ProgressBar roleKillsprogress, roleDeathsprogress, roleAssistsprogress, roleCSprogress, roleGoldprogress, roleTimeprogress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.rolelayout, container, false);
 
+        laneBtn=(Button) view.findViewById(R.id.lanebtn);
+        jungleBtn=(Button) view.findViewById(R.id.junglebtn);
+        roamBtn=(Button) view.findViewById(R.id.roambtn);
+        roleWR=(TextView) view.findViewById(R.id.roleWR);
+        roleKDA=(TextView) view.findViewById(R.id.roleKDA);
+        roleKP=(TextView) view.findViewById(R.id.roleKP);
         bestHeroesBtn=(Button) view.findViewById(R.id.bestheroesbtn);
         expandLayout=(LinearLayout) view.findViewById(R.id.llExpandDetail);
-        bestheroeslist=(RecyclerView) view.findViewById(R.id.bestheroeslist);
         sortHeroes=(RadioGroup) view.findViewById(R.id.sortHeroes);
-
         recyclerView=(RecyclerView)view.findViewById(R.id.bestheroeslist);
-        mListHeroes=getData();
+        roleKills=(TextView) view.findViewById(R.id.kills_role);
+        roleDeaths=(TextView) view.findViewById(R.id.deaths_role);
+        roleAssists=(TextView) view.findViewById(R.id.assists_role);
+        roleCS=(TextView) view.findViewById(R.id.cs_role);
+        roleGold=(TextView) view.findViewById(R.id.gold_role);
+        roleTime=(TextView) view.findViewById(R.id.time_role);
+        roleKillsprogress=(ProgressBar) view.findViewById(R.id.rolekillsprogress);
+        roleDeathsprogress=(ProgressBar) view.findViewById(R.id.roledeathsprogress);
+        roleAssistsprogress=(ProgressBar) view.findViewById(R.id.roleassistsprogress);
+        roleCSprogress=(ProgressBar) view.findViewById(R.id.rolecsprogress);
+        roleGoldprogress=(ProgressBar) view.findViewById(R.id.rolegoldprogress);
+        roleTimeprogress=(ProgressBar) view.findViewById(R.id.roletimeprogress);
+        /**
+         * initiate page view
+         */
+        laneBtn.setSelected(true);
+        roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
+        /**fill role stats
+         * first lane stats
+         * second jungle stats
+         * third roam stats
+         */
+        laneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListHeroes=getData(Constants.Positions.LANE);
+                adapter.notifyDataSetChanged();
+                roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE, Constants.Game_Types.RANKED);
+            }
+        });
+        jungleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListHeroes=getData(Constants.Positions.JUNGLE);
+                adapter.notifyDataSetChanged();
+                roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_JUNGLE, Constants.Game_Types.RANKED);
+            }
+        });
+        roamBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListHeroes=getData(Constants.Positions.ROAM);
+                adapter.notifyDataSetChanged();
+                roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ROAM, Constants.Game_Types.RANKED);
+            }
+        });
+        roleWR.setText(Float.toString(roleStats.getWinRatio()));
+        roleKDA.setText(Float.toString(roleStats.getKda_per_game()));
+        roleKP.setText(Float.toString(roleStats.getKill_participation_per_game()));
+        roleKills.setText(Float.toString(roleStats.getKills_per_game()));
+        roleKillsprogress.setProgress((int) roleStats.getKills_per_game());
+        roleDeaths.setText(Float.toString(roleStats.getDeaths_per_game()));
+        roleDeathsprogress.setProgress((int) roleStats.getDeaths_per_game());
+        roleAssists.setText(Float.toString(roleStats.getAssists_per_game()));
+        roleAssistsprogress.setProgress((int) roleStats.getAssists_per_game());
+        roleCS.setText(Float.toString(roleStats.getCs_min_per_game()));
+        roleCSprogress.setProgress((int) roleStats.getCs_min_per_game());
+        roleGold.setText(Float.toString(roleStats.getGold_per_game()));
+        roleGoldprogress.setProgress((int) roleStats.getGold_per_game());
+        //roleTime.setText(Float.toString());
+        //roleTimeprogress.setProgress((int));
 
+        /**
+         * set recyclerview
+         */
         adapter =new bestHeroesViewAdapter(getActivity(),mListHeroes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
-
+        /**
+         * set Best heroes button text
+         */
         switch (sortHeroes.getCheckedRadioButtonId()){
             case R.id.byWinratio:
                 bestHeroesBtn.setText("BEST "+getResources().getText(R.string.win_ratio_lbl)+" HEROES");
@@ -83,19 +148,24 @@ public class roleFragment extends Fragment {
                 bestHeroesBtn.setText("BEST "+getResources().getText(R.string.gold_label)+" HEROES");
                 break;
         }
-
+        /**
+         * set expand layout for sorting list option
+         */
         bestHeroesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 expandSortHeroes(expandLayout);
             }
         });
-        bestheroeslist.setOnClickListener(new View.OnClickListener() {
+        recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeLayout(expandLayout);
             }
         });
+        /**
+         * sort recyclerview
+         */
         sortHeroes.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -107,18 +177,32 @@ public class roleFragment extends Fragment {
         return view;
     }
 
+    /**
+     * expand sort options layout
+     * @param linearLayout
+     */
     private void expandSortHeroes(LinearLayout linearLayout){
         if (linearLayout.getVisibility()==View.GONE){
             linearLayout.setVisibility(View.VISIBLE);
         } else linearLayout.setVisibility(View.GONE);
 
     }
+
+    /**
+     * hide sort options layout
+     * @param linearLayout
+     */
     private void closeLayout(LinearLayout linearLayout){
         if (linearLayout.getVisibility()==View.VISIBLE){
             linearLayout.setVisibility(View.GONE);
         }
 
     }
+
+    /**
+     * sort heroes recylerview
+     * @param checkedId
+     */
     private void sortBestHeroes(int checkedId){
         switch (checkedId){
             case R.id.byWinratio:
@@ -160,18 +244,22 @@ public class roleFragment extends Fragment {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * fill role heroes recylerview
+     * @param gamePosition
+     * @return
+     */
     public List<SummaryStats> getData(int gamePosition){
-        List<SummaryStats> data=new ArrayList<>();
-        switch (gamePosition){
-            case Constants.Positions.LANE:
-                return Database_Helper.getHeroeStats(db, HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(gamePosition),Constants.Game_Types.RANKED);
-            break;
 
-        }
-        return data;
+        return dbTrans.getHeroeStats(HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(gamePosition),Constants.Game_Types.RANKED);
 
     }
 
+    /**
+     * cirle crop image
+     * @param image
+     * @return
+     */
     public Drawable circleImage (int image){
         Bitmap bitmapImage = BitmapFactory.decodeResource(getResources(), image);
         RoundedBitmapDrawable circularImage = RoundedBitmapDrawableFactory.create(getResources(), bitmapImage);
@@ -179,6 +267,9 @@ public class roleFragment extends Fragment {
         return circularImage;
     }
 
+    /**
+     * recyclerview adapter
+     */
     private class bestHeroesViewAdapter extends RecyclerView.Adapter<bestHeroesViewAdapter.MyViewHolder>
     {
 
