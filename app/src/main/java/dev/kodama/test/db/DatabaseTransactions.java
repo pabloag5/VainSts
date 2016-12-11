@@ -647,6 +647,11 @@ public class DatabaseTransactions {
     }
 
 
+    //TODO: Query for last 3 months
+    //TODO: Query for this season
+    //TODO: Query for last season
+    //TODO: Query for this patch
+    //TODO: Query for last patch
 
 
 }

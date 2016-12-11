@@ -3,6 +3,9 @@ package dev.kodama.test.utils;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import dev.kodama.test.db.Game;
+import dev.kodama.test.db.Player_Results;
+
 /**
  * Created by JuanCamilo on 8/4/2016.
  */
@@ -178,5 +181,27 @@ public class HalcyonUtils {
                 (int) Math.floor(length),
                 (int) ((length % 1)*60)
         };
+    }
+
+    public Game createRandomGame(int game_type) {
+        int hero = (int)(Math.random() * 28) + 1;
+        int position = (int)(Math.random()*3) + 1;
+        int kills = (int)(Math.random()* 20) + 1;
+        int deaths = (int)(Math.random()* 20) + 1;
+        int assists = (int)(Math.random()* 20) + 1;
+        float length = getLengthFrom((int)(Math.random()*15)+10,(int)(Math.random()*60)+1);
+        int multiplier = (int)(Math.random()*9) + 3;
+        int cs = multiplier * getLengthFrom(length)[0];
+        int gold = cs * (int)(Math.random() * 20 + 20) + kills * (int)(Math.random() * 200 + 200);
+        int total_kills = kills + (int)(Math.random()*25);
+        Player_Results player_results = new Player_Results(hero, position, kills, deaths, assists, cs, gold, length, total_kills);
+        boolean victory = Math.random()>0.5?true:false;
+        long timestamp = System.currentTimeMillis();
+        float vg_version = 1.24F;
+        int rand_deaths = (int)(Math.max(total_kills,Math.random()*30));
+        int total_deaths = victory?Math.max(total_kills-rand_deaths,deaths):Math.max(total_kills+rand_deaths,deaths);
+        Game game = new Game(length, victory, timestamp, game_type, vg_version, player_results, total_kills, total_deaths);
+
+        return game;
     }
 }
