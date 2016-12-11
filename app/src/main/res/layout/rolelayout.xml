@@ -67,6 +67,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/roleWR"
                     android:text="@string/winratio_value"
                     android:textColor="#ffffff"
                     android:textSize="18dp"
@@ -91,6 +92,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/roleKDA"
                     android:text="@string/kda_value"
                     android:textColor="#ffffff"
                     android:textSize="18dp"
@@ -115,6 +117,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:id="@+id/roleKP"
                     android:text="@string/killpart_value"
                     android:textColor="#ffffff"
                     android:textSize="18dp"
@@ -200,7 +203,7 @@
                     android:drawablePadding="10dp"
                     android:gravity="center"
                     android:button="@android:color/transparent"
-                    android:text="@string/Gold_label"
+                    android:text="@string/gold_label"
                     android:textColor="#ffffff"
                     android:textSize="10dp"
                     android:layout_margin="10dp"/>
@@ -240,9 +243,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <android.support.v4.widget.ContentLoadingProgressBar
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/rolekillsprogress"
+                    android:max="10"
+                    android:progress="6"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -264,9 +270,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <android.support.v4.widget.ContentLoadingProgressBar
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/roledeathsprogress"
+                    android:max="6"
+                    android:progress="6"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -288,9 +297,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <android.support.v4.widget.ContentLoadingProgressBar
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/roleassistsprogress"
+                    android:max="15"
+                    android:progress="10"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -318,9 +330,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <android.support.v4.widget.ContentLoadingProgressBar
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/rolecsprogress"
+                    android:max="10"
+                    android:progress="7"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -342,9 +357,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <android.support.v4.widget.ContentLoadingProgressBar
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/rolegoldprogress"
+                    android:max="10000"
+                    android:progress="6500"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -356,7 +374,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/Gold_label"
+                    android:text="@string/gold_label"
                     android:textSize="12dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
@@ -366,9 +384,12 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical">
-                <android.support.v4.widget.ContentLoadingProgressBar
+                <ProgressBar
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/roletimeprogress"
+                    android:max="100"
+                    android:progress="8"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -386,9 +407,6 @@
                     android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 </ScrollView>
