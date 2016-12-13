@@ -1,5 +1,6 @@
 package dev.kodama.test;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,8 +36,8 @@ import dev.kodama.test.utils.SummaryStats;
  */
 public class RoleFragment extends Fragment {
 
-    Button bestHeroesBtn, laneBtn, jungleBtn, roamBtn;
-    LinearLayout expandLayout;
+    Button laneBtn, jungleBtn, roamBtn;
+    LinearLayout bestHeroesBtn, expandLayout;
     RadioGroup sortHeroes;
     private DataSort mdataSort = new DataSort();
     private List<SummaryStats> mListHeroes=new ArrayList<>();
@@ -45,7 +46,7 @@ public class RoleFragment extends Fragment {
     private bestHeroesViewAdapter adapter;
     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
     DatabaseTransactions dbTrans = DatabaseTransactions.getInstance(getContext());
-    TextView roleWR, roleKDA, roleKP, roleKills, roleDeaths, roleAssists, roleCS, roleGold, roleTime;
+    TextView rolebtntext, roleWR, roleKDA, roleKP, roleKills, roleDeaths, roleAssists, roleCS, roleGold, roleTime;
     ProgressBar roleKillsprogress, roleDeathsprogress, roleAssistsprogress, roleCSprogress, roleGoldprogress, roleTimeprogress;
 
     @Override
@@ -58,7 +59,8 @@ public class RoleFragment extends Fragment {
         roleWR=(TextView) view.findViewById(R.id.roleWR);
         roleKDA=(TextView) view.findViewById(R.id.roleKDA);
         roleKP=(TextView) view.findViewById(R.id.roleKP);
-        bestHeroesBtn=(Button) view.findViewById(R.id.bestheroesbtn);
+        bestHeroesBtn=(LinearLayout) view.findViewById(R.id.bestheroesbtn);
+        rolebtntext=(TextView) view.findViewById(R.id.rolebtntext);
         expandLayout=(LinearLayout) view.findViewById(R.id.llExpandDetail);
         sortHeroes=(RadioGroup) view.findViewById(R.id.sortHeroes);
         recyclerView=(RecyclerView)view.findViewById(R.id.bestheroeslist);
@@ -79,6 +81,7 @@ public class RoleFragment extends Fragment {
          */
         laneBtn.setSelected(true);
         roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
+        updateRoleStats();
         /**fill role stats
          * first lane stats
          * second jungle stats
@@ -90,6 +93,10 @@ public class RoleFragment extends Fragment {
                 mListHeroes=getData(Constants.Positions.LANE);
                 adapter.notifyDataSetChanged();
                 roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE, Constants.Game_Types.RANKED);
+                updateRoleStats();
+                laneBtn.setSelected(true);
+                jungleBtn.setSelected(false);
+                roamBtn.setSelected(false);
             }
         });
         jungleBtn.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +105,10 @@ public class RoleFragment extends Fragment {
                 mListHeroes=getData(Constants.Positions.JUNGLE);
                 adapter.notifyDataSetChanged();
                 roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_JUNGLE, Constants.Game_Types.RANKED);
+                updateRoleStats();
+                laneBtn.setSelected(false);
+                jungleBtn.setSelected(true);
+                roamBtn.setSelected(false);
             }
         });
         roamBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,23 +117,12 @@ public class RoleFragment extends Fragment {
                 mListHeroes=getData(Constants.Positions.ROAM);
                 adapter.notifyDataSetChanged();
                 roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ROAM, Constants.Game_Types.RANKED);
+                updateRoleStats();
+                laneBtn.setSelected(false);
+                jungleBtn.setSelected(false);
+                roamBtn.setSelected(true);
             }
         });
-        roleWR.setText(Float.toString(roleStats.getWinRatio()));
-        roleKDA.setText(Float.toString(roleStats.getKda_per_game()));
-        roleKP.setText(Float.toString(roleStats.getKill_participation_per_game()));
-        roleKills.setText(Float.toString(roleStats.getKills_per_game()));
-        roleKillsprogress.setProgress((int) roleStats.getKills_per_game());
-        roleDeaths.setText(Float.toString(roleStats.getDeaths_per_game()));
-        roleDeathsprogress.setProgress((int) roleStats.getDeaths_per_game());
-        roleAssists.setText(Float.toString(roleStats.getAssists_per_game()));
-        roleAssistsprogress.setProgress((int) roleStats.getAssists_per_game());
-        roleCS.setText(Float.toString(roleStats.getCs_min_per_game()));
-        roleCSprogress.setProgress((int) roleStats.getCs_min_per_game());
-        roleGold.setText(Float.toString(roleStats.getGold_per_game()));
-        roleGoldprogress.setProgress((int) roleStats.getGold_per_game());
-        //roleTime.setText(Float.toString());
-        //roleTimeprogress.setProgress((int));
 
         /**
          * set recyclerview
@@ -136,16 +136,16 @@ public class RoleFragment extends Fragment {
          */
         switch (sortHeroes.getCheckedRadioButtonId()){
             case R.id.byWinratio:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.win_ratio_lbl)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.win_ratio_lbl)+" HEROES");
                 break;
             case R.id.byCS:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.CS_label)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.CS_label)+" HEROES");
                 break;
             case R.id.byKda:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.kda_lbl)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.kda_lbl)+" HEROES");
                 break;
             case R.id.byGold:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.gold_label)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.gold_label)+" HEROES");
                 break;
         }
         /**
@@ -196,7 +196,6 @@ public class RoleFragment extends Fragment {
         if (linearLayout.getVisibility()==View.VISIBLE){
             linearLayout.setVisibility(View.GONE);
         }
-
     }
 
     /**
@@ -206,19 +205,19 @@ public class RoleFragment extends Fragment {
     private void sortBestHeroes(int checkedId){
         switch (checkedId){
             case R.id.byWinratio:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.win_ratio_lbl)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.win_ratio_lbl)+" HEROES");
                 sortByWinRatio();
                 break;
             case R.id.byKda:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.kda_lbl)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.kda_lbl)+" HEROES");
                 sortByKda();
                 break;
             case R.id.byCS:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.CS_label)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.CS_label)+" HEROES");
                 sortByCS();
                 break;
             case R.id.byGold:
-                bestHeroesBtn.setText("BEST "+getResources().getText(R.string.gold_label)+" HEROES");
+                rolebtntext.setText("BEST "+getResources().getText(R.string.gold_label)+" HEROES");
                 sortByGold();
                 break;
         }
@@ -245,7 +244,7 @@ public class RoleFragment extends Fragment {
     }
 
     /**
-     * fill role heroes recylerview
+     * fill role heroes recylerview list
      * @param gamePosition
      * @return
      */
@@ -268,6 +267,26 @@ public class RoleFragment extends Fragment {
     }
 
     /**
+     * update page objects
+     */
+    private void updateRoleStats(){
+        roleWR.setText(String.valueOf(roleStats.getWinRatio()));
+        roleKDA.setText(String.valueOf(roleStats.getKda_per_game()));
+        roleKP.setText(String.valueOf(roleStats.getKill_participation_per_game()));
+        roleKills.setText(String.valueOf(roleStats.getKills_per_game()));
+        roleKillsprogress.setProgress((int) roleStats.getKills_per_game());
+        roleDeaths.setText(String.valueOf(roleStats.getDeaths_per_game()));
+        roleDeathsprogress.setProgress(((int) roleStats.getDeaths_per_game()-6)*-1);
+        roleAssists.setText(String.valueOf(roleStats.getAssists_per_game()));
+        roleAssistsprogress.setProgress((int) roleStats.getAssists_per_game());
+        roleCS.setText(String.valueOf(roleStats.getCs_min_per_game()));
+        roleCSprogress.setProgress((int) roleStats.getCs_min_per_game());
+        roleGold.setText(String.valueOf(roleStats.getGold_per_game()));
+        roleGoldprogress.setProgress((int) roleStats.getGold_per_game());
+        //roleTime.setText(String.valueOf());
+        //roleTimeprogress.setProgress((int));
+    }
+    /**
      * recyclerview adapter
      */
     private class bestHeroesViewAdapter extends RecyclerView.Adapter<bestHeroesViewAdapter.MyViewHolder>
@@ -285,7 +304,7 @@ public class RoleFragment extends Fragment {
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            View view=inflater.inflate(R.layout.bestHero_row,parent,false);
+            View view=inflater.inflate(R.layout.besthero_row,parent,false);
             MyViewHolder holder=new MyViewHolder(view);
 
             return holder;
@@ -301,10 +320,10 @@ public class RoleFragment extends Fragment {
             holder.kdaProgress.setProgress((int) Math.round(current.getKda_per_game()));
             holder.csProgress.setProgress((int) Math.round(current.getCs_min_per_game()));
             holder.goldProgress.setProgress((int) Math.round(current.getGold_per_game()));
-            holder.winRatioTxt.setText(Float.toString(current.getWinRatio()));
-            holder.kdaTxt.setText(Float.toString(current.getKda_per_game()));
-            holder.csTxt.setText(Float.toString(current.getCs_min_per_game()));
-            holder.goldTxt.setText(Float.toString(current.getGold_per_game()));
+            holder.winRatioTxt.setText(String.valueOf(current.getWinRatio()));
+            holder.kdaTxt.setText(String.valueOf(current.getKda_per_game()));
+            holder.csTxt.setText(String.valueOf(current.getCs_min_per_game()));
+            holder.goldTxt.setText(String.valueOf(current.getGold_per_game()));
 
         }
 

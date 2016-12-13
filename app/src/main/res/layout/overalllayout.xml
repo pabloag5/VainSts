@@ -175,6 +175,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/kda_overall"
                     android:text="@string/kda_value"
                     android:textColor="#ffffff"
                     android:textSize="24dp"
@@ -227,6 +228,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/winrate_overall"
                     android:text="@string/winratio_value"
                     android:textColor="#ffffff"
                     android:textSize="24dp"

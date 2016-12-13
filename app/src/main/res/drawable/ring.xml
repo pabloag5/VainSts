@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="ring"
-    android:innerRadius="70dp"
-    android:thickness="5dp"
+    android:innerRadius="90dp"
+    android:thickness="30dp"
     android:useLevel="false">
-    <gradient
-        android:endColor="#0BACDD"
-        android:startColor="#88C557"/>
-    <size
-        android:width="150dp"
-        android:height="150dp"
-        />
+    <solid
+        android:color="#3fdaeb"/>
 </shape>

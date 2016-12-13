@@ -19,7 +19,7 @@ public class roleRoot extends Fragment {
 		/*
 		Create fragment with fragment container
 		 */
-        transaction.replace(R.id.positionroot, new roleFragment());
+        transaction.replace(R.id.positionroot, new RoleFragment());
         transaction.commit();
 
         return view;

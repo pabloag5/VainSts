@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
         tabLayout.getTabAt(2).setIcon(tabicons[2]);
         tabLayout.getTabAt(3).setIcon(tabicons[2]);
 
-        //tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.colorAccent));
         tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.colorBackground));
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
