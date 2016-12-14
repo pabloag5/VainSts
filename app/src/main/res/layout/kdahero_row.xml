@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorBackground">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:id="@+id/hero_icon_kda"
+            android:padding="17dp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/killsherokdabar"
+                android:gravity="center_horizontal"
+                android:layout_margin="4dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/customprogressbarmagenta" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/deathsherokdabar"
+                android:gravity="center_horizontal"
+                android:layout_margin="4dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/customprogressbarblue" />
+            <ProgressBar
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_gravity="center"
+                android:id="@+id/assistsherokdabar"
+                android:gravity="center_horizontal"
+                android:layout_margin="4dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/customprogressbargreen" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/herokda"
+            android:textSize="40dp"
+            android:text="@string/kda_value"
+            android:textColor="#ffffff"
+            android:gravity="center"/>
+    </LinearLayout>
+</LinearLayout>

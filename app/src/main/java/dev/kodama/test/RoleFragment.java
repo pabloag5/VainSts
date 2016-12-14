@@ -1,6 +1,5 @@
 package dev.kodama.test;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,10 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,6 +37,7 @@ public class RoleFragment extends Fragment {
     Button laneBtn, jungleBtn, roamBtn;
     LinearLayout bestHeroesBtn, expandLayout;
     RadioGroup sortHeroes;
+    RadioButton sortHeroesWR;
     private DataSort mdataSort = new DataSort();
     private List<SummaryStats> mListHeroes=new ArrayList<>();
     private SummaryStats roleStats;
@@ -63,6 +62,7 @@ public class RoleFragment extends Fragment {
         rolebtntext=(TextView) view.findViewById(R.id.rolebtntext);
         expandLayout=(LinearLayout) view.findViewById(R.id.llExpandDetail);
         sortHeroes=(RadioGroup) view.findViewById(R.id.sortHeroes);
+        sortHeroesWR=(RadioButton) view.findViewById(R.id.byWinratio);
         recyclerView=(RecyclerView)view.findViewById(R.id.bestheroeslist);
         roleKills=(TextView) view.findViewById(R.id.kills_role);
         roleDeaths=(TextView) view.findViewById(R.id.deaths_role);
@@ -79,6 +79,7 @@ public class RoleFragment extends Fragment {
         /**
          * initiate page view
          */
+        sortHeroesWR.setSelected(true);
         laneBtn.setSelected(true);
         roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
         updateRoleStats();
@@ -270,21 +271,24 @@ public class RoleFragment extends Fragment {
      * update page objects
      */
     private void updateRoleStats(){
-        roleWR.setText(String.valueOf(roleStats.getWinRatio()));
-        roleKDA.setText(String.valueOf(roleStats.getKda_per_game()));
-        roleKP.setText(String.valueOf(roleStats.getKill_participation_per_game()));
-        roleKills.setText(String.valueOf(roleStats.getKills_per_game()));
-        roleKillsprogress.setProgress((int) roleStats.getKills_per_game());
-        roleDeaths.setText(String.valueOf(roleStats.getDeaths_per_game()));
-        roleDeathsprogress.setProgress(((int) roleStats.getDeaths_per_game()-6)*-1);
-        roleAssists.setText(String.valueOf(roleStats.getAssists_per_game()));
-        roleAssistsprogress.setProgress((int) roleStats.getAssists_per_game());
-        roleCS.setText(String.valueOf(roleStats.getCs_min_per_game()));
-        roleCSprogress.setProgress((int) roleStats.getCs_min_per_game());
-        roleGold.setText(String.valueOf(roleStats.getGold_per_game()));
-        roleGoldprogress.setProgress((int) roleStats.getGold_per_game());
-        //roleTime.setText(String.valueOf());
-        //roleTimeprogress.setProgress((int));
+        if (roleStats!=null) {
+            roleWR.setText(String.valueOf(roleStats.getWinRatio()));
+            roleKDA.setText(String.valueOf(roleStats.getKda_per_game()));
+            roleKP.setText(String.valueOf(roleStats.getKill_participation_per_game()));
+            roleKills.setText(String.valueOf(roleStats.getKills_per_game()));
+            roleKillsprogress.setProgress((int) roleStats.getKills_per_game());
+            roleDeaths.setText(String.valueOf(roleStats.getDeaths_per_game()));
+            roleDeathsprogress.setProgress(((int) roleStats.getDeaths_per_game()-6)*-1);
+            roleAssists.setText(String.valueOf(roleStats.getAssists_per_game()));
+            roleAssistsprogress.setProgress((int) roleStats.getAssists_per_game());
+            roleCS.setText(String.valueOf(roleStats.getCs_min_per_game()));
+            roleCSprogress.setProgress((int) roleStats.getCs_min_per_game());
+            roleGold.setText(String.valueOf(roleStats.getGold_per_game()));
+            roleGoldprogress.setProgress((int) roleStats.getGold_per_game());
+            //roleTime.setText(String.valueOf());
+            //roleTimeprogress.setProgress((int));
+        }
+
     }
     /**
      * recyclerview adapter
@@ -312,19 +316,20 @@ public class RoleFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
-            SummaryStats current=data.get(position);
-            //set view content
-            holder.imageView.setImageDrawable(circleImage(HalcyonUtils.getHeroIconFromId(getContext(),current.getHeroId())));
-            holder.heroName.setText(HalcyonUtils.getHeroNameFromId(getContext(),current.getHeroId()));
-            holder.winProgress.setProgress((int) Math.round(current.getWinRatio()));
-            holder.kdaProgress.setProgress((int) Math.round(current.getKda_per_game()));
-            holder.csProgress.setProgress((int) Math.round(current.getCs_min_per_game()));
-            holder.goldProgress.setProgress((int) Math.round(current.getGold_per_game()));
-            holder.winRatioTxt.setText(String.valueOf(current.getWinRatio()));
-            holder.kdaTxt.setText(String.valueOf(current.getKda_per_game()));
-            holder.csTxt.setText(String.valueOf(current.getCs_min_per_game()));
-            holder.goldTxt.setText(String.valueOf(current.getGold_per_game()));
-
+            if (data!=null) {
+                SummaryStats current=data.get(position);
+                //set view content
+                holder.imageView.setImageDrawable(circleImage(HalcyonUtils.getHeroIconFromId(getContext(),current.getHeroId())));
+                holder.heroName.setText(HalcyonUtils.getHeroNameFromId(getContext(),current.getHeroId()));
+                holder.winProgress.setProgress((int) Math.round(current.getWinRatio()));
+                holder.kdaProgress.setProgress((int) Math.round(current.getKda_per_game()));
+                holder.csProgress.setProgress((int) Math.round(current.getCs_min_per_game()));
+                holder.goldProgress.setProgress((int) Math.round(current.getGold_per_game()));
+                holder.winRatioTxt.setText(String.valueOf(current.getWinRatio()));
+                holder.kdaTxt.setText(String.valueOf(current.getKda_per_game()));
+                holder.csTxt.setText(String.valueOf(current.getCs_min_per_game()));
+                holder.goldTxt.setText(String.valueOf(current.getGold_per_game()));
+            }
         }
 
         @Override
@@ -359,6 +364,5 @@ public class RoleFragment extends Fragment {
                 goldTxt=(TextView) itemView.findViewById(R.id.gold_hero);
             }
         }
-
     }
 }

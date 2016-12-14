@@ -139,7 +139,7 @@
         style="@style/CustomProgressBar"
         android:max="15"
         android:progress="5"
-        android:progressDrawable="@drawable/customprogressbar"
+        android:progressDrawable="@drawable/customprogressbarmagenta"
         android:minHeight="15dp"
         android:layout_marginTop="15dp" />
     -->

@@ -29,7 +29,7 @@
     </style>
     <style name="CustomProgressBar" parent="android:Widget.ProgressBar">
 
-        <item name="android:progressDrawable">@drawable/customcircleprogressbar</item>
+        <item name="android:progressDrawable">@drawable/customcircleprogressbarblue</item>
 
     </style>
     <!-- changes the default colours for EditTexts, including non-text elements (also works with the DatePicker -->
