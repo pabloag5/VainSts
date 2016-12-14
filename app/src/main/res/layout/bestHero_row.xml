@@ -14,10 +14,10 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="120dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:id="@+id/hero_icon"
-            android:padding="17dp"
+            android:padding="10dp"
             />
 
         <LinearLayout
@@ -42,8 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:paddingBottom="10dp">
+                android:layout_marginBottom="5dp">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -54,15 +53,13 @@
                     <ProgressBar
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="11dp"
-                        android:paddingBottom="11dp"
+                        android:layout_weight="0.25"
                         android:id="@+id/wrprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:max="100"
                         android:progress="70"
-                        android:progressDrawable="@drawable/customprogressbar"
+                        android:progressDrawable="@drawable/customprogressbarmagenta"
                          />
                     <TextView
                         android:layout_width="match_parent"
@@ -92,15 +89,13 @@
                     <ProgressBar
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="11dp"
-                        android:paddingBottom="11dp"
+                        android:layout_weight="0.25"
                         android:id="@+id/kdaprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:max="15"
                         android:progress="10"
-                        android:progressDrawable="@drawable/customprogressbar2"
+                        android:progressDrawable="@drawable/customprogressbarblue"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -130,15 +125,13 @@
                     <ProgressBar
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="11dp"
-                        android:paddingBottom="11dp"
+                        android:layout_weight="0.25"
                         android:id="@+id/csprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:max="10"
                         android:progress="4"
-                        android:progressDrawable="@drawable/customprogressbar3"
+                        android:progressDrawable="@drawable/customprogressbarpurple"
                         />
                     <TextView
                         android:layout_width="match_parent"
@@ -168,15 +161,13 @@
                     <ProgressBar
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="11dp"
-                        android:paddingBottom="11dp"
+                        android:layout_weight="0.25"
                         android:id="@+id/goldprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:max="10000"
                         android:progress="6500"
-                        android:progressDrawable="@drawable/customprogressbar4"
+                        android:progressDrawable="@drawable/customprogressbaryellow"
                         />
                     <TextView
                         android:layout_width="match_parent"
