@@ -24,11 +24,16 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dev.kodama.test.db.DatabaseTransactions;
+import dev.kodama.test.db.Game;
 import dev.kodama.test.utils.Constants;
+import dev.kodama.test.utils.GameStats;
 import dev.kodama.test.utils.HalcyonUtils;
+import dev.kodama.test.utils.HeroKDA;
 import dev.kodama.test.utils.SummaryStats;
 
 
@@ -38,14 +43,32 @@ public class KdaFragment extends Fragment {
     private RadioGroup kdasortHeroes;
     private RadioButton highkdaHeroes;
     private DataSort mdataSort = new DataSort();
-    private List<SummaryStats> mListHeroes=new ArrayList<>();
-    private SummaryStats kdaStats;
+    private ArrayList<HeroKDA> genericArray=new ArrayList<>();
+    private ArrayList<HeroKDA> monthsArray=new ArrayList<>();
+    private ArrayList<HeroKDA> seasonArray=new ArrayList<>();
+    private ArrayList<HeroKDA> patchArray=new ArrayList<>();
+    private ArrayList<HeroKDA> rolesmonths=new ArrayList<>();
+    private ArrayList<HeroKDA> rolesseason=new ArrayList<>();
+    private ArrayList<HeroKDA> rolespatch=new ArrayList<>();
+
     private RecyclerView recyclerView;
     private kdaViewAdapter adapter;
     LinearLayoutManager kdalayoutManager = new LinearLayoutManager(getActivity());
     private DatabaseTransactions dbTrans = DatabaseTransactions.getInstance(getContext());
     private TextView kdakills, kdadeaths, kdaassists, kdaoverall, kdasortbtn;
     private ProgressBar kdaoverallgraph, killsbar, deathsbar, assistsbar;
+    private int kills_m=0;
+    private int deaths_m=0;
+    private int assists_m=0;
+    private float kda_m=0;
+    private int kills_s=0;
+    private int deaths_s=0;
+    private int assists_s=0;
+    private float kda_s=0;
+    private int kills_p=0;
+    private int deaths_p=0;
+    private int assists_p=0;
+    private float kda_p=0;
 
 
     @Override
@@ -73,9 +96,10 @@ public class KdaFragment extends Fragment {
         /**
          * initiate page view
          */
+        get3monthsstats();
+        genericArray=monthsArray;
         highkdaHeroes.setSelected(true);
         monthsBtn.setSelected(true);
-        kdaStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ALL,Constants.Game_Types.RANKED);
         updateKDAStats();
 
         /**fill kda stats
@@ -86,44 +110,41 @@ public class KdaFragment extends Fragment {
         monthsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListHeroes=getData(Constants.Positions.LANE);
+                genericArray=monthsArray;
                 adapter.notifyDataSetChanged();
-                kdaStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE, Constants.Game_Types.RANKED);
-                updateKDAStats();
                 monthsBtn.setSelected(true);
                 seasonBtn.setSelected(false);
                 patchBtn.setSelected(false);
+                updateKDAStats();
             }
         });
         seasonBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListHeroes=getData(Constants.Positions.JUNGLE);
+                genericArray=seasonArray;
                 adapter.notifyDataSetChanged();
-                kdaStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_JUNGLE, Constants.Game_Types.RANKED);
-                updateKDAStats();
                 monthsBtn.setSelected(false);
                 seasonBtn.setSelected(true);
                 patchBtn.setSelected(false);
+                updateKDAStats();
             }
         });
         patchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListHeroes=getData(Constants.Positions.ROAM);
+                genericArray=patchArray;
                 adapter.notifyDataSetChanged();
-                kdaStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ROAM, Constants.Game_Types.RANKED);
-                updateKDAStats();
                 monthsBtn.setSelected(false);
                 seasonBtn.setSelected(false);
                 patchBtn.setSelected(true);
+                updateKDAStats();
             }
         });
 
         /**
          * set recyclerview
          */
-        adapter =new kdaViewAdapter(getActivity(),mListHeroes);
+        adapter =new kdaViewAdapter(getActivity(),genericArray);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(kdalayoutManager);
 
@@ -223,30 +244,46 @@ public class KdaFragment extends Fragment {
     }
 
     public void sortByHighKDA() {
-        mdataSort.sortKDAHighHeroes(mListHeroes);
+        if (monthsBtn.isSelected()){
+            genericArray=monthsArray;
+        }
+        if (seasonBtn.isSelected()){
+            genericArray=seasonArray;
+        }
+        if (patchBtn.isSelected()){
+            genericArray=patchArray;
+        }
+        mdataSort.sortKDAHighHeroes(genericArray);
         adapter.notifyDataSetChanged();
     }
 
     public void sortByLowKDA() {
-        mdataSort.sortKDALowHeroes(mListHeroes);
+        if (monthsBtn.isSelected()){
+            genericArray=monthsArray;
+        }
+        if (seasonBtn.isSelected()){
+            genericArray=seasonArray;
+        }
+        if (patchBtn.isSelected()){
+            genericArray=patchArray;
+        }
+        mdataSort.sortKDALowHeroes(genericArray);
         adapter.notifyDataSetChanged();
     }
 
     public void sortByRoleKDA() {
-        mdataSort.sortKDARoleHeroes(mListHeroes);
+        if (monthsBtn.isSelected()){
+            genericArray=rolesmonths;
+        }
+        if (seasonBtn.isSelected()){
+            genericArray=rolesseason;
+        }
+        if (patchBtn.isSelected()){
+            genericArray=rolespatch;
+        }
         adapter.notifyDataSetChanged();
     }
 
-    /**
-     * fill role heroes recylerview list
-     * @param gamePosition
-     * @return
-     */
-    public List<SummaryStats> getData(int gamePosition){
-
-        return dbTrans.getHeroeStats(HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(gamePosition),Constants.Game_Types.RANKED);
-
-    }
 
     /**
      * cirle crop image
@@ -260,20 +297,227 @@ public class KdaFragment extends Fragment {
         return circularImage;
     }
 
+    private void get3monthsstats(){
+        int i=0;
+        int temp=0;
+        int n=15;
+        HeroKDA hero_info;
+        ArrayList<GameStats> statsArray = new ArrayList<>();
+        ArrayList<HeroKDA> tempArray = new ArrayList<>();
+        HashMap<Integer,HeroKDA> allKDA=new HashMap<>();
+        HashMap<Integer, HeroKDA> laneKDA=new HashMap<>();
+        HashMap<Integer, HeroKDA> jungleKDA=new HashMap<>();
+        HashMap<Integer, HeroKDA> roamKDA=new HashMap<>();
+
+        statsArray= dbTrans.getLastNGamesStats(Constants.Game_Types.RANKED,n,null,null,null,null);
+        while (i<=statsArray.size()){
+            kills_m=+statsArray.get(i).getKills();
+            deaths_m=+statsArray.get(i).getDeaths();
+            assists_m=+statsArray.get(i).getAssists();
+            kda_m = (float) (kills_m + assists_m)/(deaths_m+1);
+            hero_info=new HeroKDA(statsArray.get(i).getHeroId(),statsArray.get(i).getKills(),
+                    statsArray.get(i).getAssists(),statsArray.get(i).getDeaths(),1);
+            if(allKDA.get(hero_info.getHero_id())!=null){
+                allKDA.put(hero_info.getHero_id(),
+                new HeroKDA(hero_info.getHero_id(),
+                        hero_info.getKills()+ allKDA.get(hero_info.getHero_id()).getKills(),
+                        hero_info.getAssists()+allKDA.get(hero_info.getHero_id()).getAssists(),
+                        hero_info.getDeaths()+allKDA.get(hero_info.getHero_id()).getDeaths(),
+                        hero_info.getGames()+allKDA.get(hero_info.getHero_id()).getGames())
+                );
+            } else {
+                allKDA.put(hero_info.getHero_id(), hero_info);
+            }
+            if (statsArray.get(i).getPosition()==Constants.Positions.LANE) {
+                if(laneKDA.get(hero_info.getHero_id())!=null){
+                    laneKDA.put(hero_info.getHero_id(),
+                            new HeroKDA(hero_info.getHero_id(),
+                                    hero_info.getKills()+ laneKDA.get(hero_info.getHero_id()).getKills(),
+                                    hero_info.getAssists()+laneKDA.get(hero_info.getHero_id()).getAssists(),
+                                    hero_info.getDeaths()+laneKDA.get(hero_info.getHero_id()).getDeaths(),
+                                    hero_info.getGames()+laneKDA.get(hero_info.getHero_id()).getGames())
+                    );
+                } else {
+                    laneKDA.put(hero_info.getHero_id(),hero_info);
+                }
+            }
+            if (statsArray.get(i).getPosition()==Constants.Positions.JUNGLE) {
+                if(jungleKDA.get(hero_info.getHero_id())!=null){
+                    jungleKDA.put(hero_info.getHero_id(),
+                            new HeroKDA(hero_info.getHero_id(),
+                                    hero_info.getKills()+ jungleKDA.get(hero_info.getHero_id()).getKills(),
+                                    hero_info.getAssists()+jungleKDA.get(hero_info.getHero_id()).getAssists(),
+                                    hero_info.getDeaths()+jungleKDA.get(hero_info.getHero_id()).getDeaths(),
+                                    hero_info.getGames()+jungleKDA.get(hero_info.getHero_id()).getGames())
+                    );
+                } else {
+                    jungleKDA.put(hero_info.getHero_id(),hero_info);
+                }
+            }
+            if (statsArray.get(i).getPosition()==Constants.Positions.ROAM) {
+                if(roamKDA.get(hero_info.getHero_id())!=null){
+                    roamKDA.put(hero_info.getHero_id(),
+                            new HeroKDA(hero_info.getHero_id(),
+                                    hero_info.getKills()+ roamKDA.get(hero_info.getHero_id()).getKills(),
+                                    hero_info.getAssists()+roamKDA.get(hero_info.getHero_id()).getAssists(),
+                                    hero_info.getDeaths()+roamKDA.get(hero_info.getHero_id()).getDeaths(),
+                                    hero_info.getGames()+roamKDA.get(hero_info.getHero_id()).getGames())
+                    );
+                } else {
+                    roamKDA.put(hero_info.getHero_id(),hero_info);
+                }
+            }
+            i++;
+        }
+        kills_m=kills_m/n;
+        deaths_m=deaths_m/n;
+        assists_m=assists_m/n;
+        for(Map.Entry<Integer, HeroKDA> entry : allKDA.entrySet()){
+            monthsArray.add(entry.getValue());
+        }
+        for(Map.Entry<Integer, HeroKDA> entry : laneKDA.entrySet()){
+            tempArray.add(entry.getValue());
+        }
+        while (temp<tempArray.size()){
+            if (tempArray.get(temp).getKda()<tempArray.get(temp+1).getKda()){
+                tempArray.remove(temp);
+            } else {
+                tempArray.remove(temp+1);
+            }
+        }
+        rolesmonths.add(tempArray.get(0));
+        tempArray.remove(0);
+        for(Map.Entry<Integer, HeroKDA> entry : jungleKDA.entrySet()){
+            tempArray.add(entry.getValue());
+        }
+        while (temp<tempArray.size()){
+            if (tempArray.get(temp).getKda()<tempArray.get(temp+1).getKda()){
+                tempArray.remove(temp);
+            } else {
+                tempArray.remove(temp+1);
+            }
+        }
+        rolesmonths.add(tempArray.get(0));
+        tempArray.remove(0);
+        for(Map.Entry<Integer, HeroKDA> entry : roamKDA.entrySet()){
+            tempArray.add(entry.getValue());
+        }
+        while (temp<tempArray.size()){
+            if (tempArray.get(temp).getKda()<tempArray.get(temp+1).getKda()){
+                tempArray.remove(temp);
+            } else {
+                tempArray.remove(temp+1);
+            }
+        }
+        rolesmonths.add(tempArray.get(0));
+        tempArray.remove(0);
+    }
+    private void getLastpatchstats(){
+        int i=0;
+        int n=5;
+        HeroKDA hero_info;
+        ArrayList<GameStats> statsArray = new ArrayList<>();
+        HashMap<Integer,HeroKDA> tempKDA=new HashMap<>();
+        statsArray= dbTrans.getLastNGamesStats(Constants.Game_Types.RANKED,n,null,null,null,null);
+        while (i<=statsArray.size()){
+            kills_p=+statsArray.get(i).getKills();
+            deaths_p=+statsArray.get(i).getDeaths();
+            assists_p=+statsArray.get(i).getAssists();
+            kda_p = (float) (kills_p + assists_p)/(deaths_p+1);
+            hero_info=new HeroKDA(statsArray.get(i).getHeroId(),statsArray.get(i).getKills(),
+                    statsArray.get(i).getAssists(),statsArray.get(i).getDeaths(),1);
+            if(tempKDA.get(hero_info.getHero_id())!=null){
+                tempKDA.put(hero_info.getHero_id(),
+                        new HeroKDA(hero_info.getHero_id(),
+                                hero_info.getKills()+ tempKDA.get(hero_info.getHero_id()).getKills(),
+                                hero_info.getAssists()+tempKDA.get(hero_info.getHero_id()).getAssists(),
+                                hero_info.getDeaths()+tempKDA.get(hero_info.getHero_id()).getDeaths(),
+                                hero_info.getGames()+tempKDA.get(hero_info.getHero_id()).getGames())
+                );
+            } else {
+                tempKDA.put(hero_info.getHero_id(),hero_info);
+            }
+
+            i++;
+        }
+        kills_p=kills_p/n;
+        deaths_p=deaths_p/n;
+        assists_p=assists_p/n;
+        for(Map.Entry<Integer, HeroKDA> entry : tempKDA.entrySet()){
+            patchArray.add(entry.getValue());
+        }
+    }
+    private void getSeasonstats(){
+        int i=0;
+        int n=10;
+        HeroKDA hero_info;
+        ArrayList<GameStats> statsArray = new ArrayList<>();
+        HashMap<Integer,HeroKDA> tempKDA=new HashMap<>();
+        statsArray= dbTrans.getLastNGamesStats(Constants.Game_Types.RANKED,n,null,null,null,null);
+        while (i<=statsArray.size()){
+            kills_s=+statsArray.get(i).getKills();
+            deaths_s=+statsArray.get(i).getDeaths();
+            assists_s=+statsArray.get(i).getAssists();
+            kda_s = (float) (kills_s + assists_s)/(deaths_s+1);
+            hero_info=new HeroKDA(statsArray.get(i).getHeroId(),statsArray.get(i).getKills(),
+                    statsArray.get(i).getAssists(),statsArray.get(i).getDeaths(),1);
+            if(tempKDA.get(hero_info.getHero_id())!=null){
+                tempKDA.put(hero_info.getHero_id(),
+                        new HeroKDA(hero_info.getHero_id(),
+                                hero_info.getKills()+ tempKDA.get(hero_info.getHero_id()).getKills(),
+                                hero_info.getAssists()+tempKDA.get(hero_info.getHero_id()).getAssists(),
+                                hero_info.getDeaths()+tempKDA.get(hero_info.getHero_id()).getDeaths(),
+                                hero_info.getGames()+tempKDA.get(hero_info.getHero_id()).getGames())
+                );
+            } else {
+                tempKDA.put(hero_info.getHero_id(),hero_info);
+            }
+
+            i++;
+        }
+        kills_s=kills_s/n;
+        deaths_s=deaths_s/n;
+        assists_s=assists_s/n;
+        for(Map.Entry<Integer, HeroKDA> entry : tempKDA.entrySet()){
+            seasonArray.add(entry.getValue());
+        }
+    }
     /**
      * update page objects
      */
     private void updateKDAStats(){
-        if (kdaStats!=null) {
-            kdaoverall.setText(String.valueOf(roleStats.getWinRatio()));
-            kdakills.setText(String.valueOf(roleStats.getKda_per_game()));
-            kdadeaths.setText(String.valueOf(roleStats.getKill_participation_per_game()));
-            kdaassists.setText(String.valueOf(roleStats.getKills_per_game()));
-            kdaoverallgraph.setProgress((int) roleStats.getKills_per_game());
-            killsbar.setProgress(((int) roleStats.getDeaths_per_game()-6)*-1);
-            deathsbar.setProgress((int) roleStats.getAssists_per_game());
-            assistsbar.setProgress((int) roleStats.getCs_min_per_game());
+        int kills=0;
+        int assists=0;
+        int deaths=0;
+        float kda=0;
+        if (genericArray!=null) {
+            if (monthsBtn.isSelected()){
+                kills=kills_m;
+                assists=assists_m;
+                deaths=deaths_m;
+                kda=kda_m;
+            }
+            if (seasonBtn.isSelected()){
+                kills=kills_s;
+                assists=assists_s;
+                deaths=deaths_s;
+                kda=kda_s;
+            }
+            if (patchBtn.isSelected()){
+                kills=kills_p;
+                assists=assists_p;
+                deaths=deaths_p;
+                kda=kda_p;
+            }
         }
+        kdaoverall.setText(String.valueOf(kda));
+        kdakills.setText(String.valueOf(kills));
+        kdadeaths.setText(String.valueOf(deaths));
+        kdaassists.setText(String.valueOf(assists));
+        kdaoverallgraph.setProgress((int) kda);
+        killsbar.setProgress(kills);
+        deathsbar.setProgress(deaths);
+        assistsbar.setProgress(assists);
 
     }
     /**
@@ -283,9 +527,9 @@ public class KdaFragment extends Fragment {
     {
 
         private LayoutInflater inflater;
-        List<SummaryStats> data= Collections.emptyList();
+        List<HeroKDA> data= Collections.emptyList();
 
-        public kdaViewAdapter(Context context, List<SummaryStats> data){
+        public kdaViewAdapter(Context context, List<HeroKDA> data){
             inflater=LayoutInflater.from(context);
             this.data=data;
 
@@ -303,13 +547,13 @@ public class KdaFragment extends Fragment {
         @Override
         public void onBindViewHolder(kdaViewAdapter.MyViewHolder holder, int position) {
             if (data!=null) {
-                SummaryStats current=data.get(position);
+                HeroKDA current=data.get(position);
                 //set view content
-                holder.imageView.setImageDrawable(circleImage(HalcyonUtils.getHeroIconFromId(getContext(),current.getHeroId())));
-                holder.kda_hero.setText(HalcyonUtils.getHeroNameFromId(getContext(),current.getHeroId()));
-                holder.killsProgress.setProgress((int) Math.round(current.getWinRatio()));
-                holder.deathsProgress.setProgress((int) Math.round(current.getKda_per_game()));
-                holder.assistsProgress.setProgress((int) Math.round(current.getCs_min_per_game()));
+                holder.imageView.setImageDrawable(circleImage(HalcyonUtils.getHeroIconFromId(getContext(),current.getHero_id())));
+                holder.kda_hero.setText(String.valueOf(current.getKda()));
+                holder.killsProgress.setProgress((int) Math.round(current.getKills()/current.getGames()));
+                holder.deathsProgress.setProgress((int) Math.round(current.getDeaths()/current.getGames()));
+                holder.assistsProgress.setProgress((int) Math.round(current.getAssists()/current.getGames()));
             }
         }
 

@@ -138,5 +138,4 @@ public class SummaryStats {
         return wins/total_games;
     }
 
-
 }

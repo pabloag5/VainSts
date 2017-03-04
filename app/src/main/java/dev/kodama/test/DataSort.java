@@ -3,6 +3,8 @@ package dev.kodama.test;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import dev.kodama.test.utils.HeroKDA;
 import dev.kodama.test.utils.SummaryStats;
 
 /**
@@ -97,40 +99,27 @@ public class DataSort {
             }
         });
     }
-    public void sortKDAHighHeroes(List<SummaryStats> herostats){
-        Collections.sort(herostats, new Comparator<SummaryStats>() {
+    public void sortKDAHighHeroes(List<HeroKDA> herostats){
+        Collections.sort(herostats, new Comparator<HeroKDA>() {
             @Override
-            public int compare(SummaryStats lhs, SummaryStats rhs) {
-                if (lhs.getGold_min_per_game()<rhs.getGold_min_per_game()) {
+            public int compare(HeroKDA lhs, HeroKDA rhs) {
+                if (lhs.getKda()<rhs.getKda()) {
                     return 1;
                 }
-                else if (lhs.getGold_min_per_game()>rhs.getGold_min_per_game()){
+                else if (lhs.getKda()>rhs.getKda()){
                     return -1;
                 } else return 0;
             }
         });
     }
-    public void sortKDALowHeroes(List<SummaryStats> herostats){
-        Collections.sort(herostats, new Comparator<SummaryStats>() {
+    public void sortKDALowHeroes(List<HeroKDA> herostats){
+        Collections.sort(herostats, new Comparator<HeroKDA>() {
             @Override
-            public int compare(SummaryStats lhs, SummaryStats rhs) {
-                if (lhs.getGold_min_per_game()<rhs.getGold_min_per_game()) {
+            public int compare(HeroKDA lhs, HeroKDA rhs) {
+                if (lhs.getKda()>rhs.getKda()) {
                     return 1;
                 }
-                else if (lhs.getGold_min_per_game()>rhs.getGold_min_per_game()){
-                    return -1;
-                } else return 0;
-            }
-        });
-    }
-    public void sortKDARoleHeroes(List<SummaryStats> herostats){
-        Collections.sort(herostats, new Comparator<SummaryStats>() {
-            @Override
-            public int compare(SummaryStats lhs, SummaryStats rhs) {
-                if (lhs.getGold_min_per_game()<rhs.getGold_min_per_game()) {
-                    return 1;
-                }
-                else if (lhs.getGold_min_per_game()>rhs.getGold_min_per_game()){
+                else if (lhs.getKda()<rhs.getKda()){
                     return -1;
                 } else return 0;
             }
