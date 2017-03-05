@@ -21,9 +21,13 @@ import android.widget.PopupWindow;
 
 import java.util.List;
 
+import dev.kodama.test.db.DatabaseTransactions;
+import dev.kodama.test.db.Game;
+import dev.kodama.test.utils.Constants;
+import dev.kodama.test.utils.HalcyonUtils;
+
 //Main Activity
-public class MainActivity extends AppCompatActivity implements overallFragment.CommunicatorKdaFragment, HeroesFragment.CommHeroDetailFragment
-         {
+public class MainActivity extends AppCompatActivity implements HeroesFragment.CommHeroDetailFragment {
     private PopupWindow newgame;
     private LayoutInflater layoutInflater;
     private CoordinatorLayout layout;
@@ -31,15 +35,25 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
     ViewPager viewPager;
     int secondpage;
     Fragment fragment;
-
-    private int[] tabicons = {R.drawable.ic_progress_white_24dp,R.drawable.ic_heroes_white_24dp, R.drawable.ic_position_white_24dp,
-            R.drawable.ic_progress_black_24dp,R.drawable.ic_heroes_black_24dp, R.drawable.ic_position_black_24dp };
-
+    private DatabaseTransactions dbTrans;
+    private int[] tabicons = {R.drawable.ic_progress_white_24dp, R.drawable.ic_heroes_white_24dp, R.drawable.ic_position_white_24dp,
+            R.drawable.ic_progress_black_24dp, R.drawable.ic_heroes_black_24dp, R.drawable.ic_position_black_24dp};
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        /**
+         * populate database
+         */
+        dbTrans = DatabaseTransactions.getInstance(this.getApplicationContext());
+
+        createNewGames(30);
+
+        /**
+         * start view
+         */
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
         layout = (CoordinatorLayout) findViewById(R.id.main_layout);
 
         viewPager = (ViewPager) findViewById(R.id.viewcontent);
-        viewPager.setAdapter(new CustomAdapter(getSupportFragmentManager(),getApplicationContext() ));
+        viewPager.setAdapter(new CustomAdapter(getSupportFragmentManager(), getApplicationContext()));
 
         tabLayout = (TabLayout) findViewById(R.id.tabmenu);
         tabLayout.setupWithViewPager(viewPager);
@@ -71,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
             @Override
             public void onPageSelected(int position) {
 
-                switch(position) {
+                switch (position) {
                     case 0: {
                         tabLayout.getTabAt(0).setIcon(tabicons[3]);
                         tabLayout.getTabAt(1).setIcon(tabicons[1]);
@@ -130,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
 
             }
         });
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -157,6 +171,16 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
 
     }
 
+    private void createNewGames(int numberofgames) {
+        int i=0;
+        Game game;
+        while (i<numberofgames){
+            game=HalcyonUtils.createRandomGame(Constants.Game_Types.RANKED);
+            dbTrans.addNewGame(game);
+            i++;
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -169,15 +193,19 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()){
+
+
+        switch (item.getItemId()) {
             case R.id.action_newgame:
                 newActivity(NewgameActivity.class);
                 return true;
+            /*
             case R.id.action_refresh:
                 Snackbar.make(findViewById(R.id.main_layout),"DONE",Snackbar.LENGTH_SHORT).show();
                 return true;
             case R.id.action_settings:
                 return true;
+            */
             case android.R.id.home:
                 /*
                 switch(secondpage){
@@ -208,20 +236,22 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
                 return super.onOptionsItemSelected(item);
         }
 
-    }
-
-    public void newActivity(Class activity){
-        startActivity(new Intent(getApplicationContext(),activity));
 
     }
-    public void add_fragment(Fragment fragment, int container){
+
+    public void newActivity(Class activity) {
+        startActivity(new Intent(getApplicationContext(), activity));
+
+    }
+
+    public void add_fragment(Fragment fragment, int container) {
         getSupportFragmentManager().beginTransaction()
                 .add(container, fragment)
                 .commit();
     }
 
-     private class CustomAdapter extends FragmentStatePagerAdapter {
-        private String fragments [] = {getResources().getText(R.string.overall_title).toString(),
+    private class CustomAdapter extends FragmentStatePagerAdapter {
+        private String fragments[] = {getResources().getText(R.string.overall_title).toString(),
                 getResources().getText(R.string.heroes_title).toString(),
                 getResources().getText(R.string.roles_title).toString(),
                 getResources().getText(R.string.recent_games_title).toString()};
@@ -234,13 +264,13 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
+            switch (position) {
                 case 0:
                     return new overallRoot();
                 case 1:
                     return new HeroesRoot();
                 case 2:
-                    return new roleRoot();
+                    return new RoleRoot();
                 case 3:
                     return new recentGamesFragment();
                 default:
@@ -260,28 +290,31 @@ public class MainActivity extends AppCompatActivity implements overallFragment.C
             return null;
         }
     }
-    public void fragmentParent (Fragment fragment, int secondpage) {
+
+    public void fragmentParent(Fragment fragment, int secondpage) {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.fragment=fragment;
-        this.secondpage=secondpage;
+        this.fragment = fragment;
+        this.secondpage = secondpage;
     }
+
     @Override
-    public void HerofragmentParent(int position, int secondpage,  Fragment fragment, List<Gamestats> data) {
+    public void HerofragmentParent(int position, int secondpage, Fragment fragment, List<Gamestats> data) {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.fragment=fragment;
-        this.secondpage=secondpage;
+        this.fragment = fragment;
+        this.secondpage = secondpage;
 
         HeroDetailFragment frag = new HeroDetailFragment();
         Bundle args = new Bundle();
         args.putInt(HeroDetailFragment.ARG_POSITION, position);
         frag.setArguments(args);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.heroesroot,frag)
+                .replace(R.id.heroesroot, frag)
                 .addToBackStack(null)
                 .commit();
 
 
     }
+
 }
 

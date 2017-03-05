@@ -183,7 +183,7 @@ public class HalcyonUtils {
         };
     }
 
-    public Game createRandomGame(int game_type) {
+    public static Game createRandomGame(int game_type) {
         int hero = (int)(Math.random() * 28) + 1;
         int position = (int)(Math.random()*3) + 1;
         int kills = (int)(Math.random()* 20) + 1;

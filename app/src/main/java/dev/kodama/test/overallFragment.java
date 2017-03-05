@@ -32,7 +32,7 @@ public class overallFragment extends Fragment  {
     ImageView overallImage;
     TextView totalgames, wingames, lossgames, kdaoverall, winrateoverall;
     SummaryStats summaryStats;
-    DatabaseTransactions dbtrans;
+    //private DatabaseTransactions dbtrans = DatabaseTransactions.getInstance(getContext());
     LinearLayout kdadetail, winratedetail;
 
 
@@ -175,7 +175,7 @@ public class overallFragment extends Fragment  {
         /**
          * get overall stats
          */
-        summaryStats=dbtrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ALL,Constants.Game_Types.RANKED);
+        //summaryStats=dbtrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ALL,Constants.Game_Types.RANKED);
 
         int image = R.drawable.catherine;
         overallImage.setImageDrawable(circleImage(image));
@@ -209,7 +209,6 @@ public class overallFragment extends Fragment  {
                 startActivity(intent);
             }
         });
-
 
 
         return view;
