@@ -44,7 +44,7 @@ public class RoleFragment extends Fragment {
     private RecyclerView recyclerView;
     private bestHeroesViewAdapter adapter;
     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-    DatabaseTransactions dbTrans = DatabaseTransactions.getInstance(getContext());
+    DatabaseTransactions dbTrans;
     TextView rolebtntext, roleWR, roleKDA, roleKP, roleKills, roleDeaths, roleAssists, roleCS, roleGold, roleTime;
     ProgressBar roleKillsprogress, roleDeathsprogress, roleAssistsprogress, roleCSprogress, roleGoldprogress, roleTimeprogress;
 
@@ -52,6 +52,7 @@ public class RoleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.rolelayout, container, false);
 
+        dbTrans = DatabaseTransactions.getInstance(getContext());
         laneBtn=(Button) view.findViewById(R.id.lanebtn);
         jungleBtn=(Button) view.findViewById(R.id.junglebtn);
         roamBtn=(Button) view.findViewById(R.id.roambtn);
@@ -80,6 +81,7 @@ public class RoleFragment extends Fragment {
          * initiate page view
          */
         sortHeroesWR.setSelected(true);
+        sortHeroesWR.setPressed(true);
         laneBtn.setSelected(true);
         roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
         updateRoleStats();
@@ -250,9 +252,9 @@ public class RoleFragment extends Fragment {
      * @return
      */
     public List<SummaryStats> getData(int gamePosition){
-
-        return dbTrans.getHeroeStats(HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(gamePosition),Constants.Game_Types.RANKED);
-
+        ArrayList<SummaryStats> heroeslist = new ArrayList<>();
+        heroeslist=dbTrans.getHeroeStats(HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(gamePosition),Constants.Game_Types.RANKED);
+        return heroeslist;
     }
 
     /**
@@ -306,16 +308,16 @@ public class RoleFragment extends Fragment {
         }
 
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public bestHeroesViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
             View view=inflater.inflate(R.layout.besthero_row,parent,false);
-            MyViewHolder holder=new MyViewHolder(view);
+            bestHeroesViewAdapter.MyViewHolder holder=new bestHeroesViewAdapter.MyViewHolder(view);
 
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(bestHeroesViewAdapter.MyViewHolder holder, int position) {
             if (data!=null) {
                 SummaryStats current=data.get(position);
                 //set view content

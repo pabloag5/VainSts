@@ -165,7 +165,7 @@ public class DatabaseTransactions {
      * @return An {@link ArrayList} of {@link SummaryStats} with the summary of statistics for one hero overall and in each position
      * @see SummaryStats
      */
-    public ArrayList<SummaryStats> getSpecificHeroeStats(int heroId, int game_type) {
+    public ArrayList<SummaryStats> getSpecificHeroStats(int heroId, int game_type) {
 
         SQLiteDatabase db = database;
 
@@ -466,21 +466,34 @@ public class DatabaseTransactions {
         values.put(DatabaseContract.Statistics.KILL_PARTICIPATION_PER_GAME, kill_participation_per_game);
 
         // Insert the new row, returning the primary key value of the new row
-        long newRowId;
-        String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
-                DatabaseContract.Statistics.GAME_TYPE + " ?";
-        String[] whereArgs = new String[] {
-                total_type,
-                game_type+""
-        };
-        long result = db.update(
-                DatabaseContract.Statistics.TABLE_NAME,
-                values,
-                whereClause,
-                whereArgs
-        );
 
-        return result;
+
+        if(totalStats!=null){
+            String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
+                    DatabaseContract.Statistics.GAME_TYPE + " = ?";
+            String[] whereArgs = new String[] {
+                    total_type,
+                    game_type+""
+            };
+            long result = db.update(
+                    DatabaseContract.Statistics.TABLE_NAME,
+                    values,
+                    whereClause,
+                    whereArgs
+            );
+            return result;
+
+        } else {
+            values.put(DatabaseContract.Statistics.TYPE, total_type);
+            values.put(DatabaseContract.Statistics.GAME_TYPE, game_type);
+
+            long newRowId = db.insert(
+                    DatabaseContract.Statistics.TABLE_NAME,
+                    null,
+                    values
+            );
+            return newRowId;
+        }
 
     }
 
@@ -494,7 +507,7 @@ public class DatabaseTransactions {
         SQLiteDatabase db = database;
 
         int hero = game.getResults().getHero();
-        ArrayList<SummaryStats> heroeStatsList = getSpecificHeroeStats(hero, game_type);
+        ArrayList<SummaryStats> heroeStatsList = getSpecificHeroStats(hero, game_type);
         SummaryStats totalHeroStats = null;
         SummaryStats positionHeroStats = null;
 
@@ -567,20 +580,32 @@ public class DatabaseTransactions {
 
         // Insert the new row, returning the primary key value of the new row
 
-        String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
-                DatabaseContract.Statistics.SECOND_TYPE + " = ? AND " +
-                DatabaseContract.Statistics.GAME_TYPE + " = ?";
-        String[] whereArgs = new String[] {
-                Constants.Statistics_DB.Heroes.HERO_ALL,
-                hero+"",
-                game_type+""
-        };
-        long result = db.update(
-                DatabaseContract.Statistics.TABLE_NAME,
-                values,
-                whereClause,
-                whereArgs
-        );
+        if(totalHeroStats!=null) {
+            String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
+                    DatabaseContract.Statistics.SECOND_TYPE + " = ? AND " +
+                    DatabaseContract.Statistics.GAME_TYPE + " = ?";
+            String[] whereArgs = new String[] {
+                    Constants.Statistics_DB.Heroes.HERO_ALL,
+                    hero+"",
+                    game_type+""
+            };
+            long result = db.update(
+                    DatabaseContract.Statistics.TABLE_NAME,
+                    values,
+                    whereClause,
+                    whereArgs
+            );
+
+        } else {
+            values.put(DatabaseContract.Statistics.TYPE, Constants.Statistics_DB.Heroes.HERO_ALL);
+            values.put(DatabaseContract.Statistics.SECOND_TYPE, hero);
+            values.put(DatabaseContract.Statistics.GAME_TYPE,game_type);
+            long result = db.insert(
+                    DatabaseContract.Statistics.TABLE_NAME,
+                    null,
+                    values
+            );
+        }
 
         wins = 0;
 
@@ -630,20 +655,31 @@ public class DatabaseTransactions {
 
         // Insert the new row, returning the primary key value of the new row
 
-        whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
-                DatabaseContract.Statistics.SECOND_TYPE + " = ? AND " +
-                DatabaseContract.Statistics.GAME_TYPE + " = ?";
-        whereArgs = new String[] {
-                HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(game.getResults().getPosition()),
-                hero + "",
-                game_type+""
-        };
-        long secondResult = db.update(
-                DatabaseContract.Statistics.TABLE_NAME,
-                values,
-                whereClause,
-                whereArgs
-        );
+        if(positionHeroStats!=null){
+            String whereClause = DatabaseContract.Statistics.TYPE + " = ? AND " +
+                    DatabaseContract.Statistics.SECOND_TYPE + " = ? AND " +
+                    DatabaseContract.Statistics.GAME_TYPE + " = ?";
+            String[] whereArgs = new String[] {
+                    HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(game.getResults().getPosition()),
+                    hero + "",
+                    game_type+""
+            };
+            long secondResult = db.update(
+                    DatabaseContract.Statistics.TABLE_NAME,
+                    values,
+                    whereClause,
+                    whereArgs
+            );
+        } else {
+            values.put(DatabaseContract.Statistics.TYPE,HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(game.getResults().getPosition()));
+            values.put(DatabaseContract.Statistics.SECOND_TYPE, hero);
+            values.put(DatabaseContract.Statistics.GAME_TYPE,game_type);
+            long secondResult= db.insert(DatabaseContract.Statistics.TABLE_NAME,
+                    null,
+                    values
+            );
+        }
+
     }
 
 

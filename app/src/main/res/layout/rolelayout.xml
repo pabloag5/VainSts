@@ -131,13 +131,6 @@
             </LinearLayout>
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/bestheroeslist"
-            android:layout_marginTop="10dp">
-
-        </android.support.v7.widget.RecyclerView>
         <LinearLayout
             android:id="@+id/bestheroesbtn"
             android:layout_width="match_parent"
@@ -250,7 +243,13 @@
                     android:layout_margin="10dp"/>
             </RadioGroup>
         </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bestheroeslist"
+            android:layout_marginTop="10dp">
 
+        </android.support.v7.widget.RecyclerView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

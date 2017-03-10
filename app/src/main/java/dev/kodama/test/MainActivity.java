@@ -19,12 +19,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.PopupWindow;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dev.kodama.test.db.DatabaseTransactions;
 import dev.kodama.test.db.Game;
 import dev.kodama.test.utils.Constants;
+import dev.kodama.test.utils.GameStats;
 import dev.kodama.test.utils.HalcyonUtils;
+import dev.kodama.test.utils.SummaryStats;
 
 //Main Activity
 public class MainActivity extends AppCompatActivity implements HeroesFragment.CommHeroDetailFragment {
@@ -49,7 +52,11 @@ public class MainActivity extends AppCompatActivity implements HeroesFragment.Co
          */
         dbTrans = DatabaseTransactions.getInstance(this.getApplicationContext());
 
-        createNewGames(30);
+        /**
+         * create random games and test app database
+         */
+        //createNewGames(16);
+        //testDB();
 
         /**
          * start view
@@ -169,6 +176,17 @@ public class MainActivity extends AppCompatActivity implements HeroesFragment.Co
         final int width = dm.widthPixels;
         final int height = dm.heightPixels;
 
+    }
+
+    private void testDB() {
+
+        ArrayList<GameStats> lastGames = new ArrayList<>();
+        ArrayList<SummaryStats> heroesRoles=new ArrayList<>();
+        SummaryStats summaryStats, roleStats;
+        lastGames=dbTrans.getLastNGamesStats(2,16,null,null,null,null);
+        summaryStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ALL,Constants.Game_Types.RANKED);
+        roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
+        heroesRoles=dbTrans.getHeroeStats(HalcyonUtils.getHeroeStatistics_DBTypeFromPosition(Constants.Positions.JUNGLE),Constants.Game_Types.RANKED);
     }
 
     private void createNewGames(int numberofgames) {

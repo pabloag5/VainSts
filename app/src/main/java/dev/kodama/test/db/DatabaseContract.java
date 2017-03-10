@@ -171,9 +171,9 @@ public final class DatabaseContract {
         public static final String CREATE_TABLE = "CREATE TABLE " +
                 TABLE_NAME + " (" +
                 _ID + INTEGER_TYPE + PRIMARY_KEY + AUTOINCREMENT + COMMA_SEP +
-                TYPE + TEXT_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
-                SECOND_TYPE + INTEGER_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
-                GAME_TYPE + INTEGER_TYPE + NOT_NULL + UNIQUE + COMMA_SEP +
+                TYPE + TEXT_TYPE + NOT_NULL + COMMA_SEP + //deleted UNIQUE constraint
+                SECOND_TYPE + INTEGER_TYPE + NOT_NULL + COMMA_SEP + //deleted UNIQUE constraint
+                GAME_TYPE + INTEGER_TYPE + NOT_NULL + COMMA_SEP + //deleted UNIQUE constraint
                 WINS + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 TOTAL_GAMES + INTEGER_TYPE + NOT_NULL + COMMA_SEP +
                 KILLS_PER_GAME + REAL_TYPE + NOT_NULL + COMMA_SEP +

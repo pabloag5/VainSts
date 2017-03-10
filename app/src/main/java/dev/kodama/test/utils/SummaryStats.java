@@ -135,7 +135,7 @@ public class SummaryStats {
     }
 
     public float getWinRatio() {
-        return wins/total_games;
+        return (float) getWins()/getTotal_games();
     }
 
 }
