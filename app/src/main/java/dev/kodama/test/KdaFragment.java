@@ -105,7 +105,7 @@ public class KdaFragment extends Fragment {
         get3monthsstats();
         genericArray=monthsArray;
         highkdaHeroes.setSelected(true);
-        highkdaHeroes.setPressed(true);
+        highkdaHeroes.setActivated(true);
         monthsBtn.setSelected(true);
         updateKDAStats();
 

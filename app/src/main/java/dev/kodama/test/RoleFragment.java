@@ -81,10 +81,19 @@ public class RoleFragment extends Fragment {
          * initiate page view
          */
         sortHeroesWR.setSelected(true);
-        sortHeroesWR.setPressed(true);
+        sortHeroesWR.setActivated(true);
         laneBtn.setSelected(true);
         roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
+        mListHeroes=getData(Constants.Positions.LANE);
         updateRoleStats();
+
+        /**
+         * set recyclerview
+         */
+        adapter =new bestHeroesViewAdapter(getActivity(),mListHeroes);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
+
         /**fill role stats
          * first lane stats
          * second jungle stats
@@ -127,12 +136,7 @@ public class RoleFragment extends Fragment {
             }
         });
 
-        /**
-         * set recyclerview
-         */
-        adapter =new bestHeroesViewAdapter(getActivity(),mListHeroes);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(layoutManager);
+
 
         /**
          * set Best heroes button text

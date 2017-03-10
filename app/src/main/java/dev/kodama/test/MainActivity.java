@@ -215,8 +215,8 @@ public class MainActivity extends AppCompatActivity implements HeroesFragment.Co
 
         switch (item.getItemId()) {
             case R.id.action_newgame:
-                newActivity(NewgameActivity.class);
-                return true;
+                //newActivity(NewgameActivity.class);
+                //return true;
             /*
             case R.id.action_refresh:
                 Snackbar.make(findViewById(R.id.main_layout),"DONE",Snackbar.LENGTH_SHORT).show();
@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity implements HeroesFragment.Co
                 return true;
             */
             case android.R.id.home:
+                return true;
                 /*
                 switch(secondpage){
                     case 0:
