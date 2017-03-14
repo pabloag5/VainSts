@@ -1,5 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:paddingBottom="10dp"
+    android:baselineAligned="false"
+    android:background="@color/colorBackground"
+    android:animateLayoutChanges="true">
 
+    <!-- buttons up from scrollview-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/monthsbtn"
+            android:text="@string/monthsbtn"
+            android:textSize="16dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/seasonbtn"
+            android:text="@string/seasonbtn"
+            android:textSize="16dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/patchbtn"
+            android:text="@string/patchbtn"
+            android:textSize="16dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+
+    </LinearLayout>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -9,49 +56,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_vertical"
-        android:paddingBottom="10dp"
-        android:baselineAligned="false"
-        android:background="@color/colorBackground">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/monthsbtn"
-                android:text="@string/monthsbtn"
-                android:textSize="14dp"
-                android:textColor="@drawable/selectortextbutton"
-                android:background="@drawable/selectorleftbutton" />
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/seasonbtn"
-                android:text="@string/seasonbtn"
-                android:textSize="14dp"
-                android:textColor="@drawable/selectortextbutton"
-                android:background="@drawable/selectorleftbutton" />
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/patchbtn"
-                android:text="@string/patchbtn"
-                android:textSize="14dp"
-                android:textColor="@drawable/selectortextbutton"
-                android:background="@drawable/selectorleftbutton" />
+        android:animateLayoutChanges="true"
+        >
+        <!-- move buttons up before scrollview-->
 
-        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kda_lbl"
             android:layout_gravity="center"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:textColor="#70ffffff"
             android:layout_marginTop="20dp"/>
         <ProgressBar
@@ -62,8 +76,8 @@
             android:id="@+id/kdadetailprogress"
             style="?android:attr/progressBarStyleHorizontal"
             android:indeterminate="false"
-            android:progress="75"
-            android:max="100"
+            android:progress="10"
+            android:max="15"
             android:secondaryProgress="100"
             android:progressDrawable="@drawable/customcirclekdaprogressbar"/>
         <TextView
@@ -72,15 +86,15 @@
             android:id="@+id/kdagraph"
             android:text="@string/kdagraph_lbl"
             android:layout_gravity="center"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textColor="#ffffff"
-            android:layout_marginTop="-90dp"/>
+            android:layout_marginTop="-115dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kda_lbl"
             android:layout_gravity="center"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:textColor="#ffffff"
             android:layout_marginTop="5dp"/>
 
@@ -107,11 +121,11 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:max="100"
-                    android:progress="100"
+                    android:max="10"
+                    android:progress="10"
                     android:progressDrawable="@drawable/customprogressbarmagenta"
                     />
                 <TextView
@@ -119,7 +133,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/Kills_label"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"
                     android:layout_marginTop="5dp"/>
                 <TextView
@@ -128,7 +142,7 @@
                     android:id="@+id/killskda"
                     android:text="@string/kills_value"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:gravity="center"/>
 
 
@@ -149,11 +163,11 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:max="100"
-                    android:progress="100"
+                    android:max="10"
+                    android:progress="10"
                     android:progressDrawable="@drawable/customprogressbarblue"
                     />
                 <TextView
@@ -161,7 +175,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/Deaths_label"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"
                     android:layout_marginTop="5dp"/>
                 <TextView
@@ -170,7 +184,7 @@
                     android:id="@+id/deathskda"
                     android:text="@string/deaths_value"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -189,11 +203,11 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:max="100"
-                    android:progress="100"
+                    android:max="10"
+                    android:progress="10"
                     android:progressDrawable="@drawable/customprogressbargreen"
                     />
                 <TextView
@@ -201,7 +215,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/Assists_label"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"
                     android:layout_marginTop="5dp"/>
                 <TextView
@@ -210,7 +224,7 @@
                     android:id="@+id/assistskda"
                     android:text="@string/assists_value"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
@@ -241,7 +255,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/kdabtntext"
                     android:text="@string/kda_button"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
                 <ImageView
@@ -263,7 +277,8 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#2f2c57">
+            android:background="#2f2c57"
+            android:animateLayoutChanges="true">
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -282,7 +297,7 @@
                     android:text="@string/high_kda_lbl"
                     android:textColor="#ffffff"
                     android:textAllCaps="true"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"
                     android:checked="true"/>
                 <RadioButton
@@ -297,7 +312,7 @@
                     android:text="@string/low_kda_lbl"
                     android:textColor="#ffffff"
                     android:textAllCaps="true"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"/>
                 <RadioButton
                     android:layout_width="0dp"
@@ -311,7 +326,7 @@
                     android:text="@string/by_role_label"
                     android:textColor="#ffffff"
                     android:textAllCaps="true"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"/>
             </RadioGroup>
         </LinearLayout>
@@ -327,7 +342,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="30dp">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -348,10 +363,10 @@
                         />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/Kills_label"
                         android:textColor="#70ffffff"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
@@ -375,10 +390,10 @@
                         />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/Deaths_label"
                         android:textColor="#70ffffff"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
@@ -401,21 +416,24 @@
                         android:progressDrawable="@drawable/customprogressbargreen" />
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="@string/Assists_label"
                         android:textColor="#70ffffff"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:gravity="center"/>
                 </LinearLayout>
             </LinearLayout>
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/kdaheroeslist">
+                android:id="@+id/kdaheroeslist"
+                android:layout_marginTop="30dp"
+                >
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
      </LinearLayout>
 </ScrollView>
+    </LinearLayout>
 
 
 

@@ -90,10 +90,10 @@ public class DataSort {
         Collections.sort(herostats, new Comparator<SummaryStats>() {
             @Override
             public int compare(SummaryStats lhs, SummaryStats rhs) {
-                if (lhs.getGold_min_per_game()<rhs.getGold_min_per_game()) {
+                if (lhs.getGold_per_game()<rhs.getGold_per_game()) {
                     return 1;
                 }
-                else if (lhs.getGold_min_per_game()>rhs.getGold_min_per_game()){
+                else if (lhs.getGold_per_game()>rhs.getGold_per_game()){
                     return -1;
                 } else return 0;
             }

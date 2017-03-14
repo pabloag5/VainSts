@@ -80,8 +80,7 @@ public class RoleFragment extends Fragment {
         /**
          * initiate page view
          */
-        sortHeroesWR.setSelected(true);
-        sortHeroesWR.setActivated(true);
+        sortHeroesWR.setChecked(true);
         laneBtn.setSelected(true);
         roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE,Constants.Game_Types.RANKED);
         mListHeroes=getData(Constants.Positions.LANE);
@@ -93,6 +92,7 @@ public class RoleFragment extends Fragment {
         adapter =new bestHeroesViewAdapter(getActivity(),mListHeroes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+        sortByWinRatio();
 
         /**fill role stats
          * first lane stats
@@ -103,9 +103,11 @@ public class RoleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mListHeroes=getData(Constants.Positions.LANE);
-                adapter.notifyDataSetChanged();
+                adapter.setData(mListHeroes);
                 roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_LANE, Constants.Game_Types.RANKED);
                 updateRoleStats();
+                sortByWinRatio();
+                sortHeroesWR.setChecked(true);
                 laneBtn.setSelected(true);
                 jungleBtn.setSelected(false);
                 roamBtn.setSelected(false);
@@ -115,9 +117,11 @@ public class RoleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mListHeroes=getData(Constants.Positions.JUNGLE);
-                adapter.notifyDataSetChanged();
+                adapter.setData(mListHeroes);
                 roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_JUNGLE, Constants.Game_Types.RANKED);
                 updateRoleStats();
+                sortByWinRatio();
+                sortHeroesWR.setChecked(true);
                 laneBtn.setSelected(false);
                 jungleBtn.setSelected(true);
                 roamBtn.setSelected(false);
@@ -127,9 +131,11 @@ public class RoleFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mListHeroes=getData(Constants.Positions.ROAM);
-                adapter.notifyDataSetChanged();
+                adapter.setData(mListHeroes);
                 roleStats=dbTrans.getTotalStats(Constants.Statistics_DB.Totals.TOTAL_ROAM, Constants.Game_Types.RANKED);
                 updateRoleStats();
+                sortByWinRatio();
+                sortHeroesWR.setChecked(true);
                 laneBtn.setSelected(false);
                 jungleBtn.setSelected(false);
                 roamBtn.setSelected(true);
@@ -278,18 +284,18 @@ public class RoleFragment extends Fragment {
      */
     private void updateRoleStats(){
         if (roleStats!=null) {
-            roleWR.setText(String.valueOf(roleStats.getWinRatio()));
-            roleKDA.setText(String.valueOf(roleStats.getKda_per_game()));
-            roleKP.setText(String.valueOf(roleStats.getKill_participation_per_game()));
-            roleKills.setText(String.valueOf(roleStats.getKills_per_game()));
+            roleWR.setText(String.valueOf(Math.round(roleStats.getWinRatio()*100))+"%");
+            roleKDA.setText(String.format("%.1f",roleStats.getKda_per_game()));
+            roleKP.setText(String.valueOf(Math.round(roleStats.getKill_participation_per_game()*100))+"%");
+            roleKills.setText(String.valueOf(Math.round(roleStats.getKills_per_game())));
             roleKillsprogress.setProgress((int) roleStats.getKills_per_game());
-            roleDeaths.setText(String.valueOf(roleStats.getDeaths_per_game()));
+            roleDeaths.setText(String.valueOf(Math.round(roleStats.getDeaths_per_game())));
             roleDeathsprogress.setProgress(((int) roleStats.getDeaths_per_game()-6)*-1);
-            roleAssists.setText(String.valueOf(roleStats.getAssists_per_game()));
+            roleAssists.setText(String.valueOf(Math.round(roleStats.getAssists_per_game())));
             roleAssistsprogress.setProgress((int) roleStats.getAssists_per_game());
-            roleCS.setText(String.valueOf(roleStats.getCs_min_per_game()));
+            roleCS.setText(String.valueOf(Math.round(roleStats.getCs_min_per_game())));
             roleCSprogress.setProgress((int) roleStats.getCs_min_per_game());
-            roleGold.setText(String.valueOf(roleStats.getGold_per_game()));
+            roleGold.setText(String.valueOf(Math.round(roleStats.getGold_per_game())));
             roleGoldprogress.setProgress((int) roleStats.getGold_per_game());
             //roleTime.setText(String.valueOf());
             //roleTimeprogress.setProgress((int));
@@ -331,16 +337,17 @@ public class RoleFragment extends Fragment {
                 holder.kdaProgress.setProgress((int) Math.round(current.getKda_per_game()));
                 holder.csProgress.setProgress((int) Math.round(current.getCs_min_per_game()));
                 holder.goldProgress.setProgress((int) Math.round(current.getGold_per_game()));
-                holder.winRatioTxt.setText(String.valueOf(current.getWinRatio()));
-                holder.kdaTxt.setText(String.valueOf(current.getKda_per_game()));
-                holder.csTxt.setText(String.valueOf(current.getCs_min_per_game()));
-                holder.goldTxt.setText(String.valueOf(current.getGold_per_game()));
+                holder.winRatioTxt.setText(String.valueOf(Math.round(current.getWinRatio()*100))+"%");
+                holder.kdaTxt.setText(String.format("%.1f",current.getKda_per_game()));
+                holder.csTxt.setText(String.format("%.1f",current.getCs_min_per_game()));
+                holder.goldTxt.setText(String.valueOf(Math.round(current.getGold_per_game())));
             }
         }
 
         @Override
         public int getItemCount() {
-            return data.size();
+            //return data.size();
+            return Math.min(3,data.size());
         }
 
         //create subclass ViewHolder
@@ -369,6 +376,11 @@ public class RoleFragment extends Fragment {
                 csTxt=(TextView) itemView.findViewById(R.id.CS_hero);
                 goldTxt=(TextView) itemView.findViewById(R.id.gold_hero);
             }
+        }
+        //overwrites data list and then call notifyDataSetChanged()
+        public void setData(List<SummaryStats> data) {
+            this.data=data;
+            notifyDataSetChanged();
         }
     }
 }

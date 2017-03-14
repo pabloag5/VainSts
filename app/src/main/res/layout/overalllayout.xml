@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:baselineAligned="false"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,8 +16,8 @@
         android:orientation="vertical"
         android:background="@drawable/fold_overall">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:id="@+id/overallimage"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/IGN"
             android:id="@+id/ign_lbl"
-            android:textSize="24dp"
+            android:textSize="26dp"
             android:gravity="center_horizontal"
             android:textColor="#26e899"
             />
@@ -36,7 +37,7 @@
             android:layout_height="wrap_content"
             android:text="@string/skill_tier"
             android:id="@+id/skill_tier"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:gravity="center_horizontal"
             android:layout_margin="3dp"
             android:textColor="#ffffff" />
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:text="@string/skill_tier_title"
             android:id="@+id/skill_tier_lbl"
-            android:textSize="10dp"
+            android:textSize="12dp"
             android:gravity="center_horizontal"
             android:textColor="#70ffffff"/>
         <LinearLayout
@@ -68,14 +69,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/games_total"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/games_total_lbl"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff" />
             </LinearLayout>
             <LinearLayout
@@ -91,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/wins_total"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:textStyle="bold"/>
                 <TextView
@@ -99,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/wins_total_lbl"
                     android:id="@+id/losses_total_lbl"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff" />
             </LinearLayout>
             <LinearLayout
@@ -114,33 +115,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/losses_total"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/losses_total_lbl"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-
-    <!--
-    <ProgressBar
-        android:layout_width="270dp"
-        android:layout_height="40dp"
-        android:id="@+id/rankprogress"
-        android:gravity="center_horizontal"
-        style="@style/CustomProgressBar"
-        android:max="15"
-        android:progress="5"
-        android:progressDrawable="@drawable/customprogressbarmagenta"
-        android:minHeight="15dp"
-        android:layout_marginTop="15dp" />
-    -->
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -174,14 +159,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/kda_overall"
                     android:textColor="#ffffff"
-                    android:textSize="24dp"
+                    android:textSize="30dp"
                     android:gravity="center_horizontal"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kda_lbl"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"/>
             </LinearLayout>
 
@@ -226,14 +211,14 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/winrate_overall"
                     android:textColor="#ffffff"
-                    android:textSize="24dp"
+                    android:textSize="30dp"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/win_ratio_lbl"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"/>
             </LinearLayout>
 

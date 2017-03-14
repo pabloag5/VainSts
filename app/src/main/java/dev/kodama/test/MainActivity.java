@@ -30,7 +30,7 @@ import dev.kodama.test.utils.HalcyonUtils;
 import dev.kodama.test.utils.SummaryStats;
 
 //Main Activity
-public class MainActivity extends AppCompatActivity implements HeroesFragment.CommHeroDetailFragment {
+public class MainActivity extends AppCompatActivity {
     private PopupWindow newgame;
     private LayoutInflater layoutInflater;
     private CoordinatorLayout layout;
@@ -316,6 +316,7 @@ public class MainActivity extends AppCompatActivity implements HeroesFragment.Co
         this.secondpage = secondpage;
     }
 
+    /*
     @Override
     public void HerofragmentParent(int position, int secondpage, Fragment fragment, List<Gamestats> data) {
 
@@ -334,6 +335,7 @@ public class MainActivity extends AppCompatActivity implements HeroesFragment.Co
 
 
     }
+    */
 
 }
 

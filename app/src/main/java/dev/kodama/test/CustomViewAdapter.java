@@ -2,9 +2,11 @@ package dev.kodama.test;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,13 +23,19 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     List<Gamestats> data= Collections.emptyList();
     //private int expandedPosition = -1;
     //private boolean repeatPosition = false;
-    private HeroesFragment.CommHeroDetailFragment comm;
+    //private HeroesFragment.CommHeroDetailFragment comm;
 
 
     public CustomViewAdapter (Context context, List<Gamestats> data, HeroesFragment fragment){
         inflater=LayoutInflater.from(context);
         this.data=data;
-        comm = (HeroesFragment.CommHeroDetailFragment) context;
+        DisplayMetrics dm = new DisplayMetrics();
+
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(dm);
+        final int width = dm.widthPixels;
+        final int height = dm.heightPixels;
+        //comm = (HeroesFragment.CommHeroDetailFragment) context;
 
     }
 
@@ -48,8 +56,7 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
         Gamestats current=data.get(position);
         //holder.name.setText(current.getHeroName());
         holder.icon.setImageResource(current.getHeroIcon());
-        //holder.kdaratio.setText(String.format("KDA ratio: %.1f",current.getKdaRatio()));
-        //holder.winratio.setText(String.format("Win ratio: %.1f",current.getWinRatio()));
+
         /*
         //expand code
         if (position == expandedPosition && repeatPosition==false){
@@ -70,9 +77,6 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
     @Override
     public void onClick(View v) {
         MyViewHolder holder = (MyViewHolder) v.getTag();
-        comm.HerofragmentParent(holder.getAdapterPosition(), 1, new HeroesFragment(),data);
-
-
 
         /*code to find position and send it to the layoutmanager to scroll and block layout
         MyViewHolder holder = (MyViewHolder) v.getTag();
@@ -93,10 +97,8 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
 
     //create subclass ViewHolder
     class MyViewHolder extends RecyclerView.ViewHolder{
-        //TextView name;
+
         ImageView icon;
-        //TextView kdaratio;
-        //TextView winratio;
 
         /*defining layout to expand
         LinearLayout llExpandedDetail;
@@ -105,11 +107,10 @@ public class CustomViewAdapter extends RecyclerView.Adapter<CustomViewAdapter.My
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            //name= (TextView) itemView.findViewById(R.id.Hero_name);
-            icon= (ImageView) itemView.findViewById(R.id.hero_image);
-            //kdaratio= (TextView) itemView.findViewById(R.id.KDA_Ratio);
-            //winratio= (TextView) itemView.findViewById(R.id.Win_ratio);
 
+
+            icon= (ImageView) itemView.findViewById(R.id.hero_image);
+            icon.setAdjustViewBounds(true);
             /*code to expand layout
             llExpandedDetail= (LinearLayout) itemView.findViewById(R.id.llExpandDetail);
              */

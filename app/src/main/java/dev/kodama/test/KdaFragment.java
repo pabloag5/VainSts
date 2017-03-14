@@ -1,5 +1,6 @@
 package dev.kodama.test;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -50,24 +51,24 @@ public class KdaFragment extends Fragment {
     private ArrayList<HeroKDA> rolesmonths=new ArrayList<>();
     private ArrayList<HeroKDA> rolesseason=new ArrayList<>();
     private ArrayList<HeroKDA> rolespatch=new ArrayList<>();
-
+    private LayoutTransition layoutTransition;
     private RecyclerView recyclerView;
     private kdaViewAdapter adapter;
     LinearLayoutManager kdalayoutManager = new LinearLayoutManager(getActivity());
     private DatabaseTransactions dbTrans;
     private TextView kdakills, kdadeaths, kdaassists, kdaoverall, kdasortbtn;
     private ProgressBar kdaoverallgraph, killsbar, deathsbar, assistsbar;
-    private int kills_m=0;
-    private int deaths_m=0;
-    private int assists_m=0;
+    private float kills_m=0;
+    private float deaths_m=0;
+    private float assists_m=0;
     private float kda_m=0;
-    private int kills_s=0;
-    private int deaths_s=0;
-    private int assists_s=0;
+    private float kills_s=0;
+    private float deaths_s=0;
+    private float assists_s=0;
     private float kda_s=0;
-    private int kills_p=0;
-    private int deaths_p=0;
-    private int assists_p=0;
+    private float kills_p=0;
+    private float deaths_p=0;
+    private float assists_p=0;
     private float kda_p=0;
 
 
@@ -103,11 +104,19 @@ public class KdaFragment extends Fragment {
          * initiate page view
          */
         get3monthsstats();
-        genericArray=monthsArray;
-        highkdaHeroes.setSelected(true);
-        highkdaHeroes.setActivated(true);
+        getSeasonstats();
+        getLastpatchstats();
         monthsBtn.setSelected(true);
+        genericArray=monthsArray;
+        highkdaHeroes.setChecked(true);
+        /**
+         * set recyclerview
+         */
+        adapter =new kdaViewAdapter(getActivity(),genericArray);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(kdalayoutManager);
         updateKDAStats();
+        sortByHighKDA();
 
         /**fill kda stats
          * first 3 months stats
@@ -118,42 +127,41 @@ public class KdaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 genericArray=monthsArray;
-                adapter.notifyDataSetChanged();
+                adapter.setData(genericArray);
                 monthsBtn.setSelected(true);
                 seasonBtn.setSelected(false);
                 patchBtn.setSelected(false);
                 updateKDAStats();
+                sortByHighKDA();
+                highkdaHeroes.setChecked(true);
             }
         });
         seasonBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 genericArray=seasonArray;
-                adapter.notifyDataSetChanged();
+                adapter.setData(genericArray);
                 monthsBtn.setSelected(false);
                 seasonBtn.setSelected(true);
                 patchBtn.setSelected(false);
                 updateKDAStats();
+                sortByHighKDA();
+                highkdaHeroes.setChecked(true);
             }
         });
         patchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 genericArray=patchArray;
-                adapter.notifyDataSetChanged();
+                adapter.setData(genericArray);
                 monthsBtn.setSelected(false);
                 seasonBtn.setSelected(false);
                 patchBtn.setSelected(true);
                 updateKDAStats();
+                sortByHighKDA();
+                highkdaHeroes.setChecked(true);
             }
         });
-
-        /**
-         * set recyclerview
-         */
-        adapter =new kdaViewAdapter(getActivity(),genericArray);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(kdalayoutManager);
 
         /**
          * set Best heroes button text
@@ -216,7 +224,6 @@ public class KdaFragment extends Fragment {
         if (linearLayout.getVisibility()==View.GONE){
             linearLayout.setVisibility(View.VISIBLE);
         } else linearLayout.setVisibility(View.GONE);
-
     }
 
     /**
@@ -261,7 +268,7 @@ public class KdaFragment extends Fragment {
             genericArray=patchArray;
         }
         mdataSort.sortKDAHighHeroes(genericArray);
-        adapter.notifyDataSetChanged();
+        adapter.setData(genericArray);
     }
 
     public void sortByLowKDA() {
@@ -275,7 +282,7 @@ public class KdaFragment extends Fragment {
             genericArray=patchArray;
         }
         mdataSort.sortKDALowHeroes(genericArray);
-        adapter.notifyDataSetChanged();
+        adapter.setData(genericArray);
     }
 
     public void sortByRoleKDA() {
@@ -288,7 +295,7 @@ public class KdaFragment extends Fragment {
         if (patchBtn.isSelected()){
             genericArray=rolespatch;
         }
-        adapter.notifyDataSetChanged();
+        adapter.setData(genericArray);
     }
 
 
@@ -318,9 +325,9 @@ public class KdaFragment extends Fragment {
 
         statsArray= dbTrans.getLastNGamesStats(Constants.Game_Types.RANKED,n,null,null,null,null);
         while (i<statsArray.size()){
-            kills_m=+statsArray.get(i).getKills();
-            deaths_m=+statsArray.get(i).getDeaths();
-            assists_m=+statsArray.get(i).getAssists();
+            kills_m+=statsArray.get(i).getKills();
+            deaths_m+=statsArray.get(i).getDeaths();
+            assists_m+=statsArray.get(i).getAssists();
             kda_m = (float) (kills_m + assists_m)/(deaths_m+1);
             hero_info=new HeroKDA(statsArray.get(i).getHeroId(),statsArray.get(i).getKills(),
                     statsArray.get(i).getAssists(),statsArray.get(i).getDeaths(),1);
@@ -392,8 +399,14 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolesmonths.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolesmonths.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+
+        }
+
         for(Map.Entry<Integer, HeroKDA> entry : jungleKDA.entrySet()){
             tempArray.add(entry.getValue());
         }
@@ -404,8 +417,13 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolesmonths.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolesmonths.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
         for(Map.Entry<Integer, HeroKDA> entry : roamKDA.entrySet()){
             tempArray.add(entry.getValue());
         }
@@ -416,8 +434,13 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolesmonths.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolesmonths.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
     }
     private void getLastpatchstats(){
         int i=0;
@@ -433,9 +456,9 @@ public class KdaFragment extends Fragment {
 
         statsArray= dbTrans.getLastNGamesStats(Constants.Game_Types.RANKED,n,null,null,null,null);
         while (i<statsArray.size()){
-            kills_p=+statsArray.get(i).getKills();
-            deaths_p=+statsArray.get(i).getDeaths();
-            assists_p=+statsArray.get(i).getAssists();
+            kills_p+=statsArray.get(i).getKills();
+            deaths_p+=statsArray.get(i).getDeaths();
+            assists_p+=statsArray.get(i).getAssists();
             kda_p = (float) (kills_p + assists_p)/(deaths_p+1);
             hero_info=new HeroKDA(statsArray.get(i).getHeroId(),statsArray.get(i).getKills(),
                     statsArray.get(i).getAssists(),statsArray.get(i).getDeaths(),1);
@@ -507,8 +530,13 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolespatch.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null) {
+            if (tempArray.isEmpty()!=true){
+                rolespatch.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
         for(Map.Entry<Integer, HeroKDA> entry : jungleKDA.entrySet()){
             tempArray.add(entry.getValue());
         }
@@ -519,8 +547,12 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolespatch.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolespatch.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
         for(Map.Entry<Integer, HeroKDA> entry : roamKDA.entrySet()){
             tempArray.add(entry.getValue());
         }
@@ -531,8 +563,13 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolespatch.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolespatch.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
     }
     private void getSeasonstats(){
         int i=0;
@@ -548,9 +585,9 @@ public class KdaFragment extends Fragment {
 
         statsArray= dbTrans.getLastNGamesStats(Constants.Game_Types.RANKED,n,null,null,null,null);
         while (i<statsArray.size()){
-            kills_s=+statsArray.get(i).getKills();
-            deaths_s=+statsArray.get(i).getDeaths();
-            assists_s=+statsArray.get(i).getAssists();
+            kills_s+=statsArray.get(i).getKills();
+            deaths_s+=statsArray.get(i).getDeaths();
+            assists_s+=statsArray.get(i).getAssists();
             kda_s = (float) (kills_s + assists_s)/(deaths_s+1);
             hero_info=new HeroKDA(statsArray.get(i).getHeroId(),statsArray.get(i).getKills(),
                     statsArray.get(i).getAssists(),statsArray.get(i).getDeaths(),1);
@@ -622,8 +659,13 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolesseason.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolesseason.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
         for(Map.Entry<Integer, HeroKDA> entry : jungleKDA.entrySet()){
             tempArray.add(entry.getValue());
         }
@@ -634,8 +676,13 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolesseason.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolesseason.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
         for(Map.Entry<Integer, HeroKDA> entry : roamKDA.entrySet()){
             tempArray.add(entry.getValue());
         }
@@ -646,16 +693,21 @@ public class KdaFragment extends Fragment {
                 tempArray.remove(temp+1);
             }
         }
-        rolesseason.add(tempArray.get(0));
-        tempArray.remove(0);
+        if (tempArray!=null){
+            if (tempArray.isEmpty()!=true){
+                rolesseason.add(tempArray.get(0));
+                tempArray.remove(0);
+            }
+        }
+
     }
     /**
      * update page objects
      */
     private void updateKDAStats(){
-        int kills=0;
-        int assists=0;
-        int deaths=0;
+        float kills=0;
+        float assists=0;
+        float deaths=0;
         float kda=0;
         if (genericArray!=null) {
             if (monthsBtn.isSelected()){
@@ -677,14 +729,14 @@ public class KdaFragment extends Fragment {
                 kda=kda_p;
             }
         }
-        kdaoverall.setText(String.valueOf(kda));
-        kdakills.setText(String.valueOf(kills));
-        kdadeaths.setText(String.valueOf(deaths));
-        kdaassists.setText(String.valueOf(assists));
+        kdaoverall.setText(String.format("%.1f",kda));
+        kdakills.setText(String.valueOf(Math.round(kills)));
+        kdadeaths.setText(String.valueOf(Math.round(deaths)));
+        kdaassists.setText(String.valueOf(Math.round(assists)));
         kdaoverallgraph.setProgress((int) kda);
-        killsbar.setProgress(kills);
-        deathsbar.setProgress(deaths);
-        assistsbar.setProgress(assists);
+        killsbar.setProgress((int)kills);
+        deathsbar.setProgress((int)deaths);
+        assistsbar.setProgress((int)assists);
 
     }
     /**
@@ -717,7 +769,7 @@ public class KdaFragment extends Fragment {
                 HeroKDA current=data.get(position);
                 //set view content
                 holder.imageView.setImageDrawable(circleImage(HalcyonUtils.getHeroIconFromId(getContext(),current.getHero_id())));
-                holder.kda_hero.setText(String.valueOf(current.getKda()));
+                holder.kda_hero.setText(String.format("%.1f",current.getKda()));
                 holder.killsProgress.setProgress((int) Math.round(current.getKills()/current.getGames()));
                 holder.deathsProgress.setProgress((int) Math.round(current.getDeaths()/current.getGames()));
                 holder.assistsProgress.setProgress((int) Math.round(current.getAssists()/current.getGames()));
@@ -726,7 +778,8 @@ public class KdaFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return data.size();
+            //return data.size();
+            return Math.min(3, data.size());
         }
 
         //create subclass ViewHolder
@@ -745,6 +798,12 @@ public class KdaFragment extends Fragment {
                 deathsProgress=(ProgressBar) itemView.findViewById(R.id.deathsherokdabar);
                 assistsProgress=(ProgressBar) itemView.findViewById(R.id.assistsherokdabar);
             }
+        }
+
+        //overwrites data list and then call notifyDataSetChanged()
+        public void setData(List<HeroKDA> data) {
+            this.data=data;
+            notifyDataSetChanged();
         }
     }
 

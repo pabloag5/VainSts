@@ -1,52 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:paddingBottom="10dp"
+    android:baselineAligned="false"
+    android:background="@color/colorBackground"
+    android:animateLayoutChanges="true">
+
+    <!-- buttons up from scrollview-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/lanebtn"
+            android:text="@string/lanebtn"
+            android:textSize="16dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/junglebtn"
+            android:text="@string/junglebtn"
+            android:textSize="16dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/roambtn"
+            android:text="@string/roambtn"
+            android:textSize="16dp"
+            android:textColor="@drawable/selectortextbutton"
+            android:background="@drawable/selectorleftbutton" />
+
+    </LinearLayout>
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:paddingBottom="10dp"
-        android:baselineAligned="false"
-        android:background="@color/colorBackground">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            >
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/lanebtn"
-                android:text="@string/lanebtn"
-                android:textSize="14dp"
-                android:textColor="@drawable/selectortextbutton"
-                android:background="@drawable/selectorleftbutton" />
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/junglebtn"
-                android:text="@string/junglebtn"
-                android:textSize="14dp"
-                android:textColor="@drawable/selectortextbutton"
-                android:background="@drawable/selectorleftbutton" />
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/roambtn"
-                android:text="@string/roambtn"
-                android:textSize="14dp"
-                android:textColor="@drawable/selectortextbutton"
-                android:background="@drawable/selectorleftbutton" />
+        android:animateLayoutChanges="true"
+        >
 
-        </LinearLayout>
+        <!--buttons-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,14 +81,14 @@
                     android:id="@+id/roleWR"
                     android:text="@string/winratio_value"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/win_ratio_lbl"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"/>
 
             </LinearLayout>
@@ -94,14 +106,14 @@
                     android:id="@+id/roleKDA"
                     android:text="@string/kda_value"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/kda_lbl"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"/>
 
             </LinearLayout>
@@ -119,14 +131,14 @@
                     android:id="@+id/roleKP"
                     android:text="@string/killpart_value"
                     android:textColor="#ffffff"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/killpart_lbl"
                     android:textColor="#70ffffff"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:gravity="center"/>
             </LinearLayout>
         </LinearLayout>
@@ -158,7 +170,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/rolebtntext"
                     android:text="@string/best_hero_button"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
                 <ImageView
@@ -199,7 +211,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/win_ratio_lbl"
                     android:textColor="#ffffff"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"
                     android:checked="true"/>
                 <RadioButton
@@ -213,7 +225,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/kda_lbl"
                     android:textColor="#ffffff"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"/>
                 <RadioButton
                     android:layout_width="0dp"
@@ -226,7 +238,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/CS_label"
                     android:textColor="#ffffff"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"/>
                 <RadioButton
                     android:layout_width="0dp"
@@ -239,7 +251,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/gold_label"
                     android:textColor="#ffffff"
-                    android:textSize="10dp"
+                    android:textSize="12dp"
                     android:layout_margin="10dp"/>
             </RadioGroup>
         </LinearLayout>
@@ -255,7 +267,7 @@
             android:layout_height="wrap_content"
             android:text="@string/average_title"
             android:layout_gravity="center"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:textColor="#70ffffff"
             android:layout_marginTop="50dp"/>
 
@@ -293,7 +305,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/kills_role"
                     android:text="@string/kills_value"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginTop="20dp"/>
@@ -301,7 +313,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/Kills_label"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
             </LinearLayout>
@@ -326,7 +338,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/deaths_role"
                     android:text="@string/deaths_value"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginTop="20dp"/>
@@ -334,7 +346,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/Deaths_label"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
             </LinearLayout>
@@ -359,7 +371,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/assists_role"
                     android:text="@string/assists_value"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginTop="20dp"/>
@@ -367,7 +379,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/Assists_label"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
             </LinearLayout>
@@ -398,7 +410,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/cs_role"
                     android:text="@string/cs_value"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginTop="20dp"/>
@@ -406,7 +418,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/CS_label"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
             </LinearLayout>
@@ -431,7 +443,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/gold_role"
                     android:text="@string/gold_value"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginTop="20dp"/>
@@ -439,7 +451,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/gold_label"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
             </LinearLayout>
@@ -464,7 +476,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/time_role"
                     android:text="@string/time_value"
-                    android:textSize="18dp"
+                    android:textSize="22dp"
                     android:textColor="#ffffff"
                     android:gravity="center"
                     android:layout_marginTop="20dp"/>
@@ -472,7 +484,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/game_time_label"
-                    android:textSize="12dp"
+                    android:textSize="14dp"
                     android:textColor="#70ffffff"
                     android:gravity="center"/>
             </LinearLayout>
@@ -480,5 +492,5 @@
 
     </LinearLayout>
 </ScrollView>
-
+</LinearLayout>
 

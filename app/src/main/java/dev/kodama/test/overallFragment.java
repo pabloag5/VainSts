@@ -190,8 +190,8 @@ public class overallFragment extends Fragment  {
             totalgames.setText(String.valueOf(summaryStats.getTotal_games()));
             wingames.setText(String.valueOf(summaryStats.getWins()));
             lossgames.setText(String.valueOf(summaryStats.getLosses()));
-            kdaoverall.setText(String.valueOf(summaryStats.getKda_per_game()));
-            winrateoverall.setText(String.valueOf(summaryStats.getWinRatio()));
+            kdaoverall.setText(String.format("%.1f",summaryStats.getKda_per_game()));
+            winrateoverall.setText(String.valueOf(Math.round(summaryStats.getWinRatio()*100))+"%");
 
         }
 

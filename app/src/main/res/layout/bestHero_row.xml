@@ -14,7 +14,7 @@
 
         <ImageView
             android:layout_width="0dp"
-            android:layout_height="70dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             android:id="@+id/hero_icon"
             android:padding="10dp"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/hero_name"
-                android:textSize="14dp"
+                android:textSize="15dp"
                 android:textAllCaps="true"
                 android:gravity="left"
                 android:text="@string/catherine"
@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp">
                 <LinearLayout
                     android:layout_width="0dp"
@@ -54,11 +55,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.25"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:paddingRight="30dp"
                         android:id="@+id/wrprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
-                        android:max="100"
-                        android:progress="70"
+                        android:max="1"
+                        android:progress="1"
                         android:progressDrawable="@drawable/customprogressbarmagenta"
                          />
                     <TextView
@@ -67,7 +71,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:id="@+id/winratio_hero"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
                         android:textColor="#ffffff"
                         android:text="@string/winratio_value"
                         />
@@ -76,7 +80,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:textColor="#70ffffff"
                         android:text="@string/win_lbl"
                         android:textAllCaps="true"/>
@@ -90,6 +94,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.25"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:paddingRight="30dp"
                         android:id="@+id/kdaprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -103,7 +110,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:id="@+id/kda_hero"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
                         android:textColor="#ffffff"
                         android:text="@string/kda_value"
                         />
@@ -112,7 +119,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:textColor="#70ffffff"
                         android:text="@string/kda_lbl"
                         android:textAllCaps="true"/>
@@ -126,6 +133,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="0.25"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:paddingRight="30dp"
                         android:id="@+id/csprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -139,7 +149,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:id="@+id/CS_hero"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
                         android:textColor="#ffffff"
                         android:text="@string/cs_value"
                         />
@@ -148,7 +158,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:textColor="#70ffffff"
                         android:text="@string/CS_label"
                         android:textAllCaps="true"/>
@@ -159,9 +169,12 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
                     <ProgressBar
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_weight="0.25"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="1dp"
+                        android:paddingRight="30dp"
                         android:id="@+id/goldprogress"
                         android:gravity="center_horizontal"
                         style="?android:attr/progressBarStyleHorizontal"
@@ -175,7 +188,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:id="@+id/gold_hero"
-                        android:textSize="14dp"
+                        android:textSize="15dp"
                         android:textColor="#ffffff"
                         android:text="@string/gold_value"
                         />
@@ -184,7 +197,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:textSize="12dp"
+                        android:textSize="14dp"
                         android:textColor="#70ffffff"
                         android:text="@string/gold_label"
                         android:textAllCaps="true"/>
@@ -192,10 +205,12 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    <!--
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#45ffffff"/>
+-->
 <!--
     <LinearLayout
         android:id="@+id/llExpandDetail"
