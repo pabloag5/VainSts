@@ -5,12 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="dev.kodama.test.DetailActivity">
+    <!--
     <android.support.v7.widget.Toolbar
         android:id="@+id/detailtoolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorActionBarBackground">
     </android.support.v7.widget.Toolbar>
+    -->
     <FrameLayout
     android:id="@+id/activity_detail"
     android:layout_width="match_parent"

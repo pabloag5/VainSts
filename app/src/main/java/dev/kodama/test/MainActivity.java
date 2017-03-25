@@ -31,12 +31,8 @@ import dev.kodama.test.utils.SummaryStats;
 
 //Main Activity
 public class MainActivity extends AppCompatActivity {
-    private PopupWindow newgame;
-    private LayoutInflater layoutInflater;
-    private CoordinatorLayout layout;
     TabLayout tabLayout;
     ViewPager viewPager;
-    int secondpage;
     Fragment fragment;
     private DatabaseTransactions dbTrans;
     private int[] tabicons = {R.drawable.ic_progress_white_24dp, R.drawable.ic_heroes_white_24dp, R.drawable.ic_position_white_24dp,
@@ -66,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(true);
-
-
-        layout = (CoordinatorLayout) findViewById(R.id.main_layout);
+        getSupportActionBar().setTitle(getResources().getText(R.string.overall_title));
 
         viewPager = (ViewPager) findViewById(R.id.viewcontent);
         viewPager.setAdapter(new CustomAdapter(getSupportFragmentManager(), getApplicationContext()));
@@ -99,11 +93,6 @@ public class MainActivity extends AppCompatActivity {
                         tabLayout.getTabAt(2).setIcon(tabicons[2]);
                         tabLayout.getTabAt(3).setIcon(tabicons[2]);
                         getSupportActionBar().setTitle(getResources().getText(R.string.overall_title));
-                        /*
-                        if (secondpage==0) {
-                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        } else getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        */
                         break;
 
                     }
@@ -113,11 +102,6 @@ public class MainActivity extends AppCompatActivity {
                         tabLayout.getTabAt(2).setIcon(tabicons[2]);
                         tabLayout.getTabAt(3).setIcon(tabicons[2]);
                         getSupportActionBar().setTitle(getResources().getText(R.string.heroes_title));
-                        /*
-                        if (secondpage==1) {
-                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        } else getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        */
                         break;
 
                     }
@@ -127,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
                         tabLayout.getTabAt(2).setIcon(tabicons[5]);
                         tabLayout.getTabAt(3).setIcon(tabicons[2]);
                         getSupportActionBar().setTitle(getResources().getText(R.string.roles_title));
-                        /*
-                        if (secondpage==2) {
-                            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                        } else getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        */
                         break;
 
                     }
@@ -168,13 +147,6 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(tab.getPosition());
             }
         });
-
-
-        //get display width & height
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        final int width = dm.widthPixels;
-        final int height = dm.heightPixels;
 
     }
 
@@ -214,59 +186,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         switch (item.getItemId()) {
-            case R.id.action_newgame:
-                //newActivity(NewgameActivity.class);
-                //return true;
-            /*
             case R.id.action_refresh:
                 Snackbar.make(findViewById(R.id.main_layout),"DONE",Snackbar.LENGTH_SHORT).show();
                 return true;
             case R.id.action_settings:
                 return true;
-            */
-            case android.R.id.home:
-                return true;
-                /*
-                switch(secondpage){
-                    case 0:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.progressroot, fragment)
-                                .commit();
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        secondpage=3;
-                        return true;
-                    case 1:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.heroesroot, fragment)
-                                .commit();
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        secondpage=3;
-                        return true;
-                    case 2:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.positionroot, fragment)
-                                .commit();
-                        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                        secondpage=3;
-                        return true;
-                }
-                   */
             default:
                 return super.onOptionsItemSelected(item);
         }
-
-
-    }
-
-    public void newActivity(Class activity) {
-        startActivity(new Intent(getApplicationContext(), activity));
-
-    }
-
-    public void add_fragment(Fragment fragment, int container) {
-        getSupportFragmentManager().beginTransaction()
-                .add(container, fragment)
-                .commit();
     }
 
     private class CustomAdapter extends FragmentStatePagerAdapter {
@@ -309,33 +236,6 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
     }
-
-    public void fragmentParent(Fragment fragment, int secondpage) {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.fragment = fragment;
-        this.secondpage = secondpage;
-    }
-
-    /*
-    @Override
-    public void HerofragmentParent(int position, int secondpage, Fragment fragment, List<Gamestats> data) {
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.fragment = fragment;
-        this.secondpage = secondpage;
-
-        HeroDetailFragment frag = new HeroDetailFragment();
-        Bundle args = new Bundle();
-        args.putInt(HeroDetailFragment.ARG_POSITION, position);
-        frag.setArguments(args);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.heroesroot, frag)
-                .addToBackStack(null)
-                .commit();
-
-
-    }
-    */
 
 }
 

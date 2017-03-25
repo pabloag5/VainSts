@@ -2,10 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_save"
+        android:id="@+id/action_newgame"
         android:orderInCategory="100"
-        android:icon="@drawable/ic_check_white_24dp"
-        android:title="@string/newgamesave"
+        android:icon="@drawable/ic_add_white_24dp"
+        android:title="@string/add_new_game"
         app:showAsAction="ifRoom" />
 
 </menu>

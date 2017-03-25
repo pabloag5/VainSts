@@ -9,13 +9,6 @@
     android:baselineAligned="false"
     android:background="@color/colorBackground"
     android:animateLayoutChanges="true">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/detailtoolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorActionBarBackground"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-    </android.support.v7.widget.Toolbar>
 
     <!-- buttons up from scrollview-->
     <LinearLayout

@@ -4,17 +4,13 @@ import android.animation.LayoutTransition;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +21,13 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import dev.kodama.test.db.DatabaseTransactions;
 import dev.kodama.test.utils.Constants;
 import dev.kodama.test.utils.GameStats;
@@ -37,7 +35,7 @@ import dev.kodama.test.utils.HalcyonUtils;
 import dev.kodama.test.utils.HeroKDA;
 
 
-public class KdaFragment extends Fragment {
+public class WinRatioFragment extends Fragment {
     private Button monthsBtn, seasonBtn, patchBtn;
     private LinearLayout bestkdaHeroesBtn, kdaexpandLayout, kdadetaillayout;
     private RadioGroup kdasortHeroes;
@@ -76,20 +74,6 @@ public class KdaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.kdalayout, container, false);
-
-        // my_child_toolbar is defined in the layout file
-        Toolbar detailToolbar = (Toolbar) view.findViewById(R.id.detailtoolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(detailToolbar);
-
-        detailToolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getResources().getText(R.string.kda_lbl));
-
-        // Get a support ActionBar corresponding to this toolbar
-        // Enable the Up button
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
 
         dbTrans = DatabaseTransactions.getInstance(getContext());
 

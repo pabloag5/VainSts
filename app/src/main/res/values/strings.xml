@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Halcyon Stats</string>
+    <string name="app_name">Storm Queen Rank</string>
     <string name="button_send">Save</string>
     <string name="Result_label">Win/Loss</string>
     <string name="Kills_label">KILLS</string>
@@ -200,5 +200,9 @@
     <string name="high_kda_lbl">high kda</string>
     <string name="low_kda_lbl">low kda</string>
     <string name="by_role_label">by role</string>
+    <string name="recent_matches">RECENT MATCHES</string>
+    <string name="overview">overview</string>
+    <string name="performance">performance</string>
+    <string name="matchup">matchup</string>
 
 </resources>

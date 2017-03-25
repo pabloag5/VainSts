@@ -18,10 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".NewgameActivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.newTheme"></activity>
         <activity android:name=".DetailActivity"
             android:parentActivityName=".MainActivity"></activity>
     </application>

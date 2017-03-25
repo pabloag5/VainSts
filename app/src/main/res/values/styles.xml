@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="appbarTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar"></style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -34,7 +36,7 @@
     </style>
     <!-- changes the default colours for EditTexts, including non-text elements (also works with the DatePicker -->
 
-    <style name="appCompatStyle" parent="Theme.AppCompat.Light">
+    <style name="appCompatStyle" parent="Theme.AppCompat.NoActionBar">
         <item name="colorControlNormal">#cccccc</item>
         <item name="colorControlActivated">#cccccc</item>
         <item name="android:editTextStyle">@style/editTextStyle</item>

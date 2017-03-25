@@ -241,8 +241,8 @@ public final class Constants {
     }
 
     public static class Detail_Types {
-        public final static int KDA_DETAIL = 1;
-        public final static int WINRATIO_DETAIL = 2;
+        public final static int KDA_DETAIL = -1;
+        public final static int WINRATIO_DETAIL = -2;
         public final static int HERO_DETAIL = 3;
 
         public final static Map<Integer, Integer> gameTypeMap = new HashMap<Integer, Integer>() {{

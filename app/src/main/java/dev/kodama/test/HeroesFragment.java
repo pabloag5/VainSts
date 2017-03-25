@@ -1,32 +1,21 @@
 package dev.kodama.test;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import dev.kodama.test.utils.Constants;
 
 
 public class HeroesFragment extends Fragment  {
-    //TextView textView;
 
     //the list containing our heroes list
-    private List<Gamestats> mListHeroes=new ArrayList<>();
+    private List<Integer> mListHeroes=new ArrayList<>();
 
     //variables for recyclerview
     private RecyclerView recyclerView;
@@ -43,20 +32,12 @@ public class HeroesFragment extends Fragment  {
         View view= inflater.inflate(R.layout.heroessummarylayout, container, false);
 
 
-//get display width & height
-        DisplayMetrics dm = new DisplayMetrics();
-
-        WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(dm);
-        final int width = dm.widthPixels;
-        final int height = dm.heightPixels;
-
         //code creates recyclerView
         layoutManager.setAutoMeasureEnabled(true);
         recyclerView=(RecyclerView)view.findViewById(R.id.list_content);
         mListHeroes=getData();
 
-        adapter =new CustomViewAdapter(getActivity(),mListHeroes, this);
+        adapter =new CustomViewAdapter(getActivity(),mListHeroes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -65,17 +46,12 @@ public class HeroesFragment extends Fragment  {
 
     }
 
-    public List<Gamestats> getData(){
-        List<Gamestats> data=new ArrayList<>();
+    public List<Integer> getData(){
+        List<Integer> data=new ArrayList<>();
 
-        Resources res = getResources();
-        String[] heroes=res.getStringArray(R.array.Heroes_name);
-        for(int i = 0; i<heroes.length && i< Constants.Heroes.images.length; i++)
+        for(int i = 0; i<Constants.Heroes.images.length; i++)
         {
-            Gamestats current=new Gamestats();
-            current.heroIcon= Constants.Heroes.images[i];
-            current.heroName=heroes[i];
-            data.add(current);
+            data.add(Constants.Heroes.images[i]);
         }
 
         return data;
@@ -93,16 +69,5 @@ public class HeroesFragment extends Fragment  {
         super.onSaveInstanceState(outState);
     }
 
-    /*
-    public void scrollRV(int position, boolean repeatPosition) {
-
-        //code for modifying layout: expanding item when pressed
-        if (repeatPosition==false){
-            layoutManager.scrollToPositionWithOffset(position,20);
-            layoutManager.setScrollEnabled(false);
-        } else layoutManager.setScrollEnabled(true);
-
-    }
-    */
 
 }
